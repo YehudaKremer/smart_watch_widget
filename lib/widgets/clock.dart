@@ -1,7 +1,9 @@
-import 'package:analog_clock/analog_clock.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'dart:ui';
 
+import 'package:analog_clock/analog_clock.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:provider/provider.dart';
+import 'package:system_theme/system_theme.dart';
 import '../appState.dart';
 import 'menu/menu.dart';
 
@@ -15,14 +17,19 @@ class Clock extends StatelessWidget {
         Provider.of<AppState>(context, listen: false).setMenuOpen(true);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Menu()),
+          FluentPageRoute(builder: (context) => Menu()),
         );
       },
       child: AnalogClock(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: FluentTheme.of(context).scaffoldBackgroundColor,
         ),
+        numberColor: SystemTheme.accentInstance.lighter,
+        tickColor: SystemTheme.accentInstance.accent,
+        digitalClockColor: SystemTheme.accentInstance.accent,
+        hourHandColor: SystemTheme.accentInstance.light,
+        minuteHandColor: SystemTheme.accentInstance.accent,
         textScaleFactor: 1.4,
         showAllNumbers: true,
       ),

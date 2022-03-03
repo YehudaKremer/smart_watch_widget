@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
-class CustomScrollBehavior extends MaterialScrollBehavior {
+class CustomScrollBehavior extends FluentScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
         PointerDeviceKind.touch,
@@ -9,20 +9,10 @@ class CustomScrollBehavior extends MaterialScrollBehavior {
       };
 
   @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
-    return GlowingOverscrollIndicator(
-      axisDirection: details.direction,
-      color: Theme.of(context).colorScheme.secondary,
-      child: child,
-    );
-  }
-
-  @override
   Widget buildScrollbar(
       BuildContext context, Widget child, ScrollableDetails details) {
     return Scrollbar(
-      thickness: 0,
+      style: ScrollbarThemeData(thickness: 0),
       controller: details.controller,
       child: child,
     );

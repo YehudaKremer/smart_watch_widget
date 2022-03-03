@@ -1,46 +1,68 @@
-import 'package:flutter/material.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
-import '../../colors/linear_gradient_style.dart';
 
 class MenuItem extends StatelessWidget {
   final String name;
   final IconData icon;
+  final Color? color;
   final Function()? onPressed;
+  final SystemMouseCursor? cursor;
 
   const MenuItem(
-      {Key? key, required this.name, required this.icon, this.onPressed})
+      {Key? key,
+      required this.name,
+      required this.icon,
+      this.color,
+      this.onPressed,
+      this.cursor})
       : super(key: key);
+
+  Widget getIconButton() {
+    var normalIconButton = IconButton(
+      style: ButtonStyle(
+        iconSize: ButtonState.all(24),
+        foregroundColor: ButtonState.all(color),
+      ),
+      icon: Icon(icon),
+      onPressed: onPressed ?? () {},
+    );
+
+    var moveWindowIconButton = MoveWindow(
+      child: SizedBox(
+        width: 52,
+        child: normalIconButton,
+      ),
+    );
+
+    return cursor == SystemMouseCursors.move
+        ? moveWindowIconButton
+        : normalIconButton;
+  }
 
   @override
   Widget build(BuildContext context) {
-    var randomGradient = LinearGradientStyle.linearGradient(
-      orientation: LinearGradientStyle.ORIENTATION_VERTICAL,
-      gradientType: Random(name.hashCode).nextInt(334),
-    );
-    var gradient = LinearGradient(
-      begin: Alignment(-1.0, -2.0),
-      end: Alignment(1.0, 2.0),
-      colors: [randomGradient.colors[1], randomGradient.colors[0]],
-    );
-
-    return ClipOval(
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: gradient,
-        ),
-        child: RawMaterialButton(
-          padding: EdgeInsets.all(6),
-          shape: CircleBorder(),
-          elevation: 10,
-          child: Icon(
-            icon,
-            size: 32,
-            color: Colors.white,
-          ),
-          onPressed: onPressed ?? () {},
-        ),
+    return Tooltip(
+      message: name,
+      triggerMode: TooltipTriggerMode.longPress,
+      child: MouseRegion(
+        cursor: cursor ?? SystemMouseCursors.basic,
+        child: getIconButton(),
       ),
     );
   }
 }
+
+// SizedBox(
+//         height: splitButtonHeight,
+//         child:
+
+
+// ClipOval(
+//       child: Container(
+//         decoration: BoxDecoration(
+//           shape: BoxShape.circle,
+//           gradient: gradient,
+//         ),
+//         child:
