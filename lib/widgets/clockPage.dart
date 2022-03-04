@@ -5,7 +5,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:system_theme/system_theme.dart';
 import '../appState.dart';
-import 'menu/menu.dart';
+import 'menu/menuPage.dart';
 
 class Clock extends StatelessWidget {
   const Clock({Key? key}) : super(key: key);
@@ -15,18 +15,15 @@ class Clock extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Provider.of<AppState>(context, listen: false).setMenuOpen(true);
-        Navigator.push(
-          context,
-          FluentPageRoute(builder: (context) => Menu()),
-        );
+        Navigator.push(context, FluentPageRoute(builder: (context) => Menu()));
       },
       child: AnalogClock(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: FluentTheme.of(context).scaffoldBackgroundColor,
         ),
-        numberColor: SystemTheme.accentInstance.lighter,
-        tickColor: SystemTheme.accentInstance.accent,
+        numberColor: SystemTheme.accentInstance.light,
+        tickColor: SystemTheme.accentInstance.dark,
         digitalClockColor: SystemTheme.accentInstance.accent,
         hourHandColor: SystemTheme.accentInstance.light,
         minuteHandColor: SystemTheme.accentInstance.accent,

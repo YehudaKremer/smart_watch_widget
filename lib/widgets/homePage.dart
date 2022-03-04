@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/appState.dart';
 import 'package:system_theme/system_theme.dart';
 import '../customScrollBehavior.dart';
-import 'clock.dart';
+import 'clockPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

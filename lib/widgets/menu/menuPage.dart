@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import '../../appState.dart';
+import '../settingsPage.dart';
 import 'menuItem.dart';
 
 class Menu extends StatelessWidget {
@@ -40,7 +41,14 @@ class Menu extends StatelessWidget {
           ),
           MenuItem(name: 'test2', icon: FluentIcons.accept),
           MenuItem(name: 'test4', icon: FluentIcons.accept),
-          MenuItem(name: 'settings', icon: FluentIcons.settings),
+          MenuItem(
+            name: 'settings',
+            icon: FluentIcons.settings,
+            onPressed: () {
+              Navigator.push(context,
+                  FluentPageRoute(builder: (context) => SettingsPage()));
+            },
+          ),
           MenuItem(name: 'test66', icon: FluentIcons.accept),
           MenuItem(name: 'test7', icon: FluentIcons.accept),
           MenuItem(name: 'settings8', icon: FluentIcons.settings),
