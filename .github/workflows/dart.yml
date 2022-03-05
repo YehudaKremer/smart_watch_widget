@@ -35,4 +35,4 @@ jobs:
           body: ""
           tag_name: "vnext"
           files: |
-            Output/smart_watch_widget.exe
+            build/windows/runner/Release/smart_watch_widget.exe
