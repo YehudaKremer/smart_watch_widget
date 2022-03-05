@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import '../../appState.dart';
+import '../layout.dart';
 import '../settingsPage.dart';
 import 'menuItem.dart';
 
@@ -10,9 +11,8 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage(
-      padding: const EdgeInsets.all(0),
-      content: GridView.count(
+    return Layout(
+      child: GridView.count(
         primary: false,
         padding: const EdgeInsets.all(30),
         crossAxisSpacing: 10,

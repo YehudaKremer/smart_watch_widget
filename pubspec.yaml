@@ -16,6 +16,7 @@ dependencies:
   fluent_ui: ^3.9.1
   fluentui_system_icons: ^1.1.161
   system_theme: ^1.0.1
+  window_manager: ^0.1.9
 
 dev_dependencies:
   flutter_test:

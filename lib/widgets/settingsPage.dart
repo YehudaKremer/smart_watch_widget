@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../appState.dart';
+import 'layout.dart';
 import 'menu/menuItem.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -9,9 +10,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage(
-      padding: const EdgeInsets.all(10),
-      content: ListView(
+    return Layout(
+      child: ListView(
         padding: const EdgeInsets.all(30),
         children: [
           MenuItem(
