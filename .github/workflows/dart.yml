@@ -26,10 +26,7 @@ jobs:
       - run: flutter config --enable-windows-desktop
       - run: flutter pub get
       - run: flutter build windows
-
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r smart_watch_widget.zip build/windows/runner/Release
+      - run: tar.exe -a -c -f smart_watch_widget.zip build/windows/runner/Release
 
       - name: Release
         uses: softprops/action-gh-release@v1
