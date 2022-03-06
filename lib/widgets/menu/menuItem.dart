@@ -1,14 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 class MenuItem extends StatelessWidget {
-  final String name;
+  final String title;
   final IconData icon;
   final Color? color;
   final Function()? onPressed;
 
   const MenuItem(
       {Key? key,
-      required this.name,
+      required this.title,
       required this.icon,
       this.color,
       this.onPressed})
@@ -17,7 +17,7 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: name,
+      message: title,
       triggerMode: TooltipTriggerMode.longPress,
       child: IconButton(
         style: ButtonStyle(

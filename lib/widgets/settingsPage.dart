@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
         padding: const EdgeInsets.all(30),
         children: [
           MenuItem(
-            name: 'Back',
+            title: 'Back',
             icon: FluentIcons.back,
             onPressed: () {
               Navigator.pop(context);

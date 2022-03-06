@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/widgets/homePage.dart';
 import 'package:system_theme/system_theme.dart';
 import 'appState.dart';
+import 'widgets/alarmClock/alarmClockState.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ Future<void> main() async {
   );
   final prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
+  final alarmClockState = AlarmClockState(prefs);
 
   doWhenWindowReady(() {
     appWindow.maxSize = appWindow.minSize = appWindow.size = initialSize;
@@ -32,8 +34,11 @@ Future<void> main() async {
   });
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => appState,
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => appState),
+        ChangeNotifierProvider(create: (_) => alarmClockState),
+      ],
       child: HomePage(),
     ),
   );

@@ -22,35 +22,35 @@ class Menu extends StatelessWidget {
         crossAxisCount: 3,
         children: [
           MenuItem(
-            name: 'Go Back',
+            title: 'Go Back',
             icon: FluentIcons.back,
             onPressed: () => Navigator.pop(context),
           ),
           GestureDetector(
             onPanDown: (_) => windowManager.startDragging(),
             child: MenuItem(
-              name: 'Move Watch',
+              title: 'Move Watch',
               icon: FluentIcons.move,
             ),
           ),
           MenuItem(
-            name: 'Close Watch',
+            title: 'Close Watch',
             icon: FluentIcons.cancel,
             color: Colors.red,
             onPressed: () => exit(0),
           ),
           MenuItem(
-            name: 'Alarm Clock',
+            title: 'Alarm Clock',
             icon: FluentIcons.alarm_clock,
             onPressed: () => Navigator.push(context,
                 FluentPageRoute(builder: (context) => AlarmClockPage())),
           ),
-          MenuItem(
-            name: 'Settings',
-            icon: FluentIcons.settings,
-            onPressed: () => Navigator.push(
-                context, FluentPageRoute(builder: (context) => SettingsPage())),
-          ),
+          // MenuItem(
+          //   title: 'Settings',
+          //   icon: FluentIcons.settings,
+          //   onPressed: () => Navigator.push(
+          //       context, FluentPageRoute(builder: (context) => SettingsPage())),
+          // ),
         ],
       ),
     );
