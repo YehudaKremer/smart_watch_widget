@@ -13,22 +13,37 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with WindowListener {
+class _HomePageState extends State<HomePage>
+    with WindowListener, WidgetsBindingObserver {
   @override
   void initState() {
-    windowManager.addListener(this);
     super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+    windowManager.addListener(this);
   }
 
   @override
   void dispose() {
     windowManager.removeListener(this);
+    WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    if (WidgetsBinding.instance != null) {
+      context
+          .read<AppState>()
+          .setBrightness(WidgetsBinding.instance!.window.platformBrightness);
+    }
+
+    super.didChangePlatformBrightness();
   }
 
   @override
   Widget build(BuildContext context) {
     return FluentApp(
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         brightness: context.watch<AppState>().brightness,
         accentColor: SystemTheme.accentInstance.accent.toAccentColor(),
@@ -43,14 +58,12 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
   @override
   void onWindowFocus() {
-    Provider.of<AppState>(context, listen: false).setWindowFocused(true);
-    Provider.of<AppState>(context, listen: false).getDarkMode();
+    context.read<AppState>().setWindowFocused(true);
   }
 
   @override
   void onWindowBlur() {
-    Provider.of<AppState>(context, listen: false).setWindowFocused(false);
-    Provider.of<AppState>(context, listen: false)
-        .setWindowPosition(appWindow.position);
+    context.read<AppState>().setWindowFocused(false);
+    context.read<AppState>().setWindowPosition(appWindow.position);
   }
 }

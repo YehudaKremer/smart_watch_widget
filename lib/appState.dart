@@ -8,14 +8,15 @@ const initialSize = Size(250, 250);
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _isWindowFocused = false;
+  Brightness _brightness = Brightness.dark;
   Offset? _windowPosition;
   Offset? get windowPosition => _windowPosition;
   bool get isWindowFocused => _isWindowFocused;
-  Brightness brightness = Brightness.dark;
+  Brightness get brightness => _brightness;
 
   AppState(this.prefs) {
     _getWindowPosition();
-    getDarkMode();
+    _getThemeMode();
   }
 
   _getWindowPosition() {
@@ -24,11 +25,15 @@ class AppState extends ChangeNotifier {
     if (dx != null || dy != null) _windowPosition = Offset(dx ?? 0, dy ?? 0);
   }
 
-  getDarkMode() {
+  _getThemeMode() {
     SystemTheme.darkMode.then((isDarkMode) {
-      brightness = isDarkMode ? Brightness.dark : Brightness.light;
-      SystemTheme.accentInstance.load().then((_) => notifyListeners());
+      setBrightness(isDarkMode ? Brightness.dark : Brightness.light);
     });
+  }
+
+  setBrightness(Brightness brightness) {
+    _brightness = brightness;
+    SystemTheme.accentInstance.load().then((_) => notifyListeners());
   }
 
   void setWindowFocused(bool value) {
