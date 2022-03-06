@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 import '../../appState.dart';
+import '../alarmClock/alarmClockPage.dart';
 import '../layout.dart';
 import '../settingsPage.dart';
 import 'menuItem.dart';
@@ -19,7 +20,6 @@ class Menu extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 3,
-        physics: BouncingScrollPhysics(),
         children: [
           MenuItem(
             name: 'Go Back',
@@ -39,7 +39,12 @@ class Menu extends StatelessWidget {
             color: Colors.red,
             onPressed: () => exit(0),
           ),
-          MenuItem(name: 'Alarm Clock', icon: FluentIcons.alarm_clock),
+          MenuItem(
+            name: 'Alarm Clock',
+            icon: FluentIcons.alarm_clock,
+            onPressed: () => Navigator.push(context,
+                FluentPageRoute(builder: (context) => AlarmClockPage())),
+          ),
           MenuItem(
             name: 'Settings',
             icon: FluentIcons.settings,

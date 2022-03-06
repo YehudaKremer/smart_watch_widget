@@ -21,7 +21,8 @@ class MenuItem extends StatelessWidget {
       triggerMode: TooltipTriggerMode.longPress,
       child: IconButton(
         style: ButtonStyle(
-          iconSize: ButtonState.all(24),
+          iconSize: ButtonState.all(
+              FluentTheme.of(context).typography.title!.fontSize),
           foregroundColor: ButtonState.all(color),
         ),
         icon: Icon(icon),

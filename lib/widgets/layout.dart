@@ -26,7 +26,9 @@ class Layout extends StatelessWidget {
               borderRadius:
                   BorderRadius.all(Radius.circular(initialSize.width / 2)),
             ),
-            child: child,
+            child: ClipOval(
+              child: child,
+            ),
           ),
         ),
       ),
