@@ -11,7 +11,7 @@ class Layout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(1),
+      padding: const EdgeInsets.all(2),
       child: ClipOval(
         child: ScaffoldPage(
           padding: const EdgeInsets.all(0),
