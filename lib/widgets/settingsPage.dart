@@ -1,7 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:provider/provider.dart';
-
-import '../appState.dart';
 import 'layout.dart';
 import 'menu/menuItem.dart';
 
@@ -18,7 +15,6 @@ class SettingsPage extends StatelessWidget {
             name: 'Back',
             icon: FluentIcons.back,
             onPressed: () {
-              Provider.of<AppState>(context, listen: false).setMenuOpen(false);
               Navigator.pop(context);
             },
           ),

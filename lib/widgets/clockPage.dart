@@ -1,10 +1,5 @@
-import 'dart:ui';
-
 import 'package:analog_clock/analog_clock.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:provider/provider.dart';
-import 'package:system_theme/system_theme.dart';
-import '../appState.dart';
 import 'menu/menuPage.dart';
 
 class Clock extends StatelessWidget {
@@ -14,7 +9,6 @@ class Clock extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Provider.of<AppState>(context, listen: false).setMenuOpen(true);
         Navigator.push(context, FluentPageRoute(builder: (context) => Menu()));
       },
       child: AnalogClock(

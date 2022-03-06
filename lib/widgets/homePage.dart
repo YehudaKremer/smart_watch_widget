@@ -1,3 +1,4 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
@@ -43,10 +44,13 @@ class _HomePageState extends State<HomePage> with WindowListener {
   @override
   void onWindowFocus() {
     Provider.of<AppState>(context, listen: false).setWindowFocused(true);
+    Provider.of<AppState>(context, listen: false).getDarkMode();
   }
 
   @override
   void onWindowBlur() {
     Provider.of<AppState>(context, listen: false).setWindowFocused(false);
+    Provider.of<AppState>(context, listen: false)
+        .setWindowPosition(appWindow.position);
   }
 }

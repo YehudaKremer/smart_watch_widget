@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.flutter.smartwatchwidget" "\0"
+            VALUE "CompanyName", "yehudak.flutter.smartwatchwidget" "\0"
             VALUE "FileDescription", "smart_watch_widget" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "smart_watch_widget" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.flutter.smartwatchwidget. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 yehudak.flutter.smartwatchwidget. All rights reserved." "\0"
             VALUE "OriginalFilename", "smart_watch_widget.exe" "\0"
             VALUE "ProductName", "smart_watch_widget" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

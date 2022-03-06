@@ -32,7 +32,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(250, 250);
 
-  LPCWSTR appName = L"smartwatchwidget"; 
+  LPCWSTR appName = L"Smart Watch Widget"; 
 
   // App instance flag to allow only one instance at a time.
   HANDLE hMutex = OpenMutex(MUTEX_ALL_ACCESS, 0, appName);
