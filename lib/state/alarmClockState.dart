@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
+import 'package:libmpv/libmpv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/alarm.dart';
@@ -14,9 +14,10 @@ class AlarmClockState extends ChangeNotifier {
   List<Alarm> _alarms = [];
   List<Alarm> get alarms => _alarms;
   Alarm? playingAlarm;
-  Player? player;
+  Player player = Player(video: false, osc: false, yt: false);
 
   AlarmClockState(this.prefs) {
+    player.setPlaylistMode(PlaylistMode.loop);
     _getAlarms();
     _startAlarmService();
   }
@@ -71,16 +72,13 @@ class AlarmClockState extends ChangeNotifier {
 
   void startAlarm(Alarm alarm) {
     playingAlarm = alarm;
-    player = Player(id: 63955);
-    player!.setPlaylistMode(PlaylistMode.repeat);
-    player!.open(Media.asset('assets/audio/Twin-bell-alarm-clock.mp3'));
+    player.open([Media('assets/audio/Twin-bell-alarm-clock.mp3')]);
     notifyListeners();
   }
 
   void stopAlarm() {
     if (playingAlarm != null) {
-      player?.stop();
-      player?.dispose();
+      player.pause();
       playingAlarm = null;
       notifyListeners();
     }

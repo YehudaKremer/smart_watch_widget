@@ -20,7 +20,9 @@ dependencies:
   shared_preferences: ^2.0.13
   intl: ^0.17.0
   hotkey_manager: ^0.1.6
-  dart_vlc: ^0.1.8
+  libmpv:
+    git:
+      url: https://github.com/harmonoid/libmpv.dart.git
   new_im_animations: ^0.1.1
 
 dev_dependencies:

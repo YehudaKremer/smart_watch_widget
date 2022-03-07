@@ -1,7 +1,7 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:libmpv/libmpv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -17,10 +17,8 @@ Future<void> main() async {
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();
-  DartVLC.initialize();
-  await Window.setEffect(
-    effect: WindowEffect.transparent,
-  );
+  await MPV.initialize();
+  await Window.setEffect(effect: WindowEffect.transparent);
   final prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
   final alarmClockState = AlarmClockState(prefs);
