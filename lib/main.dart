@@ -1,12 +1,12 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/widgets/homePage.dart';
+import 'package:smart_watch_widget/pages/homePage.dart';
 import 'package:system_theme/system_theme.dart';
 import 'appState.dart';
 import 'widgets/alarmClock/alarmClockState.dart';
@@ -17,6 +17,7 @@ Future<void> main() async {
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();
+  DartVLC.initialize();
   await Window.setEffect(
     effect: WindowEffect.transparent,
   );

@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_windows
+  dart_vlc
   flutter_acrylic
   hotkey_manager
   system_theme

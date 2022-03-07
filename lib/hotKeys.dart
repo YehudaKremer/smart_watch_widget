@@ -11,7 +11,6 @@ var isGeneralHotKeysRegistered = false;
 
 Future<void> registerGeneralHotKeys(BuildContext context) async {
   if (isGeneralHotKeysRegistered) return;
-  print('registerHotKeys');
   await hotKeyManager.register(
     _goBackHotKey,
     keyDownHandler: (_) {

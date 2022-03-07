@@ -1,7 +1,11 @@
 import 'dart:convert';
 
+import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/alarm.dart';
 
 const alarmsPrefsKey = 'alarms';
 
@@ -9,9 +13,12 @@ class AlarmClockState extends ChangeNotifier {
   final SharedPreferences prefs;
   List<Alarm> _alarms = [];
   List<Alarm> get alarms => _alarms;
+  Alarm? playingAlarm;
+  Player? player;
 
   AlarmClockState(this.prefs) {
     _getAlarms();
+    _startAlarmService();
   }
 
   void _getAlarms() {
@@ -28,6 +35,55 @@ class AlarmClockState extends ChangeNotifier {
 
   void _saveAlarms() {
     prefs.setString(alarmsPrefsKey, jsonEncode(_alarms));
+  }
+
+  Future<void> _startAlarmService() async {
+    while (true) {
+      var now = DateTime.now();
+
+      if (playingAlarm == null) {
+        var timeNow = DateFormat('kk:mm:ss a').format(now);
+        var today = DateFormat.E().format(now);
+        _alarms
+            .where((alarm) =>
+                alarm.isActive &&
+                (alarm.activeDays.length == 0 ||
+                    alarm.activeDays.length == 7 ||
+                    alarm.activeDays.contains(today)))
+            .forEach((alarm) {
+          var alarmTime = DateFormat('kk:mm:00 a').format(alarm.date);
+          if (alarmTime == timeNow) {
+            startAlarm(alarm);
+            return;
+          }
+        });
+      } else {
+        var timeNow = DateFormat('kk:mm').format(now);
+        var alarmTime = DateFormat('kk:mm').format(playingAlarm!.date);
+        if (timeNow != alarmTime) {
+          stopAlarm();
+        }
+      }
+
+      await Future.delayed(Duration(milliseconds: 750));
+    }
+  }
+
+  void startAlarm(Alarm alarm) {
+    playingAlarm = alarm;
+    player = Player(id: 63955);
+    player!.setPlaylistMode(PlaylistMode.repeat);
+    player!.open(Media.asset('assets/audio/Twin-bell-alarm-clock.mp3'));
+    notifyListeners();
+  }
+
+  void stopAlarm() {
+    if (playingAlarm != null) {
+      player?.stop();
+      player?.dispose();
+      playingAlarm = null;
+      notifyListeners();
+    }
   }
 
   void addAlarm(Alarm alarm) {
@@ -47,65 +103,7 @@ class AlarmClockState extends ChangeNotifier {
     notifyListeners();
     _saveAlarms();
   }
-}
 
-class Alarm {
-  DateTime? date;
-  bool sun;
-  bool mon;
-  bool tue;
-  bool wed;
-  bool thu;
-  bool fri;
-  bool sat;
-  bool isActive;
-
-  Alarm({
-    this.date,
-    this.sun = false,
-    this.mon = false,
-    this.tue = false,
-    this.wed = false,
-    this.thu = false,
-    this.fri = false,
-    this.sat = false,
-    this.isActive = false,
-  }) {
-    date = DateTime.now();
-  }
-
-  Map<String, dynamic> toJson() => {
-        'date': date?.toIso8601String(),
-        'sun': sun,
-        'mon': mon,
-        'tue': tue,
-        'wed': wed,
-        'thu': thu,
-        'fri': fri,
-        'sat': sat,
-        'isActive': isActive,
-      };
-
-  Alarm.fromJson(Map<String, dynamic> json)
-      : date = DateTime.parse(json['date']),
-        sun = json['sun'],
-        mon = json['mon'],
-        tue = json['tue'],
-        wed = json['wed'],
-        thu = json['thu'],
-        fri = json['fri'],
-        sat = json['sat'],
-        isActive = json['isActive'];
-
-  List<String> get activeDays {
-    List<String> activeDays = [];
-    if (sun) activeDays.add('Sun');
-    if (mon) activeDays.add('Mon');
-    if (tue) activeDays.add('Tue');
-    if (wed) activeDays.add('Wed');
-    if (thu) activeDays.add('Thu');
-    if (fri) activeDays.add('Fri');
-    if (sat) activeDays.add('Sat');
-    return activeDays;
-  }
+  int get numberOfActiveAlarms =>
+      _alarms.where((alarm) => alarm.isActive).length;
 }

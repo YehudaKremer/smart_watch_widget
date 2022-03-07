@@ -1,6 +1,6 @@
 import 'package:analog_clock/analog_clock.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'menu/menuPage.dart';
+import 'menuPage.dart';
 
 class Clock extends StatelessWidget {
   const Clock({Key? key}) : super(key: key);

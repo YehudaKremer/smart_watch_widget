@@ -4,6 +4,7 @@ class MenuItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color? color;
+  final Widget? infoBadgeSource;
   final Function()? onPressed;
 
   const MenuItem(
@@ -11,7 +12,8 @@ class MenuItem extends StatelessWidget {
       required this.title,
       required this.icon,
       this.color,
-      this.onPressed})
+      this.onPressed,
+      this.infoBadgeSource})
       : super(key: key);
 
   @override
@@ -25,7 +27,21 @@ class MenuItem extends StatelessWidget {
               FluentTheme.of(context).typography.title!.fontSize),
           foregroundColor: ButtonState.all(color),
         ),
-        icon: Icon(icon),
+        icon: Stack(
+          alignment: Alignment.center,
+          children: [
+            Icon(icon),
+            infoBadgeSource != null
+                ? Positioned(
+                    right: 0,
+                    top: 0,
+                    child: InfoBadge(
+                      source: infoBadgeSource,
+                    ),
+                  )
+                : Container(),
+          ],
+        ),
         onPressed: onPressed ?? () {},
       ),
     );

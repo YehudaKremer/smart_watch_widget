@@ -7,7 +7,7 @@ import 'package:smart_watch_widget/appState.dart';
 import 'package:system_theme/system_theme.dart';
 import '../customScrollBehavior.dart';
 import 'clockPage.dart';
-import 'layout.dart';
+import '../widgets/layout.dart';
 
 class HomePage extends StatefulWidget {
   @override

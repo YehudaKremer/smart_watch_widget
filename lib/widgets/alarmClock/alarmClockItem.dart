@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/widgets/alarmClock/alarmClockState.dart';
 
+import '../../models/alarm.dart';
 import 'alarmClockFrom.dart';
 
 class AlarmClockItem extends StatelessWidget {
@@ -22,7 +23,7 @@ class AlarmClockItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(DateFormat.jm().format(alarm.date!)),
+              Text(DateFormat.jm().format(alarm.date)),
               alarm.activeDays.isNotEmpty
                   ? Text(
                       alarm.activeDays

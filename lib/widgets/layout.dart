@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-
 import '../appState.dart';
 import '../hotKeys.dart';
+import '../pages/alarmScreen.dart';
 
 class Layout extends StatelessWidget {
   final Widget child;
@@ -29,7 +29,10 @@ class Layout extends StatelessWidget {
                   BorderRadius.all(Radius.circular(initialSize.width / 2)),
             ),
             child: ClipOval(
-              child: child,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [child, AlarmScreen()],
+              ),
             ),
           ),
         ),
