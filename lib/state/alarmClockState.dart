@@ -66,7 +66,6 @@ class AlarmClockState extends ChangeNotifier {
   }
 
   void _scheduleAlarms() {
-    print('_scheduleAlarms');
     scheduler?.dispose();
     scheduler = TimeScheduler();
     var today = DateFormat.E().format(DateTime.now());
@@ -83,11 +82,8 @@ class AlarmClockState extends ChangeNotifier {
     if (activeAlarmTimeStampsForToday.length > 0) {
       var nextAlarmTimeStampForToday =
           activeAlarmTimeStampsForToday.reduce(min);
-
-      print('nextAlarmTimeStampForToday: $nextAlarmTimeStampForToday');
       var nextAlarmDateForToday =
           DateTime.fromMillisecondsSinceEpoch(nextAlarmTimeStampForToday);
-      print('nextAlarmDateForToday: $nextAlarmDateForToday');
       scheduler!
           .run(() => startAlarm(nextAlarmDateForToday), nextAlarmDateForToday);
     }
