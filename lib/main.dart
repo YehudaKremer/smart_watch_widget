@@ -8,8 +8,8 @@ import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/homePage.dart';
 import 'package:system_theme/system_theme.dart';
-import 'appState.dart';
-import 'widgets/alarmClock/alarmClockState.dart';
+import 'state/appState.dart';
+import 'state/alarmClockState.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

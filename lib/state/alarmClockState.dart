@@ -5,7 +5,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/alarm.dart';
+import '../models/alarm.dart';
 
 const alarmsPrefsKey = 'alarms';
 
