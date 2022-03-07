@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
 
 import '../appState.dart';
+import '../hotKeys.dart';
 
 class Layout extends StatelessWidget {
   final Widget child;
@@ -10,6 +10,8 @@ class Layout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    registerGeneralHotKeys(context);
+
     return Padding(
       padding: const EdgeInsets.all(2),
       child: ClipOval(

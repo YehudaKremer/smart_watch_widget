@@ -8,12 +8,9 @@ import 'alarmClockFrom.dart';
 class AlarmClockItem extends StatelessWidget {
   final Alarm alarm;
 
-  const AlarmClockItem({Key? key, required this.alarm}) : super(key: key);
-
+  const AlarmClockItem(this.alarm, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var activeDays = alarm.getActiveDays();
-
     return Button(
       style: ButtonStyle(
         textStyle:
@@ -26,11 +23,12 @@ class AlarmClockItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(DateFormat.jm().format(alarm.date!)),
-              activeDays.isNotEmpty
+              alarm.activeDays.isNotEmpty
                   ? Text(
-                      activeDays
-                          .map((day) =>
-                              activeDays.length > 4 ? day.substring(0, 1) : day)
+                      alarm.activeDays
+                          .map((day) => alarm.activeDays.length > 4
+                              ? day.substring(0, 1)
+                              : day)
                           .join(', '),
                       style:
                           FluentTheme.of(context).typography.caption!.copyWith(
@@ -48,13 +46,13 @@ class AlarmClockItem extends StatelessWidget {
             checked: alarm.isActive,
             onChanged: (v) {
               alarm.isActive = v;
-              context.read<AlarmClockState>().saveAlarm(alarm);
+              context.read<AlarmClockState>().updateAlarm(alarm);
             },
           ),
         ],
       ),
       onPressed: () => Navigator.push(context,
-          FluentPageRoute(builder: (context) => AlarmClockFrom(alarm: alarm))),
+          FluentPageRoute(builder: (context) => AlarmClockFrom(alarm))),
     );
   }
 }

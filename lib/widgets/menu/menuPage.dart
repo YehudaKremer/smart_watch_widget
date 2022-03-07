@@ -1,11 +1,8 @@
 import 'dart:io';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
-import '../../appState.dart';
 import '../alarmClock/alarmClockPage.dart';
 import '../layout.dart';
-import '../settingsPage.dart';
 import 'menuItem.dart';
 
 class Menu extends StatelessWidget {

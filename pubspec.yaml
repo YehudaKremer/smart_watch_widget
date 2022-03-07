@@ -19,6 +19,7 @@ dependencies:
   window_manager: ^0.1.9
   shared_preferences: ^2.0.13
   intl: ^0.17.0
+  hotkey_manager: ^0.1.6
 
 dev_dependencies:
   flutter_test:

@@ -30,10 +30,14 @@ class AlarmClockState extends ChangeNotifier {
     prefs.setString(alarmsPrefsKey, jsonEncode(_alarms));
   }
 
-  void saveAlarm(Alarm alarm) {
-    if (!_alarms.contains(alarm)) {
-      _alarms.add(alarm);
-    }
+  void addAlarm(Alarm alarm) {
+    alarm.isActive = true;
+    _alarms.add(alarm);
+    notifyListeners();
+    _saveAlarms();
+  }
+
+  void updateAlarm(Alarm alarm) {
     notifyListeners();
     _saveAlarms();
   }
@@ -93,7 +97,7 @@ class Alarm {
         sat = json['sat'],
         isActive = json['isActive'];
 
-  List<String> getActiveDays() {
+  List<String> get activeDays {
     List<String> activeDays = [];
     if (sun) activeDays.add('Sun');
     if (mon) activeDays.add('Mon');

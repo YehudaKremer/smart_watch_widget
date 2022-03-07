@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/widgets/alarmClock/alarmClockState.dart';
-
 import '../layout.dart';
 import '../menu/menuItem.dart';
 import 'alarmClockFrom.dart';
@@ -24,17 +23,15 @@ class AlarmClockPage extends StatelessWidget {
     ];
 
     context.watch<AlarmClockState>().alarms.forEach((alarm) {
-      children.addAll([AlarmClockItem(alarm: alarm), Container(height: 10)]);
+      children.addAll([AlarmClockItem(alarm), Container(height: 10)]);
     });
 
     children.add(
       MenuItem(
         title: 'New Alarm',
         icon: FluentIcons.add,
-        onPressed: () => Navigator.push(
-            context,
-            FluentPageRoute(
-                builder: (context) => AlarmClockFrom(alarm: Alarm()))),
+        onPressed: () => Navigator.push(context,
+            FluentPageRoute(builder: (context) => AlarmClockFrom(Alarm()))),
       ),
     );
 

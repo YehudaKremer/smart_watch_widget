@@ -1,5 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:smart_watch_widget/appState.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
+    hotKeyManager.unregisterAll();
     windowManager.removeListener(this);
     WidgetsBinding.instance?.removeObserver(this);
     super.dispose();

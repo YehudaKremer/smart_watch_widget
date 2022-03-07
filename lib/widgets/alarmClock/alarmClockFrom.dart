@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/widgets/alarmClock/alarmClockState.dart';
 import '../basicButton.dart';
@@ -9,7 +10,10 @@ import 'dayToggleButton.dart';
 class AlarmClockFrom extends StatefulWidget {
   final Alarm alarm;
 
-  AlarmClockFrom({Key? key, required this.alarm}) : super(key: key);
+  AlarmClockFrom(
+    this.alarm, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AlarmClockFrom> createState() => _AlarmClockFromState();
@@ -19,18 +23,44 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
   late Alarm alarm = widget.alarm;
 
   @override
-  Widget build(BuildContext context) {
-    bool isNewAlarm = !context.read<AlarmClockState>().alarms.contains(alarm);
+  void initState() {
+    super.initState();
+    registerGeneralHotKeys();
+  }
 
-    void setAlarmState(Function cb) {
-      setState(() {
-        cb();
-      });
-      if (!isNewAlarm) {
-        context.read<AlarmClockState>().saveAlarm(alarm);
-      }
+  @override
+  void dispose() {
+    hotKeyManager.unregister(_confirmHotKey);
+    super.dispose();
+  }
+
+  Future<void> registerGeneralHotKeys() async {
+    await hotKeyManager.register(
+      _confirmHotKey,
+      keyDownHandler: (_) => submit(),
+    );
+  }
+
+  bool get isExistedAlarm =>
+      context.read<AlarmClockState>().alarms.contains(alarm);
+
+  void submit() {
+    if (!isExistedAlarm) {
+      context.read<AlarmClockState>().addAlarm(alarm);
     }
+    Navigator.pop(context);
+  }
 
+  void setAlarmState(Function cb) {
+    setState(() => cb());
+
+    if (isExistedAlarm) {
+      context.read<AlarmClockState>().updateAlarm(alarm);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Layout(
       child: ListView(
         padding: const EdgeInsets.all(30),
@@ -39,6 +69,12 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
             title: 'Go Back',
             icon: FluentIcons.back,
             onPressed: () => Navigator.pop(context),
+          ),
+          Container(height: 10),
+          TimePicker(
+            popupHeight: 220,
+            selected: alarm.date,
+            onChanged: (date) => setAlarmState(() => alarm.date = date),
           ),
           Container(height: 10),
           Wrap(
@@ -84,24 +120,10 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
             ],
           ),
           Container(height: 10),
-          TimePicker(
-            popupHeight: 220,
-            selected: alarm.date,
-            onChanged: (date) => setAlarmState(() => alarm.date = date),
-          ),
-          Container(height: 10),
           Row(
             children: [
-              isNewAlarm
+              isExistedAlarm
                   ? BasicButton(
-                      title: 'Save',
-                      icon: FluentIcons.accept,
-                      onPressed: () {
-                        context.read<AlarmClockState>().saveAlarm(alarm);
-                        Navigator.pop(context);
-                      },
-                    )
-                  : BasicButton(
                       title: 'Delete',
                       icon: FluentIcons.delete,
                       color: Colors.red,
@@ -109,6 +131,11 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                         context.read<AlarmClockState>().removeAlarm(alarm);
                         Navigator.pop(context);
                       },
+                    )
+                  : BasicButton(
+                      title: 'Save',
+                      icon: FluentIcons.accept,
+                      onPressed: submit,
                     ),
             ],
           ),
@@ -118,4 +145,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
   }
 }
 
-class DayToggleButtonState {}
+HotKey _confirmHotKey = HotKey(
+  KeyCode.enter,
+  scope: HotKeyScope.inapp,
+);
