@@ -4,6 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:libmpv/libmpv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../models/alarm.dart';
 
@@ -71,6 +72,7 @@ class AlarmClockState extends ChangeNotifier {
   }
 
   void startAlarm(Alarm alarm) {
+    windowManager.focus();
     playingAlarm = alarm;
     player.open([Media('assets/audio/Twin-bell-alarm-clock.mp3')]);
     notifyListeners();
