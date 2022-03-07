@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
 import '../../models/alarm.dart';
@@ -75,7 +76,9 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
           TimePicker(
             popupHeight: 220,
             selected: alarm.date,
-            onChanged: (date) => setAlarmState(() => alarm.date = date),
+            onChanged: (date) => setAlarmState(() => alarm.date =
+                DateTime.parse(
+                    DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),
           ),
           Container(height: 10),
           Wrap(

@@ -14,6 +14,7 @@ import 'state/alarmClockState.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
+  await windowManager.setSkipTaskbar(true);
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();

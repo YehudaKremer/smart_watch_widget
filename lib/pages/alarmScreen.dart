@@ -14,7 +14,7 @@ class AlarmScreen extends StatelessWidget {
         opacity: animation,
         child: child,
       ),
-      child: context.watch<AlarmClockState>().playingAlarm != null
+      child: context.watch<AlarmClockState>().isPlayingAlarm
           ? MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
