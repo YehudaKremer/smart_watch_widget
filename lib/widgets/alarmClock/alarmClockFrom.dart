@@ -74,7 +74,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
           ),
           Container(height: 10),
           TimePicker(
-            popupHeight: 220,
+            popupHeight: 240,
             selected: alarm.date,
             onChanged: (date) => setAlarmState(() => alarm.date =
                 DateTime.parse(

@@ -137,8 +137,8 @@ bool Win32Window::CreateAndShow(const std::wstring &title,
                                 nullptr, nullptr, GetModuleHandle(nullptr), this);
 
   // Draw the app in a circle
-  HRGN windowRegion = CreateRoundRectRgn(0, 0, size.width, size.height, size.width, size.height);
-  SetWindowRgn(window, windowRegion, TRUE);
+  //HRGN windowRegion = CreateRoundRectRgn(0, 0, size.width, size.height, size.width, size.height);
+  //SetWindowRgn(window, windowRegion, TRUE);
 
   if (!window)
   {
