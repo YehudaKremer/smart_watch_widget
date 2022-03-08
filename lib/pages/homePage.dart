@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void onWindowBlur() {
+    windowManager.setSkipTaskbar(true);
     context.read<AppState>().setWindowFocused(false);
     context.read<AppState>().setWindowPosition(appWindow.position);
   }

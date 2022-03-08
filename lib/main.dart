@@ -14,7 +14,7 @@ import 'state/alarmClockState.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
-  await windowManager.setSkipTaskbar(true);
+  windowManager.focus();
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();
@@ -35,6 +35,14 @@ Future<void> main() async {
     appWindow.show();
   });
 
+  // Player player = Player(video: false, osc: false, yt: false);
+
+  // Future.delayed(Duration(seconds: 3), () {
+  //   print('dispose player');
+  //   player.dispose();
+  // });
+
+  print('starting the app');
   runApp(
     MultiProvider(
       providers: [

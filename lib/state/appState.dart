@@ -6,7 +6,7 @@ const initialSize = Size(250, 250);
 
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
-  bool _isWindowFocused = false;
+  bool _isWindowFocused = true;
   Brightness _brightness = Brightness.dark;
   Offset? _windowPosition;
   Offset? get windowPosition => _windowPosition;
