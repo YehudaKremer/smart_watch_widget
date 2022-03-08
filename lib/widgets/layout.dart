@@ -25,8 +25,8 @@ class Layout extends StatelessWidget {
                     : FluentTheme.of(context).shadowColor.withOpacity(0.4),
                 width: 1.4,
               ),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(initialSize.width / 2)),
+              borderRadius: BorderRadius.all(
+                  Radius.circular(MediaQuery.of(context).size.height / 2)),
             ),
             child: ClipOval(
               child: Stack(

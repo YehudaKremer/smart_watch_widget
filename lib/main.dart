@@ -15,6 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   windowManager.focus();
+
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();
@@ -25,13 +26,12 @@ Future<void> main() async {
   final alarmClockState = AlarmClockState(prefs);
 
   doWhenWindowReady(() {
-    appWindow.maxSize = appWindow.minSize = appWindow.size = initialSize;
     if (appState.windowPosition != null) {
       appWindow.position = appState.windowPosition!;
     } else {
       appWindow.alignment = Alignment.topRight;
     }
-
+    //windowManager.setSize(Size(250, 250));
     appWindow.show();
   });
 
@@ -42,7 +42,6 @@ Future<void> main() async {
   //   player.dispose();
   // });
 
-  print('starting the app');
   runApp(
     MultiProvider(
       providers: [

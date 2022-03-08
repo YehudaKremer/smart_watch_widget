@@ -2,8 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:system_theme/system_theme.dart';
 
-const initialSize = Size(250, 250);
-
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _isWindowFocused = true;
