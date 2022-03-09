@@ -11,6 +11,11 @@ class AlarmClockItem extends StatelessWidget {
   final Alarm alarm;
 
   const AlarmClockItem(this.alarm, {Key? key}) : super(key: key);
+
+  Color subTitleColor(BuildContext context) => alarm.isActive
+      ? FluentTheme.of(context).typography.caption!.color!.withOpacity(0.5)
+      : FluentTheme.of(context).disabledColor.withOpacity(0.5);
+
   @override
   Widget build(BuildContext context) {
     return Button(
@@ -31,13 +36,31 @@ class AlarmClockItem extends StatelessWidget {
               key: Key('column-alarm-is-active-${alarm.isActive}'),
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  DateFormat.jm().format(alarm.date),
-                  style: TextStyle(
-                    color: alarm.isActive
-                        ? FluentTheme.of(context).activeColor
-                        : FluentTheme.of(context).disabledColor,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      DateFormat.jm().format(alarm.date),
+                      style: TextStyle(
+                        color: alarm.isActive
+                            ? FluentTheme.of(context).activeColor
+                            : FluentTheme.of(context).disabledColor,
+                      ),
+                    ),
+                    alarm.message != null && alarm.message!.isNotEmpty
+                        ? Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: Tooltip(
+                              message: alarm.message,
+                              child: Icon(FluentIcons.message_fill,
+                                  size: FluentTheme.of(context)
+                                      .typography
+                                      .caption!
+                                      .fontSize,
+                                  color: subTitleColor(context)),
+                            ),
+                          )
+                        : Container()
+                  ],
                 ),
                 alarm.activeDays.isNotEmpty
                     ? Text(
@@ -49,17 +72,7 @@ class AlarmClockItem extends StatelessWidget {
                         style: FluentTheme.of(context)
                             .typography
                             .caption!
-                            .copyWith(
-                              color: alarm.isActive
-                                  ? FluentTheme.of(context)
-                                      .typography
-                                      .caption!
-                                      .color!
-                                      .withOpacity(0.5)
-                                  : FluentTheme.of(context)
-                                      .disabledColor
-                                      .withOpacity(0.5),
-                            ),
+                            .copyWith(color: subTitleColor(context)),
                       )
                     : Container(),
               ],

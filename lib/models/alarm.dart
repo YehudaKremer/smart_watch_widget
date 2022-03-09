@@ -33,6 +33,7 @@ class Alarm {
         'fri': fri,
         'sat': sat,
         'isActive': isActive,
+        'message': message,
       };
 
   Alarm.fromJson(Map<String, dynamic> json)
@@ -44,7 +45,8 @@ class Alarm {
         thu = json['thu'],
         fri = json['fri'],
         sat = json['sat'],
-        isActive = json['isActive'];
+        isActive = json['isActive'],
+        message = json['message'];
 
   List<String> get activeDays {
     List<String> activeDays = [];
