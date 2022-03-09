@@ -8,6 +8,7 @@ class Alarm {
   bool fri;
   bool sat;
   bool isActive;
+  String? message;
 
   Alarm({
     required this.date,
@@ -19,6 +20,7 @@ class Alarm {
     this.fri = false,
     this.sat = false,
     this.isActive = false,
+    this.message,
   });
 
   Map<String, dynamic> toJson() => {

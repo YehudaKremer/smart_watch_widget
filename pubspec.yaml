@@ -25,6 +25,7 @@ dependencies:
       url: https://github.com/harmonoid/libmpv.dart.git
   new_im_animations: ^0.1.1
   schedulers: ^0.3.1
+  win_toast: ^0.0.2
 
 dev_dependencies:
   flutter_test:

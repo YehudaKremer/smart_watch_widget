@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:libmpv/libmpv.dart';
 import 'package:schedulers/schedulers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 import '../animations.dart';
 import '../models/alarm.dart';
@@ -27,7 +28,6 @@ class AlarmClockState extends ChangeNotifier {
   AlarmClockState(this._prefs) {
     //temp, we should dispose player
     player.setPlaylistMode(PlaylistMode.loop);
-
     _getAlarms();
     _scheduleAlarms();
   }
@@ -95,47 +95,55 @@ class AlarmClockState extends ChangeNotifier {
   void _scheduleAlarms() {
     scheduler?.dispose();
     scheduler = TimeScheduler();
-    var today = DateFormat.E().format(DateTime.now());
+    String today = DateFormat.E().format(DateTime.now());
 
-    var activeAlarmTimeStampsForToday = _alarms
-        .where((alarm) =>
-            alarm.isActive &&
-            alarm.date.isAfter(DateTime.now()) &&
-            (alarm.activeDays.length == 0 ||
-                alarm.activeDays.length == 7 ||
-                alarm.activeDays.contains(today)))
-        .map((alarm) => alarm.date.millisecondsSinceEpoch);
+    Iterable<Alarm> activeAlarmForToday = _alarms.where((alarm) =>
+        alarm.isActive &&
+        alarm.date.isAfter(DateTime.now()) &&
+        (alarm.activeDays.length == 0 ||
+            alarm.activeDays.length == 7 ||
+            alarm.activeDays.contains(today)));
 
-    if (activeAlarmTimeStampsForToday.length > 0) {
-      var nextAlarmTimeStampForToday =
-          activeAlarmTimeStampsForToday.reduce(min);
-      var nextAlarmDateForToday =
+    if (activeAlarmForToday.length > 0) {
+      int nextAlarmTimeStampForToday = activeAlarmForToday
+          .map((alarm) => alarm.date.millisecondsSinceEpoch)
+          .reduce(min);
+      DateTime nextAlarmDateForToday =
           DateTime.fromMillisecondsSinceEpoch(nextAlarmTimeStampForToday);
+      Alarm nextAlarmForToday = activeAlarmForToday
+          .firstWhere((alarm) => alarm.date == nextAlarmDateForToday);
       scheduler!
-          .run(() => startAlarm(nextAlarmDateForToday), nextAlarmDateForToday);
+          .run(() => startAlarm(nextAlarmForToday), nextAlarmForToday.date);
     }
 
-    var startOfTheNextDay = DateTime.parse(
+    DateTime startOfTheNextDay = DateTime.parse(
         DateFormat('yyyy-MM-dd').format(DateTime.now().add(Duration(days: 1))));
     scheduler!.run(() => _scheduleAlarms(), startOfTheNextDay);
   }
 
-  void startAlarm(DateTime alarmDate) {
+  void startAlarm(Alarm alarm) {
     windowManager.focus().then((_) => windowManager.isFocused().then((focused) {
-          if (!focused) {
-            windowManager.setSkipTaskbar(false);
-          }
+          if (!focused) windowManager.setSkipTaskbar(false);
         }));
 
     isPlayingAlarm = true;
 
-    //Media('assets/audio/Twin-bell-alarm-clock.mp3');
     player.open([
+      //Media('assets/audio/Twin-bell-alarm-clock.mp3');
       Media(
           '${File(Platform.resolvedExecutable).parent.path}\\data\\flutter_assets\\assets\\audio\\Twin-bell-alarm-clock.mp3')
     ]);
-    scheduler!.run(() => stopAlarm(), alarmDate.add(Duration(minutes: 1)));
+
+    scheduler!.run(() => stopAlarm(), alarm.date.add(Duration(minutes: 1)));
+    _showWindowsToast(alarm);
     notifyListeners();
+  }
+
+  void _showWindowsToast(Alarm alarm) {
+    WinToast.instance().showToast(
+        type: ToastType.text02,
+        title: DateFormat.yMMMMEEEEd().format(alarm.date),
+        subtitle: alarm.message ?? '');
   }
 
   void stopAlarm() {

@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:libmpv/libmpv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,11 @@ Future<void> main() async {
   await Window.initialize();
   await MPV.initialize();
   await Window.setEffect(effect: WindowEffect.transparent);
+  await WinToast.instance().initialize(
+      appName: 'Smart Watch Widget',
+      productName: '48434KremerSoftware.SmartWatchWidget',
+      companyName: 'Kremer Software');
+
   var prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
 
