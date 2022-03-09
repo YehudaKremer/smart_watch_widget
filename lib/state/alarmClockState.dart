@@ -1,18 +1,16 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:libmpv/libmpv.dart';
-import 'package:provider/provider.dart';
 import 'package:schedulers/schedulers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
-
 import '../animations.dart';
 import '../models/alarm.dart';
 import '../widgets/alarmClock/alarmClockItem.dart';
 import '../widgets/listItemPadding.dart';
-import 'appState.dart';
 
 const alarmsPrefsKey = 'alarms';
 
@@ -65,6 +63,11 @@ class AlarmClockState extends ChangeNotifier {
   }
 
   _removeAlarmAnimatedListItem(int itemIndex, Alarm removedItem) {
+    /// for perfect animation we set here the isActive property of the removed item
+    if (itemIndex > 0 && alarms.length > 0) {
+      removedItem.isActive = alarms[itemIndex - 1].isActive;
+    }
+
     alarmsAnimatedListKey.currentState!.removeItem(
       itemIndex + 1,
       (context, animation) => SizeFadeTransition(
@@ -125,7 +128,12 @@ class AlarmClockState extends ChangeNotifier {
         }));
 
     isPlayingAlarm = true;
-    player.open([Media('assets/audio/Twin-bell-alarm-clock.mp3')]);
+
+    //Media('assets/audio/Twin-bell-alarm-clock.mp3');
+    player.open([
+      Media(
+          '${File(Platform.resolvedExecutable).parent.path}\\data\\flutter_assets\\assets\\audio\\Twin-bell-alarm-clock.mp3')
+    ]);
     scheduler!.run(() => stopAlarm(), alarmDate.add(Duration(minutes: 1)));
     notifyListeners();
   }
