@@ -14,16 +14,13 @@ import 'state/alarmClockState.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
-  windowManager.focus();
-
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();
   await MPV.initialize();
   await Window.setEffect(effect: WindowEffect.transparent);
-  final prefs = await SharedPreferences.getInstance();
+  var prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
-  final alarmClockState = AlarmClockState(prefs);
 
   doWhenWindowReady(() {
     if (appState.windowPosition != null) {
@@ -33,6 +30,7 @@ Future<void> main() async {
     }
     //windowManager.setSize(Size(250, 250));
     appWindow.show();
+    windowManager.focus();
   });
 
   // Player player = Player(video: false, osc: false, yt: false);
@@ -46,7 +44,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => appState),
-        ChangeNotifierProvider(create: (_) => alarmClockState),
+        ChangeNotifierProvider(create: (_) => AlarmClockState(prefs)),
       ],
       child: HomePage(),
     ),

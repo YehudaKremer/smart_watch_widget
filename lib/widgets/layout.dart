@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import '../state/appState.dart';
 import '../hotKeys.dart';
-import '../pages/alarmScreen.dart';
+import 'alarmClock/alarmScreen.dart';
 
 class Layout extends StatelessWidget {
   final Widget child;

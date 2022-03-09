@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
 
+import '../../animations.dart';
 import '../../models/alarm.dart';
 import 'alarmClockFrom.dart';
 
@@ -20,28 +21,49 @@ class AlarmClockItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(DateFormat.jm().format(alarm.date)),
-              alarm.activeDays.isNotEmpty
-                  ? Text(
-                      alarm.activeDays
-                          .map((day) => alarm.activeDays.length > 4
-                              ? day.substring(0, 1)
-                              : day)
-                          .join(', '),
-                      style:
-                          FluentTheme.of(context).typography.caption!.copyWith(
-                                color: FluentTheme.of(context)
-                                    .typography
-                                    .caption!
-                                    .color!
-                                    .withOpacity(0.5),
-                              ),
-                    )
-                  : Container(),
-            ],
+          AnimatedSwitcher(
+            duration: FluentTheme.of(context).fasterAnimationDuration,
+            transitionBuilder: (child, animation) => FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+            child: Column(
+              key: Key('column-alarm-is-active-${alarm.isActive}'),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DateFormat.jm().format(alarm.date),
+                  style: TextStyle(
+                    color: alarm.isActive
+                        ? FluentTheme.of(context).activeColor
+                        : FluentTheme.of(context).disabledColor,
+                  ),
+                ),
+                alarm.activeDays.isNotEmpty
+                    ? Text(
+                        alarm.activeDays
+                            .map((day) => alarm.activeDays.length > 4
+                                ? day.substring(0, 1)
+                                : day)
+                            .join(', '),
+                        style: FluentTheme.of(context)
+                            .typography
+                            .caption!
+                            .copyWith(
+                              color: alarm.isActive
+                                  ? FluentTheme.of(context)
+                                      .typography
+                                      .caption!
+                                      .color!
+                                      .withOpacity(0.5)
+                                  : FluentTheme.of(context)
+                                      .disabledColor
+                                      .withOpacity(0.5),
+                            ),
+                      )
+                    : Container(),
+              ],
+            ),
           ),
           ToggleSwitch(
             checked: alarm.isActive,

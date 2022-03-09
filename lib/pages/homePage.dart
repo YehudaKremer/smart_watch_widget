@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void onWindowFocus() {
+    windowManager.setSkipTaskbar(false);
     context.read<AppState>().setWindowFocused(true);
     SystemTheme.accentInstance.load();
   }

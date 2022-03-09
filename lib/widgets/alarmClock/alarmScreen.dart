@@ -9,7 +9,7 @@ class AlarmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
+      duration: FluentTheme.of(context).mediumAnimationDuration,
       transitionBuilder: (child, animation) => FadeTransition(
         opacity: animation,
         child: child,
