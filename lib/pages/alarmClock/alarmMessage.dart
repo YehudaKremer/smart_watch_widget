@@ -43,11 +43,25 @@ class AlarmMessage extends StatelessWidget {
           actionsSpacing: 0,
         ),
         actions: [
-          Center(
-            child: IconButton(
-              icon: Icon(FluentIcons.accept),
-              onPressed: submitAlarmMessage,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Tooltip(
+                message: 'Save',
+                child: IconButton(
+                  icon: Icon(FluentIcons.accept),
+                  onPressed: submitAlarmMessage,
+                ),
+              ),
+              Container(width: 10),
+              Tooltip(
+                message: 'Cancel',
+                child: IconButton(
+                  icon: Icon(FluentIcons.cancel),
+                  onPressed: onDismiss,
+                ),
+              ),
+            ],
           ),
         ],
       ),
