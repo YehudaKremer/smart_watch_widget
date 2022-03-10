@@ -170,7 +170,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
             ],
           ),
           AnimatedSwitcher(
-            duration: FluentTheme.of(context).fasterAnimationDuration,
+            duration: FluentTheme.of(context).fastAnimationDuration,
             transitionBuilder: (child, animation) => SlideFadeTransition(
               animation: animation,
               child: child,

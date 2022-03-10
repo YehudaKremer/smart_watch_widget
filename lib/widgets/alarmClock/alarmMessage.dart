@@ -25,7 +25,6 @@ class AlarmMessage extends StatelessWidget {
           controller: messageController,
           placeholder: 'Type alarm message',
           maxLines: 3,
-          highlightColor: Colors.transparent,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
