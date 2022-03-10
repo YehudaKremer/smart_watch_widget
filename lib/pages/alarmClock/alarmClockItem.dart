@@ -40,11 +40,11 @@ class AlarmClockItem extends StatelessWidget {
                       DateFormat.jm().format(alarm.date),
                       style: TextStyle(
                         color: alarm.isActive
-                            ? FluentTheme.of(context).activeColor
+                            ? FluentTheme.of(context).typography.body!.color
                             : FluentTheme.of(context).disabledColor,
                       ),
                     ),
-                    alarm.message != null && alarm.message!.isNotEmpty
+                    alarm.haveMessage
                         ? Container(
                             margin: EdgeInsets.only(left: 10),
                             child: Tooltip(

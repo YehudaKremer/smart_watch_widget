@@ -162,9 +162,12 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                   Container(width: 10),
                   BasicButton(
                     title: 'Message',
-                    icon: alarm.message == null || alarm.message!.isEmpty
-                        ? FluentIcons.message
-                        : FluentIcons.message_fill,
+                    icon: alarm.haveMessage
+                        ? FluentIcons.message_fill
+                        : FluentIcons.message,
+                    color: alarm.haveMessage
+                        ? FluentTheme.of(context).accentColor
+                        : FluentTheme.of(context).typography.body!.color,
                     onPressed: toggleAlarmMessageDialogOpen,
                   ),
                   Container(width: 20),

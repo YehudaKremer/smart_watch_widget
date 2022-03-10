@@ -59,4 +59,6 @@ class Alarm {
     if (sat) activeDays.add('Sat');
     return activeDays;
   }
+
+  get haveMessage => message != null && message!.isNotEmpty;
 }
