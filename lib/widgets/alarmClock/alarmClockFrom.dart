@@ -3,6 +3,7 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import '../../animations.dart';
 import '../../hotKeys.dart';
 import '../../models/alarm.dart';
 import '../basicButton.dart';
@@ -168,10 +169,17 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
               ),
             ],
           ),
-          isAlarmMessageDialogOpen
-              ? AlarmMessage(
-                  alarm: alarm, onDismiss: toggleAlarmMessageDialogOpen)
-              : Container(),
+          AnimatedSwitcher(
+            duration: FluentTheme.of(context).fasterAnimationDuration,
+            transitionBuilder: (child, animation) => SlideFadeTransition(
+              animation: animation,
+              child: child,
+            ),
+            child: isAlarmMessageDialogOpen
+                ? AlarmMessage(
+                    alarm: alarm, onDismiss: toggleAlarmMessageDialogOpen)
+                : Container(),
+          ),
         ],
       ),
     );

@@ -14,34 +14,6 @@ class AlarmClockPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List<Widget> children = [
-    //   MenuItem(
-    //     title: 'Back',
-    //     icon: FluentIcons.back,
-    //     onPressed: () {
-    //       Navigator.pop(context);
-    //     },
-    //   ),
-    //   Container(height: 10),
-    // ];
-
-    // context.watch<AlarmClockState>().alarms.forEach((alarm) {
-    //   children.addAll([AlarmClockItem(alarm), Container(height: 10)]);
-    // });
-
-    // children.add(
-    //   MenuItem(
-    //     title: 'New Alarm',
-    //     icon: FluentIcons.add,
-    //     onPressed: () => Navigator.push(
-    //       context,
-    //       FluentPageRoute(
-    //         builder: (context) => AlarmClockFrom(Alarm(date: DateTime.now())),
-    //       ),
-    //     ),
-    //   ),
-    // );
-
     return Layout(
       child: Consumer<AlarmClockState>(
         builder: (context, state, child) {
