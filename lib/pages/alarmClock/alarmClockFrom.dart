@@ -43,7 +43,6 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
     await hotKeyManager.register(
       _alarmClockFromConfirmHotKey,
       keyDownHandler: (_) {
-        print('submitAlarmClockFrom');
         if (!isAlarmMessageDialogOpen) {
           submitAlarmClockFrom();
         }
@@ -86,12 +85,22 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                 onPressed: () => Navigator.pop(context),
               ),
               Container(height: 10),
-              TimePicker(
-                popupHeight: 240,
-                selected: alarm.date,
-                onChanged: (date) => setAlarmState(() => alarm.date =
-                    DateTime.parse(
-                        DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: FluentTheme.of(context)
+                          .borderInputColor
+                          .withOpacity(0.07),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(4)),
+                child: TimePicker(
+                  popupHeight: 240,
+                  selected: alarm.date,
+                  onChanged: (date) => setAlarmState(() => alarm.date =
+                      DateTime.parse(
+                          DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),
+                ),
               ),
               Container(height: 10),
               Wrap(
