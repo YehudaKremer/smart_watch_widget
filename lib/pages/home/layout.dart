@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import '../state/appState.dart';
-import '../hotKeys.dart';
-import 'alarmClock/alarmScreen.dart';
+import 'package:smart_watch_widget/utils/hotKeys.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarmScreen.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 
 class Layout extends StatelessWidget {
   final Widget child;

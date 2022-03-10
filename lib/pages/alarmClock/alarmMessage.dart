@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import '../../models/alarm.dart';
+import 'package:smart_watch_widget/models/alarm.dart';
 
 class AlarmMessage extends StatelessWidget {
   final Alarm alarm;

@@ -6,12 +6,12 @@ import 'package:intl/intl.dart';
 import 'package:libmpv/libmpv.dart';
 import 'package:schedulers/schedulers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_watch_widget/utils/animations.dart';
+import 'package:smart_watch_widget/models/alarm.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
+import 'package:smart_watch_widget/widgets/listItemPadding.dart';
 import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
-import '../animations.dart';
-import '../models/alarm.dart';
-import '../widgets/alarmClock/alarmClockItem.dart';
-import '../widgets/listItemPadding.dart';
 
 const alarmsPrefsKey = 'alarms';
 

@@ -1,13 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_watch_widget/utils/animations.dart';
+import 'package:smart_watch_widget/models/alarm.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarmClockFrom.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
-import '../animations.dart';
-import '../models/alarm.dart';
-import '../widgets/layout.dart';
-import '../widgets/listItemPadding.dart';
-import '../widgets/menuItem.dart';
-import '../widgets/alarmClock/alarmClockFrom.dart';
-import '../widgets/alarmClock/alarmClockItem.dart';
+import 'package:smart_watch_widget/pages/home/layout.dart';
+import 'package:smart_watch_widget/widgets/listItemPadding.dart';
+import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 
 class AlarmClockPage extends StatelessWidget {
   const AlarmClockPage({Key? key}) : super(key: key);

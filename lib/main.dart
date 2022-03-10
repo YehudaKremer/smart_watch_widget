@@ -7,7 +7,7 @@ import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/homePage.dart';
+import 'package:smart_watch_widget/pages/home/homePage.dart';
 import 'package:system_theme/system_theme.dart';
 import 'state/appState.dart';
 import 'state/alarmClockState.dart';

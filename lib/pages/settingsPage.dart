@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import '../widgets/layout.dart';
-import '../widgets/menuItem.dart';
+import 'home/layout.dart';
+import 'menu/menuItem.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);

@@ -1,10 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
-
-import '../../animations.dart';
-import '../../models/alarm.dart';
 import 'alarmClockFrom.dart';
 
 class AlarmClockItem extends StatelessWidget {
