@@ -85,23 +85,18 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                 onPressed: () => Navigator.pop(context),
               ),
               Container(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: FluentTheme.of(context)
-                          .borderInputColor
-                          .withOpacity(0.07),
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(4)),
-                child: TimePicker(
-                  popupHeight: 240,
-                  selected: alarm.date,
-                  onChanged: (date) => setAlarmState(() => alarm.date =
-                      DateTime.parse(
-                          DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),
-                ),
-              ),
+              Button(
+                  style: ButtonStyle(
+                    padding: ButtonState.all(EdgeInsets.all(0)),
+                  ),
+                  child: TimePicker(
+                    popupHeight: 240,
+                    selected: alarm.date,
+                    onChanged: (date) => setAlarmState(() => alarm.date =
+                        DateTime.parse(DateFormat('yyyy-MM-dd HH:mm:00.000')
+                            .format(date))),
+                  ),
+                  onPressed: () {}),
               Container(height: 10),
               Wrap(
                 spacing: 10,
