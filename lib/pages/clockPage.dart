@@ -9,7 +9,8 @@ class Clock extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, FluentPageRoute(builder: (context) => Menu()));
+        Navigator.push(
+            context, FluentPageRoute(builder: (context) => MenuPage()));
       },
       child: AnalogClock(
         decoration: BoxDecoration(

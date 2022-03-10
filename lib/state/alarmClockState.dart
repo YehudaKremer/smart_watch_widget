@@ -62,7 +62,7 @@ class AlarmClockState extends ChangeNotifier {
     notifyListeners();
   }
 
-  _removeAlarmAnimatedListItem(int itemIndex, Alarm removedItem) {
+  void _removeAlarmAnimatedListItem(int itemIndex, Alarm removedItem) {
     /// for perfect animation we set here the isActive property of the removed item
     if (itemIndex > 0 && alarms.length > 0) {
       removedItem.isActive = alarms[itemIndex - 1].isActive;
