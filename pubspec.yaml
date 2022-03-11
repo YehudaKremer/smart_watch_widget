@@ -30,7 +30,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  msix: ^3.3.1
+  msix: ^3.3.2
 
 flutter:
   uses-material-design: true
@@ -45,4 +45,4 @@ msix_config:
   msix_version: 0.3.0.0
   logo_path: images\logo-light.png
   enable_at_startup : true
-  store: false
+  store: true
