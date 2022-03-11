@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/utils/hotKeys.dart';
-import 'package:smart_watch_widget/pages/alarmClock/alarmScreen.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 
 class Layout extends StatelessWidget {
@@ -28,12 +27,7 @@ class Layout extends StatelessWidget {
               borderRadius: BorderRadius.all(
                   Radius.circular(MediaQuery.of(context).size.height / 2)),
             ),
-            child: ClipOval(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [child, AlarmScreen()],
-              ),
-            ),
+            child: ClipOval(child: child),
           ),
         ),
       ),

@@ -6,9 +6,11 @@ import 'package:intl/intl.dart';
 import 'package:libmpv/libmpv.dart';
 import 'package:schedulers/schedulers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarmScreenPage.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
+import 'package:smart_watch_widget/utils/generalScope.dart';
 import 'package:smart_watch_widget/widgets/listItemPadding.dart';
 import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
@@ -21,7 +23,6 @@ class AlarmClockState extends ChangeNotifier {
 
   List<Alarm> _alarms = [];
   List<Alarm> get alarms => _alarms;
-  bool isPlayingAlarm = false;
   Player player = Player(video: false, osc: false, yt: false);
   TimeScheduler? scheduler;
 
@@ -126,13 +127,14 @@ class AlarmClockState extends ChangeNotifier {
           if (!focused) windowManager.setSkipTaskbar(false);
         }));
 
-    isPlayingAlarm = true;
-
     player.open([
       //Media('assets/audio/Twin-bell-alarm-clock.mp3');
       Media(
           '${File(Platform.resolvedExecutable).parent.path}\\data\\flutter_assets\\assets\\audio\\Twin-bell-alarm-clock.mp3')
     ]);
+
+    Navigator.push(navigatorKey.currentContext!,
+        FluentPageRoute(builder: (context) => AlarmScreenPage()));
 
     scheduler!.run(() => stopAlarm(), alarm.date.add(Duration(minutes: 1)));
     _showWindowsToast(alarm);
@@ -147,12 +149,9 @@ class AlarmClockState extends ChangeNotifier {
   }
 
   void stopAlarm() {
-    if (isPlayingAlarm) {
-      player.pause();
-      isPlayingAlarm = false;
-      windowManager.setSkipTaskbar(true);
-      _scheduleAlarms();
-      notifyListeners();
-    }
+    player.pause();
+    windowManager.setSkipTaskbar(true);
+    _scheduleAlarms();
+    notifyListeners();
   }
 }

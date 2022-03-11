@@ -2,12 +2,12 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 
-class AlarmMessage extends StatelessWidget {
+class AlarmMessagePage extends StatelessWidget {
   final Alarm alarm;
   final void Function() onDismiss;
   final messageController = TextEditingController();
 
-  AlarmMessage({Key? key, required this.alarm, required this.onDismiss})
+  AlarmMessagePage({Key? key, required this.alarm, required this.onDismiss})
       : super(key: key) {
     messageController.text = alarm.message ?? '';
   }
