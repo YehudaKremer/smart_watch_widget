@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
+import 'package:smart_watch_widget/pages/home/layout.dart';
 
 class AlarmMessage extends StatelessWidget {
   final Alarm alarm;
@@ -11,14 +12,15 @@ class AlarmMessage extends StatelessWidget {
     messageController.text = alarm.message ?? '';
   }
 
-  void submitAlarmMessage() {
+  void submitAlarmMessage(BuildContext context) {
     alarm.message = messageController.text;
     onDismiss();
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Acrylic(
+    return Layout(
       child: ContentDialog(
         content: TextBox(
           autofocus: true,
@@ -50,7 +52,7 @@ class AlarmMessage extends StatelessWidget {
                 message: 'Save',
                 child: IconButton(
                   icon: Icon(FluentIcons.accept),
-                  onPressed: submitAlarmMessage,
+                  onPressed: () => submitAlarmMessage(context),
                 ),
               ),
               Container(width: 10),
@@ -58,7 +60,7 @@ class AlarmMessage extends StatelessWidget {
                 message: 'Cancel',
                 child: IconButton(
                   icon: Icon(FluentIcons.cancel),
-                  onPressed: onDismiss,
+                  onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
             ],
