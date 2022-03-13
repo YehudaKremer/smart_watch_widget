@@ -3,7 +3,9 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockPage.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
+import 'package:smart_watch_widget/pages/settingsPage.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 import 'package:window_manager/window_manager.dart';
 import 'menuItem.dart';
 
@@ -56,12 +58,12 @@ class MenuPage extends StatelessWidget {
                 ? Text(numberOfActiveAlarms.toString())
                 : null,
           ),
-          // MenuItem(
-          //   title: 'Settings',
-          //   icon: FluentIcons.settings,
-          //   onPressed: () => Navigator.push(
-          //       context, FluentPageRoute(builder: (context) => SettingsPage())),
-          // ),
+          MenuItem(
+            title: 'Settings',
+            icon: FluentIcons.settings,
+            onPressed: () => Navigator.push(
+                context, FluentPageRoute(builder: (context) => SettingsPage())),
+          ),
         ],
       ),
     );

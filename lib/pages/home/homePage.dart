@@ -1,13 +1,18 @@
+import 'dart:async';
+
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clockSettingsPage.dart';
+import 'package:smart_watch_widget/pages/home/layout.dart';
+import 'package:smart_watch_widget/pages/menu/menuPage.dart';
 import 'package:smart_watch_widget/utils/generalScope.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:system_theme/system_theme.dart';
-import 'customScrollBehavior.dart';
+import '../../utils/customScrollBehavior.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +21,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with WindowListener, WidgetsBindingObserver {
+  Timer? _debounceWindowMoves;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +35,7 @@ class _HomePageState extends State<HomePage>
     hotKeyManager.unregisterAll();
     windowManager.removeListener(this);
     WidgetsBinding.instance?.removeObserver(this);
+    _debounceWindowMoves?.cancel();
     super.dispose();
   }
 
@@ -51,9 +59,11 @@ class _HomePageState extends State<HomePage>
         brightness: context.watch<AppState>().brightness,
         accentColor: SystemTheme.accentInstance.accent.toAccentColor(),
       ),
-      scrollBehavior: CustomScrollBehavior(),
+      scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
-      home: Clock(),
+      home: Layout(
+        child: ClockPage(navigateOnTap: MenuPage()),
+      ),
     );
   }
 
@@ -68,6 +78,15 @@ class _HomePageState extends State<HomePage>
   void onWindowBlur() {
     windowManager.setSkipTaskbar(true);
     context.read<AppState>().setWindowFocused(false);
-    context.read<AppState>().setWindowPosition(appWindow.position);
+  }
+
+  @override
+  Future<void> onWindowMove() async {
+    if (_debounceWindowMoves?.isActive ?? false) _debounceWindowMoves?.cancel();
+    _debounceWindowMoves = Timer(const Duration(milliseconds: 500), () async {
+      context
+          .read<AppState>()
+          .setWindowPosition(await windowManager.getPosition());
+    });
   }
 }

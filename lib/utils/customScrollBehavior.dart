@@ -12,7 +12,9 @@ class CustomScrollBehavior extends FluentScrollBehavior {
   ScrollPhysics getScrollPhysics(BuildContext context) {
     return const BouncingScrollPhysics();
   }
+}
 
+class CustomScrollBehaviorWithoutScrollBar extends CustomScrollBehavior {
   @override
   Widget buildScrollbar(
       BuildContext context, Widget child, ScrollableDetails details) {

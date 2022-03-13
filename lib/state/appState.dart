@@ -38,10 +38,9 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setWindowPosition(Offset value) async {
+  void setWindowPosition(Offset value) {
     _windowPosition = value;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('windowPositionDx', value.dx);
-    await prefs.setDouble('windowPositionDy', value.dy);
+    prefs.setDouble('windowPositionDx', value.dx);
+    prefs.setDouble('windowPositionDy', value.dy);
   }
 }

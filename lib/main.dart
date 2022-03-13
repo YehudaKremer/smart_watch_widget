@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:libmpv/libmpv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -51,6 +52,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => appState),
         ChangeNotifierProvider(create: (_) => AlarmClockState(prefs)),
+        ChangeNotifierProvider(create: (_) => ClockSettingsState(prefs)),
       ],
       child: HomePage(),
     ),

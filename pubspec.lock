@@ -4,9 +4,11 @@ packages:
   analog_clock:
     dependency: "direct main"
     description:
-      name: analog_clock
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: fix-digital-clock-live
+      resolved-ref: "2f562011cd2e00c480d9b41189e468f571662c66"
+      url: "https://github.com/YehudaKremer/analog_clock.git"
+    source: git
     version: "0.1.0"
   archive:
     dependency: transitive
@@ -181,6 +183,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+1"
+  flutter_colorpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_colorpicker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter

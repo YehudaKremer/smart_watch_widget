@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clockSettingsPage.dart';
 import 'home/layout.dart';
 import 'menu/menuItem.dart';
 
@@ -18,16 +19,26 @@ class SettingsPage extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          StatefulBuilder(
-            builder: ((context, setState) {
-              bool _checked = false;
-
-              return ToggleSwitch(
-                checked: _checked,
-                onChanged: (v) => setState(() => _checked = v),
-                content: Text(_checked ? 'On' : 'Off'),
-              );
-            }),
+          Container(height: 10),
+          Button(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FluentIcons.clock,
+                  size: FluentTheme.of(context).typography.bodyLarge!.fontSize,
+                ),
+                Container(width: 5),
+                Text(
+                  'Clock Settings',
+                  style: FluentTheme.of(context).typography.bodyLarge,
+                ),
+              ],
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  FluentPageRoute(builder: (context) => ClockSettings()));
+            },
           ),
         ],
       ),

@@ -9,7 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  analog_clock: ^0.1.0
+  analog_clock: #^0.1.0
+    git: 
+      url: https://github.com/YehudaKremer/analog_clock.git
+      ref: fix-digital-clock-live
   flutter_acrylic: ^1.0.0+1
   bitsdojo_window: ^0.1.1+1
   provider: ^6.0.2
@@ -26,6 +29,7 @@ dependencies:
   new_im_animations: ^0.1.1
   schedulers: ^0.3.1
   win_toast: ^0.0.2
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -45,4 +49,4 @@ msix_config:
   msix_version: 0.3.0.0
   logo_path: images\logo-light.png
   enable_at_startup : true
-  store: true
+  store: false
