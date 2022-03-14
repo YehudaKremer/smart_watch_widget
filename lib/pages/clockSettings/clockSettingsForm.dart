@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
@@ -42,6 +42,33 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                 icon: FluentIcons.back,
                 onPressed: widget.onDismiss,
               ),
+              Container(height: 10),
+              Button(
+                onPressed: () => showDialog<String>(
+                  context: context,
+                  barrierColor: Colors.transparent,
+                  builder: (BuildContext context) => ContentDialog(
+                    backgroundDismiss: true,
+                    title: const Text('AlertDialog Title'),
+                    content: const Text('AlertDialog description'),
+                  ),
+                ),
+                child: const Text('Show Dialog'),
+              ),
+              // Material(
+              //   child:
+
+              //   ContentDialog(
+              //     content: SizedBox(
+              //       width: 100,
+              //       height: 150,
+              //       child: ColorPicker(
+              //         pickerColor: Color(0xff443a49),
+              //         onColorChanged: (_) {},
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Container(height: 10),
               ToggleSwitch(
                 checked: settings.showNumbers,
@@ -103,17 +130,6 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                 ),
               ),
               Container(height: 10),
-              // Material(
-              //   child: SizedBox(
-              //     width: 100,
-              //     height: 150,
-              //     child: ColorPicker(
-              //       pickerColor: Color(0xff443a49),
-              //       onColorChanged: (_) {},
-              //     ),
-              //   ),
-              // ),
-              // Container(height: 10),
             ],
           ),
         );

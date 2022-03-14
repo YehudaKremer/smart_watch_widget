@@ -14,13 +14,8 @@ class AlarmMessageDialog extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(3),
         child: Container(
-          decoration: BoxDecoration(
-            color: FluentTheme.of(context)
-                .scaffoldBackgroundColor
-                .withOpacity(0.6),
-            borderRadius: BorderRadius.all(
-                Radius.circular(MediaQuery.of(context).size.height / 2)),
-          ),
+          color:
+              FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
           child: ContentDialog(
             content: TextBox(
               autofocus: true,
