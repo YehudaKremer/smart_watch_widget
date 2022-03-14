@@ -7,7 +7,7 @@ import 'package:smart_watch_widget/state/alarmClockState.dart';
 import 'package:smart_watch_widget/widgets/basicButton.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
-import 'alarmMessagePage.dart';
+import 'alarmMessageDialog.dart';
 import 'dayToggleButton.dart';
 
 class AlarmClockFrom extends StatefulWidget {
@@ -158,13 +158,17 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                 color: alarm.haveMessage
                     ? FluentTheme.of(context).accentColor
                     : FluentTheme.of(context).typography.body!.color,
-                onPressed: () => Navigator.push(
-                  context,
-                  FluentPageRoute(
-                    builder: (context) => AlarmMessagePage(
-                        alarm: alarm, onDismiss: () => setAlarmState(() {})),
-                  ),
-                ),
+                onPressed: () async {
+                  final message = await showDialog<String>(
+                    context: context,
+                    barrierColor: Colors.transparent,
+                    builder: (BuildContext context) =>
+                        AlarmMessageDialog(message: alarm.message ?? ''),
+                  );
+                  if (message != null) {
+                    setAlarmState(() => alarm.message = message);
+                  }
+                },
               ),
               Container(width: 20),
             ],
