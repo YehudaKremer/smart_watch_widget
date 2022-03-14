@@ -48,3 +48,21 @@ class SlideFadeTransition extends AnimatedWidget {
     );
   }
 }
+
+class AnimatedSlideFade extends StatelessWidget {
+  final Widget child;
+
+  const AnimatedSlideFade({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: FluentTheme.of(context).fasterAnimationDuration,
+      transitionBuilder: (innerChild, animation) => SlideFadeTransition(
+        animation: animation,
+        child: innerChild,
+      ),
+      child: child,
+    );
+  }
+}

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsForm.dart';
 import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:window_manager/window_manager.dart';
 
 class ClockSettings extends StatefulWidget {
@@ -13,12 +14,19 @@ class ClockSettings extends StatefulWidget {
 }
 
 class _ClockSettingsState extends State<ClockSettings> {
+  bool show = false;
+
   @override
   void initState() {
     super.initState();
     final windowPosition = context.read<AppState>().windowPosition;
-    windowManager.setBounds(
-        Rect.fromLTWH(windowPosition!.dx - 200, windowPosition.dy, 450, 250));
+
+    WidgetsBinding.instance!.addPostFrameCallback(
+        (_) => Future.delayed(Duration(milliseconds: 200), () async {
+              await windowManager.setBounds(Rect.fromLTWH(
+                  windowPosition!.dx - 200, windowPosition.dy, 450, 250));
+              setState(() => show = true);
+            }));
   }
 
   @override
@@ -42,15 +50,39 @@ class _ClockSettingsState extends State<ClockSettings> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: ClockPage(),
+                  child: AnimatedSlideFade(
+                    child: show
+                        ? GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: ClockPage(),
+                          )
+                        : Container(),
                   ),
                 ),
                 Expanded(
-                  child: ClockSettingsForm(),
+                  child: AnimatedSlideFade(
+                    child: show
+                        ? ClockSettingsForm(
+                            onDismiss: () {
+                              setState(() => show = false);
+                              Future.delayed(Duration(milliseconds: 200),
+                                  () async {
+                                final windowPosition =
+                                    context.read<AppState>().windowPosition;
+
+                                await windowManager.setBounds(Rect.fromLTWH(
+                                    windowPosition!.dx,
+                                    windowPosition.dy,
+                                    250,
+                                    250));
+                                Navigator.pop(context);
+                              });
+                            },
+                          )
+                        : Container(),
+                  ),
                 ),
               ],
             ),
