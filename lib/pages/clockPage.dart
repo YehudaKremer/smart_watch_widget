@@ -1,6 +1,7 @@
 import 'package:analog_clock/analog_clock.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
 
 class ClockPage extends StatelessWidget {
@@ -23,13 +24,20 @@ class ClockPage extends StatelessWidget {
             key: Key(state.lastModified.toString()),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: FluentTheme.of(context).scaffoldBackgroundColor,
+              color: state.backgroundColor ??
+                  FluentTheme.of(context).scaffoldBackgroundColor,
             ),
-            numberColor: FluentTheme.of(context).accentColor.light,
-            tickColor: FluentTheme.of(context).accentColor.dark,
-            digitalClockColor: FluentTheme.of(context).accentColor,
-            hourHandColor: FluentTheme.of(context).accentColor.light,
-            minuteHandColor: FluentTheme.of(context).accentColor,
+            numberColor:
+                state.numberColor ?? FluentTheme.of(context).accentColor.light,
+            tickColor:
+                state.tickColor ?? FluentTheme.of(context).accentColor.dark,
+            digitalClockColor:
+                state.digitalClockColor ?? FluentTheme.of(context).accentColor,
+            hourHandColor: state.hourHandColor ??
+                FluentTheme.of(context).accentColor.light,
+            minuteHandColor:
+                state.minuteHandColor ?? FluentTheme.of(context).accentColor,
+            secondHandColor: state.secondHandColor ?? material.Colors.redAccent,
             textScaleFactor: 1.4,
             showAllNumbers: state.showAllNumbers,
             useMilitaryTime: state.useMilitaryTime,

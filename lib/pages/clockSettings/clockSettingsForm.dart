@@ -1,10 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
-//import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:smart_watch_widget/widgets/colorPickerDialog.dart';
 
 class ClockSettingsForm extends StatefulWidget {
   final void Function() onDismiss;
@@ -42,33 +43,6 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                 icon: FluentIcons.back,
                 onPressed: widget.onDismiss,
               ),
-              Container(height: 10),
-              Button(
-                onPressed: () => showDialog<String>(
-                  context: context,
-                  barrierColor: Colors.transparent,
-                  builder: (BuildContext context) => ContentDialog(
-                    backgroundDismiss: true,
-                    title: const Text('AlertDialog Title'),
-                    content: const Text('AlertDialog description'),
-                  ),
-                ),
-                child: const Text('Show Dialog'),
-              ),
-              // Material(
-              //   child:
-
-              //   ContentDialog(
-              //     content: SizedBox(
-              //       width: 100,
-              //       height: 150,
-              //       child: ColorPicker(
-              //         pickerColor: Color(0xff443a49),
-              //         onColorChanged: (_) {},
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Container(height: 10),
               ToggleSwitch(
                 checked: settings.showNumbers,
@@ -121,7 +95,7 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                         state, () => settings.useMilitaryTime = v)
                     : null,
                 content: Text(
-                  'Use AM/FM Time',
+                  'Use Military Time',
                   style: TextStyle(
                     color: settings.showDigitalClock
                         ? FluentTheme.of(context).typography.body!.color
@@ -130,6 +104,10 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                 ),
               ),
               Container(height: 10),
+              Button(
+                child: Text('Reset All'),
+                onPressed: () => state.resetAll(),
+              ),
             ],
           ),
         );

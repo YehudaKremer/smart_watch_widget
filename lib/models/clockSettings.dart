@@ -1,4 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ClockSettings {
   Color? backgroundColor;
@@ -19,31 +21,47 @@ class ClockSettings {
 
   ClockSettings();
 
-  Map<String, dynamic> toJson() => {
-        'backgroundColor': backgroundColor,
-        'numberColor': numberColor,
-        'tickColor': tickColor,
-        'digitalClockColor': digitalClockColor,
-        'hourHandColor': hourHandColor,
-        'minuteHandColor': minuteHandColor,
-        'secondHandColor': secondHandColor,
-        'showDigitalClock': showDigitalClock,
-        'showNumbers': showNumbers,
-        'showSecondHand': showSecondHand,
-        'showTicks': showTicks,
-        'useMilitaryTime': useMilitaryTime,
-        'showAllNumbers': showAllNumbers,
-        'textScaleFactor': textScaleFactor,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'backgroundColor': backgroundColor?.value.toRadixString(16),
+      'numberColor': numberColor?.value.toRadixString(16),
+      'tickColor': tickColor?.value.toRadixString(16),
+      'digitalClockColor': digitalClockColor?.value.toRadixString(16),
+      'hourHandColor': hourHandColor?.value.toRadixString(16),
+      'minuteHandColor': minuteHandColor?.value.toRadixString(16),
+      'secondHandColor': secondHandColor?.value.toRadixString(16),
+      'showDigitalClock': showDigitalClock,
+      'showNumbers': showNumbers,
+      'showSecondHand': showSecondHand,
+      'showTicks': showTicks,
+      'useMilitaryTime': useMilitaryTime,
+      'showAllNumbers': showAllNumbers,
+      'textScaleFactor': textScaleFactor,
+    };
+  }
 
   ClockSettings.fromJson(Map<String, dynamic> json)
-      : backgroundColor = json['backgroundColor'],
-        numberColor = json['numberColor'],
-        tickColor = json['tickColor'],
-        digitalClockColor = json['digitalClockColor'],
-        hourHandColor = json['hourHandColor'],
-        minuteHandColor = json['minuteHandColor'],
-        secondHandColor = json['secondHandColor'],
+      : backgroundColor = json['backgroundColor'] != null
+            ? HexColor(json['backgroundColor'])
+            : json['backgroundColor'],
+        numberColor = json['numberColor'] != null
+            ? HexColor(json['numberColor'])
+            : json['numberColor'],
+        tickColor = json['tickColor'] != null
+            ? HexColor(json['tickColor'])
+            : json['tickColor'],
+        digitalClockColor = json['digitalClockColor'] != null
+            ? HexColor(json['digitalClockColor'])
+            : json['digitalClockColor'],
+        hourHandColor = json['hourHandColor'] != null
+            ? HexColor(json['hourHandColor'])
+            : json['hourHandColor'],
+        minuteHandColor = json['minuteHandColor'] != null
+            ? HexColor(json['minuteHandColor'])
+            : json['minuteHandColor'],
+        secondHandColor = json['secondHandColor'] != null
+            ? HexColor(json['secondHandColor'])
+            : json['secondHandColor'],
         showDigitalClock = json['showDigitalClock'] ?? true,
         showNumbers = json['showNumbers'] ?? true,
         showSecondHand = json['showSecondHand'] ?? true,

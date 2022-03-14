@@ -23,9 +23,19 @@ class ClockSettingsState extends ChangeNotifier {
     }
   }
 
-  void updateClockSettings() {
+  void notify() {
     _clockSettings.lastModified = DateTime.now().millisecondsSinceEpoch;
     notifyListeners();
+  }
+
+  void updateClockSettings() {
+    notify();
     _prefs.setString(clockSettingsPrefsKey, jsonEncode(_clockSettings));
+  }
+
+  Future<void> resetAll() async {
+    await _prefs.remove(clockSettingsPrefsKey);
+    _clockSettings = ClockSettings();
+    notifyListeners();
   }
 }

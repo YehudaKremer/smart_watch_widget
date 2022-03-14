@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clockSettingsColors.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsForm.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
@@ -56,7 +57,12 @@ class _ClockSettingsState extends State<ClockSettings> {
                             onTap: () {
                               Navigator.of(context).pop();
                             },
-                            child: ClockPage(),
+                            child: Stack(
+                              children: [
+                                ClockPage(),
+                                ClockSettingsColors(),
+                              ],
+                            ),
                           )
                         : Container(),
                   ),
