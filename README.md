@@ -8,6 +8,9 @@ It includes an Alarm Clock and it is fully customizable.
 This open-source project was created as an example of what we can do with [Flutter for Windows](https://flutter.dev/multi-platform/desktop).
 ![image](https://user-images.githubusercontent.com/946652/158329657-3e1b3e80-e500-4127-9a46-d7b856010175.png)
 
+## Installation
+[![Microsoft Store](https://user-images.githubusercontent.com/946652/158346120-a407813f-7a3a-4c15-89f3-438d3a3319ab.png)](ms-windows-store://pdp/?productid=9MXP7B6Q4TQD)
+
 ## Packages
 To have a fully functional and distributable widget, we use several top quality [pub packages](https://pub.dev/):
 | Package Name | Description |
