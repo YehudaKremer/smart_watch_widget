@@ -5,7 +5,7 @@
 ### Smartwatch widget for Windows made with [Flutter](https://flutter.dev).
 It includes an Alarm Clock and it is fully customizable.
 
-This project was created as an example of what we can do with [Flutter for Windows](https://flutter.dev/multi-platform/desktop).
+This open-source project was created as an example of what we can do with [Flutter for Windows](https://flutter.dev/multi-platform/desktop).
 ![image](https://user-images.githubusercontent.com/946652/158329657-3e1b3e80-e500-4127-9a46-d7b856010175.png)
 
 ## Packages
@@ -23,3 +23,5 @@ To have a fully functional and distributable widget, we use several top quality 
 | [win_toast](https://pub.dev/packages/win_toast) | To display Windows alarm notification |
 | [flutter_colorpicker](https://pub.dev/packages/flutter_colorpicker) | To enable customizes the clock colors |
 | [msix](https://pub.dev/packages/msix) | To build Msix file for Microsoft Store distribution |
+
+Alarm sound by [Alexander](https://orangefreesounds.com/) posted at [orangefreesounds.com](https://orangefreesounds.com/twin-bell-alarm-clock/) under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license.
