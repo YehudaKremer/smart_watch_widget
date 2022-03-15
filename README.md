@@ -9,7 +9,7 @@ This open-source project was created as an example of what we can do with [Flutt
 ![image](https://user-images.githubusercontent.com/946652/158329657-3e1b3e80-e500-4127-9a46-d7b856010175.png)
 
 ## Installation
-<a title="Install From Microsoft Store" href="https://www.microsoft.com/store/apps/9MXP7B6Q4TQD"><img src="https://user-images.githubusercontent.com/946652/158346120-a407813f-7a3a-4c15-89f3-438d3a3319ab.png" /></a>
+<a title="Install From Microsoft Store" href="ms-windows-store://pdp/?productid=9MXP7B6Q4TQD" target="_blank"><img src="https://user-images.githubusercontent.com/946652/158346120-a407813f-7a3a-4c15-89f3-438d3a3319ab.png" /></a>
 
 ## Packages
 To have a fully functional and distributable widget, we use several top quality [pub packages](https://pub.dev/):
