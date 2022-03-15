@@ -98,27 +98,6 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
                     ],
                   ),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Tooltip(
-                //       message: 'Save',
-                //       child: IconButton(
-                //         icon: Icon(FluentIcons.accept),
-                //         onPressed: () =>
-                //             Navigator.pop(context, textController.text),
-                //       ),
-                //     ),
-                //     Container(width: 10),
-                //     Tooltip(
-                //       message: 'Cancel',
-                //       child: IconButton(
-                //         icon: Icon(FluentIcons.cancel),
-                //         onPressed: () => Navigator.of(context).pop(),
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:smart_watch_widget/widgets/colorPickerDialog.dart';
 
 class ClockSettingsForm extends StatefulWidget {
   final void Function() onDismiss;

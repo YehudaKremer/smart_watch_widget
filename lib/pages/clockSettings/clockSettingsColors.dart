@@ -26,8 +26,8 @@ class ClockSettingsColors extends StatelessWidget {
           children: [
             state.showNumbers
                 ? ColorButton(
-                    top: 50,
-                    left: 125,
+                    top: 33,
+                    left: 127,
                     size: 14,
                     color: state.numberColor ?? defaultNumberColor,
                     tooltip: 'Numbers Color',
@@ -50,8 +50,8 @@ class ClockSettingsColors extends StatelessWidget {
                 : Container(),
             state.showTicks
                 ? ColorButton(
-                    top: 26,
-                    left: 185,
+                    top: 30,
+                    left: 180,
                     size: 14,
                     color: state.tickColor ?? defaultTickColor,
                     tooltip: 'Ticks Color',

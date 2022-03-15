@@ -35,17 +35,9 @@ Future<void> main() async {
     } else {
       appWindow.alignment = Alignment.topRight;
     }
-    //windowManager.setSize(Size(250, 250));
     appWindow.show();
     windowManager.focus();
   });
-
-  // Player player = Player(video: false, osc: false, yt: false);
-
-  // Future.delayed(Duration(seconds: 3), () {
-  //   print('dispose player');
-  //   player.dispose();
-  // });
 
   runApp(
     MultiProvider(

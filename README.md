@@ -1,21 +1,25 @@
-# Smart Watch Widget [WIP]
+# Smart Watch Widget
 
-<a title="Made with Fluent Design" href="https://github.com/bdlukaa/fluent_ui">
-  <img
-    src="https://img.shields.io/badge/fluent-design-blue?color=7A7574&labelColor=0078D7"
-  />
-</a>
+<a title="Made with Fluent Design" href="https://github.com/bdlukaa/fluent_ui"><img src="https://img.shields.io/badge/fluent-design-blue?color=7A7574&labelColor=0078D7" /></a>
 
-<br />
+### Smartwatch widget for Windows made with [Flutter](https://flutter.dev).
+It includes an Alarm Clock and it is fully customizable.
 
-### A smart watch widget for Windows, made with Flutter.
+This project was created as an example of what we can do with [Flutter for Windows](https://flutter.dev/multi-platform/desktop).
+![image](https://user-images.githubusercontent.com/946652/158329657-3e1b3e80-e500-4127-9a46-d7b856010175.png)
 
-<br />
-
-![logo-light](https://user-images.githubusercontent.com/946652/157030359-cdadf80d-009e-4650-9fe0-04054bca0724.png)
-![logo-dark](https://user-images.githubusercontent.com/946652/157030379-86558ca8-3bc6-4b55-aea8-4878d8a16310.png)
-
-<br />
-
-![alarm-clock-items](https://user-images.githubusercontent.com/946652/157030376-e3d2e2e5-1a12-4960-85e8-cac9a8e9310f.png)
-![alarm-clock-form](https://user-images.githubusercontent.com/946652/157030373-1d9bc70b-ed08-4c20-aa4e-541c21873656.png)
+## Packages
+To have a fully functional and distributable widget, we use several top quality [pub packages](https://pub.dev/):
+| Package Name | Description |
+| :---: | :---: |
+| [analog_clock](https://pub.dev/packages/analog_clock) | For displaying analog clock widget |
+| [fluent_ui](https://pub.dev/packages/fluent_ui) | For displaying Windows FluentUI widgets |
+| [bitsdojo_window](https://pub.dev/packages/bitsdojo_window) | To customize the widget window |
+| [flutter_acrylic](https://pub.dev/packages/flutter_acrylic) | To set the widget background-color |
+| [window_manager](https://pub.dev/packages/window_manager) | To manage the state and visibility of the widget window |
+| [libmpv](https://pub.dev/packages/libmpv) | For playing the alarm audio |
+| [schedulers](https://pub.dev/packages/schedulers) | To schedule alarms |
+| [new_im_animations](https://pub.dev/packages/new_im_animations) | For displaying alarm effect |
+| [win_toast](https://pub.dev/packages/win_toast) | To display Windows alarm notification |
+| [flutter_colorpicker](https://pub.dev/packages/flutter_colorpicker) | To enable customizes the clock colors |
+| [msix](https://pub.dev/packages/msix) | To build Msix file for Microsoft Store distribution |

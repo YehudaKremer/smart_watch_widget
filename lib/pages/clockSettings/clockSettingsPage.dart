@@ -53,10 +53,8 @@ class _ClockSettingsState extends State<ClockSettings> {
                 Expanded(
                   child: AnimatedSlideFade(
                     child: show
-                        ? GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
+                        ? Padding(
+                            padding: const EdgeInsets.only(left: 5),
                             child: Stack(
                               children: [
                                 ClockPage(),

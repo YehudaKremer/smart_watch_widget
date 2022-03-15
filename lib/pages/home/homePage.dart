@@ -1,18 +1,15 @@
 import 'dart:async';
-
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
-import 'package:smart_watch_widget/pages/clockSettings/clockSettingsPage.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuPage.dart';
+import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 import 'package:smart_watch_widget/utils/generalScope.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:system_theme/system_theme.dart';
-import '../../utils/customScrollBehavior.dart';
 
 class HomePage extends StatefulWidget {
   @override

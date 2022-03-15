@@ -5,7 +5,6 @@ import 'package:smart_watch_widget/pages/alarmClock/alarmClockPage.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/settingsPage.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
-import 'package:smart_watch_widget/state/appState.dart';
 import 'package:window_manager/window_manager.dart';
 import 'menuItem.dart';
 
@@ -46,9 +45,6 @@ class MenuPage extends StatelessWidget {
             color: Colors.red,
             onPressed: () => exit(0),
           ),
-          //   const InfoBadge(
-          //   source: Text('9'),
-          // )
           MenuItem(
             title: 'Alarm Clock',
             icon: FluentIcons.alarm_clock,
