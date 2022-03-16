@@ -31,6 +31,7 @@ dependencies:
   win_toast: ^0.0.2
   flutter_colorpicker: ^1.0.3
   hexcolor: ^2.0.6
+  wave: ^0.2.0
 
 dev_dependencies:
   flutter_test:

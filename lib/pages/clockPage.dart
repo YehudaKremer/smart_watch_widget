@@ -24,15 +24,14 @@ class ClockPage extends StatelessWidget {
             key: Key(state.lastModified.toString()),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: state.backgroundColor ??
-                  FluentTheme.of(context).scaffoldBackgroundColor,
+              color: state.backgroundColor ?? Colors.transparent,
             ),
             numberColor:
                 state.numberColor ?? FluentTheme.of(context).accentColor.light,
             tickColor:
                 state.tickColor ?? FluentTheme.of(context).accentColor.dark,
-            digitalClockColor:
-                state.digitalClockColor ?? FluentTheme.of(context).accentColor,
+            digitalClockColor: state.digitalClockColor ??
+                FluentTheme.of(context).accentColor.light,
             hourHandColor: state.hourHandColor ??
                 FluentTheme.of(context).accentColor.light,
             minuteHandColor:

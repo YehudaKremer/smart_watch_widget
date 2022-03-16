@@ -2,23 +2,31 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:system_theme/system_theme.dart';
 
+const windowPositionDx = 'windowPositionDx';
+const windowPositionDy = 'windowPositionDy';
+const backgroundKey = 'background';
+enum Background { empty, waves }
+
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _isWindowFocused = true;
   Brightness _brightness = Brightness.dark;
+  Background _background = Background.empty;
   Offset? _windowPosition;
   Offset? get windowPosition => _windowPosition;
   bool get isWindowFocused => _isWindowFocused;
   Brightness get brightness => _brightness;
+  Background get background => _background;
 
   AppState(this.prefs) {
     _getWindowPosition();
     _getThemeMode();
+    _getBackground();
   }
 
   _getWindowPosition() {
-    final dx = prefs.getDouble('windowPositionDx');
-    final dy = prefs.getDouble('windowPositionDy');
+    final dx = prefs.getDouble(windowPositionDx);
+    final dy = prefs.getDouble(windowPositionDy);
     if (dx != null || dy != null) _windowPosition = Offset(dx ?? 0, dy ?? 0);
   }
 
@@ -40,7 +48,22 @@ class AppState extends ChangeNotifier {
 
   void setWindowPosition(Offset value) {
     _windowPosition = value;
-    prefs.setDouble('windowPositionDx', value.dx);
-    prefs.setDouble('windowPositionDy', value.dy);
+    prefs.setDouble(windowPositionDx, value.dx);
+    prefs.setDouble(windowPositionDy, value.dy);
+  }
+
+  void _getBackground() {
+    var backgroundString = prefs.getString(backgroundKey);
+    if (backgroundString != null && backgroundString.isNotEmpty) {
+      _background = Background.values
+          .firstWhere((e) => e.toString() == prefs.getString(backgroundKey));
+      notifyListeners();
+    }
+  }
+
+  void setBackground(Background background) {
+    _background = background;
+    notifyListeners();
+    prefs.setString(backgroundKey, background.toString());
   }
 }
