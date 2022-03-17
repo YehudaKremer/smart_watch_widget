@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:system_theme/system_theme.dart';
@@ -5,11 +7,13 @@ import 'package:system_theme/system_theme.dart';
 const windowPositionDx = 'windowPositionDx';
 const windowPositionDy = 'windowPositionDy';
 const backgroundKey = 'background';
-enum Background { empty, waves }
+const localImageBackgroundKey = 'localImageBackground';
+enum Background { empty, waves, localImage }
 
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _isWindowFocused = true;
+  String? _localImageBackground;
   Brightness _brightness = Brightness.dark;
   Background _background = Background.empty;
   Offset? _windowPosition;
@@ -17,6 +21,7 @@ class AppState extends ChangeNotifier {
   bool get isWindowFocused => _isWindowFocused;
   Brightness get brightness => _brightness;
   Background get background => _background;
+  String? get localImageBackground => _localImageBackground;
 
   AppState(this.prefs) {
     _getWindowPosition();
@@ -52,17 +57,30 @@ class AppState extends ChangeNotifier {
     prefs.setDouble(windowPositionDy, value.dy);
   }
 
-  void _getBackground() {
+  Future<void> _getBackground() async {
     var backgroundString = prefs.getString(backgroundKey);
     if (backgroundString != null && backgroundString.isNotEmpty) {
       _background = Background.values
           .firstWhere((e) => e.toString() == prefs.getString(backgroundKey));
+      if (_background == Background.localImage) {
+        var path = prefs.getString(localImageBackgroundKey);
+        if (path != null && await File(path).exists()) {
+          _localImageBackground = path;
+        }
+      }
       notifyListeners();
     }
   }
 
-  void setBackground(Background background) {
+  Future<void> setBackground(Background background,
+      {String? localImage}) async {
     _background = background;
+    if (localImage != null &&
+        localImage.isNotEmpty &&
+        await File(localImage).exists()) {
+      _localImageBackground = localImage;
+      prefs.setString(localImageBackgroundKey, localImage);
+    }
     notifyListeners();
     prefs.setString(backgroundKey, background.toString());
   }

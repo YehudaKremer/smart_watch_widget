@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
@@ -12,6 +14,8 @@ class Layout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     registerGeneralHotKeys(context);
+    var background = context.watch<AppState>().background;
+    var localImageBackground = context.watch<AppState>().localImageBackground;
 
     return Padding(
       padding: const EdgeInsets.all(2),
@@ -31,11 +35,20 @@ class Layout extends StatelessWidget {
             ),
             child: ClipOval(
               child: Stack(
+                fit: StackFit.expand,
                 children: [
                   AnimatedSlideFade(
-                    child:
-                        context.watch<AppState>().background == Background.waves
-                            ? Waves()
+                    child: background == Background.waves
+                        ? Waves()
+                        : background == Background.localImage &&
+                                localImageBackground != null
+                            ? Container(
+                                constraints: BoxConstraints.expand(),
+                                child: Image.file(File(localImageBackground),
+                                    fit: BoxFit.fitHeight,
+                                    color: Colors.white.withOpacity(0.9),
+                                    colorBlendMode: BlendMode.modulate),
+                              )
                             : Container(),
                   ),
                   child,

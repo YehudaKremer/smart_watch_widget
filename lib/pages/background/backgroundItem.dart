@@ -17,32 +17,32 @@ class BackgroundItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
-      child: Button(
-        style: ButtonStyle(
-          padding: ButtonState.all(EdgeInsets.zero),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            background,
-            Text(name),
-            Positioned(
-              top: 5,
-              right: 5,
-              child: AnimatedSlideFade(
-                child: isSelected
-                    ? InfoBadge(
-                        source: Icon(FluentIcons.accept),
-                      )
-                    : Container(),
-              ),
-            ),
-          ],
-        ),
-        onPressed: onPressed,
+    return Button(
+      style: ButtonStyle(
+        padding: ButtonState.all(EdgeInsets.zero),
       ),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(3)),
+            child: background,
+          ),
+          Center(child: Text(name)),
+          Positioned(
+            top: 5,
+            right: 5,
+            child: AnimatedSlideFade(
+              child: isSelected
+                  ? InfoBadge(
+                      source: Icon(FluentIcons.accept),
+                    )
+                  : Container(),
+            ),
+          ),
+        ],
+      ),
+      onPressed: onPressed,
     );
   }
 }
