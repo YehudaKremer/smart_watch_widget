@@ -3,13 +3,12 @@
 <a title="Made with Fluent Design" href="https://github.com/bdlukaa/fluent_ui"><img src="https://img.shields.io/badge/fluent-design-blue?color=7A7574&labelColor=0078D7" /></a>
 
 ### Smartwatch widget for Windows made with [Flutter](https://flutter.dev).
-It includes an Alarm Clock and it is fully customizable.
-
 This open-source project was created as an example of what we can do with [Flutter for Windows](https://flutter.dev/multi-platform/desktop).
+
 ![image](https://user-images.githubusercontent.com/946652/158329657-3e1b3e80-e500-4127-9a46-d7b856010175.png)
 
 ## Installation
-To open the widget when windows start, install it from the store.
+To automatically open the widget when windows start, install it from the store.
 <br /><br />
 <a title="Install From Microsoft Store" href="https://www.microsoft.com/store/apps/9MXP7B6Q4TQD"><img src="https://user-images.githubusercontent.com/946652/158346120-a407813f-7a3a-4c15-89f3-438d3a3319ab.png" /></a>
 
