@@ -104,7 +104,44 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
               Container(height: 10),
               Button(
                 child: Text('Reset All'),
-                onPressed: () => state.resetAll(),
+                onPressed: () async {
+                  await showDialog<String>(
+                    barrierDismissible: true,
+                    context: context,
+                    barrierColor: Colors.transparent,
+                    builder: (BuildContext context) => Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        child: Container(
+                          color: FluentTheme.of(context)
+                              .scaffoldBackgroundColor
+                              .withOpacity(0.6),
+                          child: ContentDialog(
+                            title: Text('Reset Settings'),
+                            content: Text(
+                                'Do you want to reset all clock settings?'),
+                            actions: [
+                              Button(
+                                child: Text('Ok'),
+                                onPressed: () async {
+                                  await state.resetAll();
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              Button(
+                                child: Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
