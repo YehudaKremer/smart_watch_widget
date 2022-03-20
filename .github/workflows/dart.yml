@@ -1,39 +1,43 @@
-# # This workflow uses actions that are not certified by GitHub.
-# # They are provided by a third-party and are governed by
-# # separate terms of service, privacy policy, and support
-# # documentation.
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
 
-# name: Build
+name: Build
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
   
-# jobs:
-#   build_windows:
-#     name: Build Windows
-#     runs-on: windows-latest
+jobs:
+  build_windows:
+    name: Build Windows
+    env:
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    runs-on: windows-latest
 
-#     steps:
-#       - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
+        with:
+            token: ${{ secrets.ACCESS_TOKEN }}
 
-#       - uses: subosito/flutter-action@v1
-#         with:
-#           channel: "stable"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
 
-#       - run: flutter config --enable-windows-desktop
-#       - run: flutter pub get
-#       - run: flutter build windows
-#       - run: tar.exe -C build/windows/runner/Release -cvf smart_watch_widget.zip *
+      - run: flutter config --enable-windows-desktop
+      - run: flutter pub get
+      - run: flutter build windows
+      - run: tar.exe -C build/windows/runner/Release -cvf smart_watch_widget.zip *
 
-#       - name: Release
-#         uses: softprops/action-gh-release@v1
-#         with:
-#           draft: true
-#           prerelease: false
-#           body: ""
-#           tag_name: "vnext"
-#           files: |
-#             smart_watch_widget.zip
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          prerelease: false
+          body: ""
+          tag_name: "vnext"
+          files: |
+            smart_watch_widget.zip
