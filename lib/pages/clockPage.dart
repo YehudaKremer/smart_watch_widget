@@ -37,7 +37,7 @@ class ClockPage extends StatelessWidget {
             minuteHandColor:
                 state.minuteHandColor ?? FluentTheme.of(context).accentColor,
             secondHandColor: state.secondHandColor ?? material.Colors.redAccent,
-            textScaleFactor: 1.4,
+            textScaleFactor: state.textScaleFactor,
             showAllNumbers: state.showAllNumbers,
             useMilitaryTime: state.useMilitaryTime,
             showDigitalClock: state.showDigitalClock,

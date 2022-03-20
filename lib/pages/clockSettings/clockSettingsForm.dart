@@ -102,6 +102,34 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                 ),
               ),
               Container(height: 10),
+              Row(
+                children: [
+                  Text(
+                    'Font Size',
+                    style: TextStyle(
+                      color: settings.showDigitalClock
+                          ? FluentTheme.of(context).typography.body!.color
+                          : FluentTheme.of(context).disabledColor,
+                    ),
+                  ),
+                  Container(width: 10),
+                  SizedBox(
+                    width: 100,
+                    child: Slider(
+                      min: 1,
+                      max: 2.5,
+                      value: settings.textScaleFactor,
+                      onChanged:
+                          settings.showNumbers || settings.showDigitalClock
+                              ? (v) => updateClockSettings(
+                                  state, () => settings.textScaleFactor = v)
+                              : null,
+                      label: settings.textScaleFactor.toStringAsFixed(1),
+                    ),
+                  ),
+                ],
+              ),
+              Container(height: 10),
               Button(
                 child: Text('Reset All'),
                 onPressed: () async {
