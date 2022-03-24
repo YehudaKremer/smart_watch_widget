@@ -41,7 +41,10 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => appState),
-        ChangeNotifierProvider(create: (_) => AlarmClockState(prefs)),
+        ChangeNotifierProvider(
+          create: (_) => AlarmClockState(prefs),
+          lazy: false,
+        ),
         ChangeNotifierProvider(create: (_) => ClockSettingsState(prefs)),
       ],
       child: HomePage(),

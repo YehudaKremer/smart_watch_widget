@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:ffi';
+import 'package:ffi/ffi.dart';
 import 'dart:isolate';
 import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -16,6 +18,7 @@ import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 
 const alarmsPrefsKey = 'alarms';
+const windowsMediaPath = 'C:/Windows/Media';
 
 class AlarmClockState extends ChangeNotifier {
   final SharedPreferences _prefs;
@@ -124,8 +127,21 @@ class AlarmClockState extends ChangeNotifier {
           if (!focused) windowManager.setSkipTaskbar(false);
         }));
 
-    final p = ReceivePort();
-    await Isolate.spawn(startPlaySound, p.sendPort);
+    ReceivePort rPort = ReceivePort();
+    rPort.listen((data) {
+      if (data is SendPort) {
+        data.send(alarm.message);
+      } else if (data == 'done') {
+        Navigator.pop(navigatorKey.currentContext!);
+        Future.delayed(Duration(seconds: 1), stopAlarm);
+      }
+    });
+
+    await Isolate.spawn(
+        alarm.readMessage && alarm.haveMessage
+            ? playTextToSpeech
+            : startPlaySound,
+        rPort.sendPort);
 
     Navigator.push(navigatorKey.currentContext!,
         FluentPageRoute(builder: (context) => AlarmScreenPage()));
@@ -152,13 +168,42 @@ class AlarmClockState extends ChangeNotifier {
 }
 
 Future<void> startPlaySound(SendPort p) async {
-  final soundPath = TEXT('C:/Windows/Media/Alarm01.wav');
+  final soundPath = TEXT('$windowsMediaPath/Alarm01.wav');
   PlaySound(soundPath, NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
   free(soundPath);
+  Isolate.exit(p);
 }
 
 Future<void> stopPlaySound(SendPort p) async {
-  final empty = TEXT('0');
-  PlaySound(empty, NULL, NULL);
-  free(empty);
+  PlaySound(nullptr, NULL, NULL);
+  Isolate.exit(p);
+}
+
+Future<void> playTextToSpeech(SendPort sPort) async {
+  ReceivePort rPort = ReceivePort();
+  rPort.listen((message) async {
+    await Future.delayed(Duration(seconds: 1)).then((_) {
+      final soundPath = TEXT('$windowsMediaPath/Speech On.wav');
+      PlaySound(soundPath, NULL, SND_FILENAME | SND_ASYNC);
+      free(soundPath);
+    });
+
+    await Future.delayed(Duration(seconds: 2)).then((_) {
+      CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+      final speechEngine = SpVoice.createInstance();
+      final pText = (message as String).toNativeUtf16();
+      speechEngine.Speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
+      free(pText);
+      CoUninitialize();
+
+      final soundPath = TEXT('$windowsMediaPath/Speech Off.wav');
+      PlaySound(soundPath, NULL, SND_FILENAME | SND_ASYNC);
+      free(soundPath);
+    });
+
+    sPort.send('done');
+    Isolate.exit(sPort);
+  });
+
+  sPort.send(rPort.sendPort);
 }

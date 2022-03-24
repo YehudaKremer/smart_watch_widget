@@ -8,6 +8,7 @@ class Alarm {
   bool fri;
   bool sat;
   bool isActive;
+  bool readMessage;
   String? message;
 
   Alarm({
@@ -20,6 +21,7 @@ class Alarm {
     this.fri = false,
     this.sat = false,
     this.isActive = false,
+    this.readMessage = false,
     this.message,
   });
 
@@ -33,6 +35,7 @@ class Alarm {
         'fri': fri,
         'sat': sat,
         'isActive': isActive,
+        'readMessage': readMessage,
         'message': message,
       };
 
@@ -46,6 +49,7 @@ class Alarm {
         fri = json['fri'],
         sat = json['sat'],
         isActive = json['isActive'],
+        readMessage = json['readMessage'] ?? false,
         message = json['message'];
 
   List<String> get activeDays {

@@ -150,32 +150,66 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                       },
                     )
                   : BasicButton(
+                      color: Colors.green,
                       title: 'Save',
-                      icon: FluentIcons.accept,
+                      icon: FluentIcons.save,
                       onPressed: submitAlarmClockFrom,
                     ),
               Container(width: 10),
-              BasicButton(
-                title: 'Message',
-                icon: alarm.haveMessage
-                    ? FluentIcons.message_fill
-                    : FluentIcons.message,
-                color: alarm.haveMessage
-                    ? FluentTheme.of(context).accentColor
-                    : FluentTheme.of(context).typography.body!.color,
-                onPressed: () async {
-                  isMessageDialogOpen = true;
-                  final message = await showDialog<String>(
-                    context: context,
-                    barrierColor: Colors.transparent,
-                    builder: (BuildContext context) =>
-                        AlarmMessageDialog(message: alarm.message ?? ''),
-                  );
-                  isMessageDialogOpen = false;
-                  if (message != null) {
-                    setAlarmState(() => alarm.message = message);
-                  }
-                },
+              Expanded(
+                child: Tooltip(
+                  message: 'Alarm Message',
+                  child: Button(
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            alarm.haveMessage
+                                ? FluentIcons.message_fill
+                                : FluentIcons.message,
+                            color: alarm.haveMessage
+                                ? FluentTheme.of(context).accentColor
+                                : FluentTheme.of(context)
+                                    .typography
+                                    .body!
+                                    .color,
+                            size: FluentTheme.of(context)
+                                .typography
+                                .title!
+                                .fontSize,
+                          ),
+                          alarm.readMessage
+                              ? Positioned(
+                                  top: 2.5,
+                                  child: Icon(
+                                    FluentIcons.speech,
+                                    color: FluentTheme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    size: FluentTheme.of(context)
+                                            .typography
+                                            .title!
+                                            .fontSize! /
+                                        2,
+                                  ),
+                                )
+                              : Container(),
+                        ],
+                      ),
+                    ),
+                    onPressed: () async {
+                      isMessageDialogOpen = true;
+                      await showDialog<String>(
+                        context: context,
+                        barrierColor: Colors.transparent,
+                        builder: (BuildContext context) => AlarmMessageDialog(
+                            alarm: alarm, isExistedAlarm: isExistedAlarm),
+                      );
+                      isMessageDialogOpen = false;
+                      setAlarmState(() {});
+                    },
+                  ),
+                ),
               ),
               Container(width: 20),
             ],
