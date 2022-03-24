@@ -24,6 +24,7 @@ class AlarmClockFrom extends StatefulWidget {
 
 class _AlarmClockFromState extends State<AlarmClockFrom> {
   late Alarm alarm = widget.alarm;
+  bool isMessageDialogOpen = false;
 
   @override
   void initState() {
@@ -48,6 +49,10 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
       context.read<AlarmClockState>().alarms.contains(alarm);
 
   void submitAlarmClockFrom() {
+    if (isMessageDialogOpen) {
+      return;
+    }
+
     if (!isExistedAlarm) {
       context.read<AlarmClockState>().addAlarm(alarm);
     }
@@ -159,12 +164,14 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                     ? FluentTheme.of(context).accentColor
                     : FluentTheme.of(context).typography.body!.color,
                 onPressed: () async {
+                  isMessageDialogOpen = true;
                   final message = await showDialog<String>(
                     context: context,
                     barrierColor: Colors.transparent,
                     builder: (BuildContext context) =>
                         AlarmMessageDialog(message: alarm.message ?? ''),
                   );
+                  isMessageDialogOpen = false;
                   if (message != null) {
                     setAlarmState(() => alarm.message = message);
                   }
