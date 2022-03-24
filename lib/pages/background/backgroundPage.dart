@@ -5,6 +5,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/BackgroundImageItem.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
+import 'package:smart_watch_widget/pages/background/onlineImages.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/appState.dart';
@@ -16,63 +17,70 @@ class BackgroundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Layout(
-      child: Padding(
+      child: GridView.count(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
-        child: GridView.count(
-          primary: false,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-          crossAxisCount: 2,
-          children: [
-            MenuItem(
-              title: 'Go Back',
-              icon: FluentIcons.back,
-              onPressed: () => Navigator.pop(context),
+        primary: false,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+        crossAxisCount: 2,
+        children: [
+          MenuItem(
+            title: 'Go Back',
+            icon: FluentIcons.back,
+            onPressed: () => Navigator.pop(context),
+          ),
+          BackgroundItem(
+            name: 'Empty',
+            background: Icon(
+              FluentIcons.blocked,
+              size: 50,
+              color: FluentTheme.of(context)
+                  .typography
+                  .body!
+                  .color!
+                  .withOpacity(0.2),
             ),
-            BackgroundItem(
-              name: 'Empty',
-              background: Icon(
-                FluentIcons.blocked,
-                size: 50,
-                color: FluentTheme.of(context)
-                    .typography
-                    .body!
-                    .color!
-                    .withOpacity(0.2),
-              ),
-              isSelected:
-                  context.watch<AppState>().background == Background.empty,
-              onPressed: () {
-                context.read<AppState>().setBackground(Background.empty);
-              },
-            ),
-            BackgroundItem(
-              name: 'Waves',
-              background: Waves(),
-              isSelected:
-                  context.watch<AppState>().background == Background.waves,
-              onPressed: () {
-                context.read<AppState>().setBackground(Background.waves);
-              },
-            ),
-            BackgroundImageItem(
-                isSelected: context.watch<AppState>().background ==
-                    Background.localImage,
-                onPressed: () async {
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles(type: FileType.image);
+            isSelected:
+                context.watch<AppState>().backgroundType == Background.empty,
+            onPressed: () {
+              context.read<AppState>().setBackground(Background.empty);
+            },
+          ),
+          BackgroundItem(
+            name: 'Waves',
+            background: Waves(),
+            isSelected:
+                context.watch<AppState>().backgroundType == Background.waves,
+            onPressed: () {
+              context.read<AppState>().setBackground(Background.waves);
+            },
+          ),
+          BackgroundImageItem(
+            name: 'Local\nImage',
+            backgroundType: Background.localImage,
+            onPressed: () async {
+              FilePickerResult? result =
+                  await FilePicker.platform.pickFiles(type: FileType.image);
 
-                  if (result != null) {
-                    var path = result.files.single.path;
-                    if (path != null && path.isNotEmpty) {
-                      context.read<AppState>().setBackground(
-                          Background.localImage,
-                          localImage: path);
-                    }
-                  }
-                }),
-          ],
-        ),
+              if (result != null) {
+                var path = result.files.single.path;
+                if (path != null && path.isNotEmpty) {
+                  context
+                      .read<AppState>()
+                      .setBackground(Background.localImage, localImage: path);
+                }
+              }
+            },
+          ),
+          // BackgroundImageItem(
+          //   name: 'Online\nImage',
+          //   backgroundType: Background.onlineImage,
+          //   onPressed: () async {
+          //     Navigator.push(
+          //         context, FluentPageRoute(builder: (_) => OnlineImages()));
+          //   },
+          // ),
+        ],
       ),
     );
   }

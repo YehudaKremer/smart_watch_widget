@@ -14,7 +14,7 @@ class Layout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     registerGeneralHotKeys(context);
-    var background = context.watch<AppState>().background;
+    var background = context.watch<AppState>().backgroundType;
     var localImageBackground = context.watch<AppState>().localImageBackground;
 
     return Padding(

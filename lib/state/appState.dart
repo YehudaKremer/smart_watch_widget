@@ -8,19 +8,19 @@ const windowPositionDx = 'windowPositionDx';
 const windowPositionDy = 'windowPositionDy';
 const backgroundKey = 'background';
 const localImageBackgroundKey = 'localImageBackground';
-enum Background { empty, waves, localImage }
+enum Background { empty, waves, localImage, onlineImage }
 
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _isWindowFocused = true;
   String? _localImageBackground;
   Brightness _brightness = Brightness.dark;
-  Background _background = Background.empty;
+  Background _backgroundType = Background.empty;
   Offset? _windowPosition;
   Offset? get windowPosition => _windowPosition;
   bool get isWindowFocused => _isWindowFocused;
   Brightness get brightness => _brightness;
-  Background get background => _background;
+  Background get backgroundType => _backgroundType;
   String? get localImageBackground => _localImageBackground;
 
   AppState(this.prefs) {
@@ -60,9 +60,9 @@ class AppState extends ChangeNotifier {
   Future<void> _getBackground() async {
     var backgroundString = prefs.getString(backgroundKey);
     if (backgroundString != null && backgroundString.isNotEmpty) {
-      _background = Background.values
+      _backgroundType = Background.values
           .firstWhere((e) => e.toString() == prefs.getString(backgroundKey));
-      if (_background == Background.localImage) {
+      if (_backgroundType == Background.localImage) {
         var path = prefs.getString(localImageBackgroundKey);
         if (path != null && await File(path).exists()) {
           _localImageBackground = path;
@@ -74,7 +74,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> setBackground(Background background,
       {String? localImage}) async {
-    _background = background;
+    _backgroundType = background;
     if (localImage != null &&
         localImage.isNotEmpty &&
         await File(localImage).exists()) {
