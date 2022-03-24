@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'dart:isolate';
 import 'dart:math';
@@ -18,7 +19,9 @@ import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 
 const alarmsPrefsKey = 'alarms';
-const windowsMediaPath = 'C:/Windows/Media';
+final systemRoot = Platform.environment['SYSTEMROOT'];
+final windowsMediaPath =
+    systemRoot != null ? '${systemRoot}/Media' : 'C:/Windows/Media';
 
 class AlarmClockState extends ChangeNotifier {
   final SharedPreferences _prefs;
