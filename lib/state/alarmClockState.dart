@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:isolate';
 import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
-import 'package:libmpv/libmpv.dart';
 import 'package:schedulers/schedulers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmScreenPage.dart';
@@ -12,6 +11,7 @@ import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
 import 'package:smart_watch_widget/utils/generalScope.dart';
 import 'package:smart_watch_widget/widgets/listItemPadding.dart';
+import 'package:win32/win32.dart';
 import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -23,12 +23,9 @@ class AlarmClockState extends ChangeNotifier {
 
   List<Alarm> _alarms = [];
   List<Alarm> get alarms => _alarms;
-  Player player = Player(video: false, osc: false, yt: false);
   TimeScheduler? scheduler;
 
   AlarmClockState(this._prefs) {
-    //temp, we should dispose player
-    player.setPlaylistMode(PlaylistMode.loop);
     _getAlarms();
     _scheduleAlarms();
   }
@@ -122,16 +119,13 @@ class AlarmClockState extends ChangeNotifier {
     scheduler!.run(() => _scheduleAlarms(), startOfTheNextDay);
   }
 
-  void startAlarm(Alarm alarm) {
+  Future<void> startAlarm(Alarm alarm) async {
     windowManager.focus().then((_) => windowManager.isFocused().then((focused) {
           if (!focused) windowManager.setSkipTaskbar(false);
         }));
 
-    player.open([
-      //Media('assets/audio/Twin-bell-alarm-clock.mp3');
-      Media(
-          '${File(Platform.resolvedExecutable).parent.path}\\data\\flutter_assets\\assets\\audio\\Twin-bell-alarm-clock.mp3')
-    ]);
+    final p = ReceivePort();
+    await Isolate.spawn(startPlaySound, p.sendPort);
 
     Navigator.push(navigatorKey.currentContext!,
         FluentPageRoute(builder: (context) => AlarmScreenPage()));
@@ -141,17 +135,30 @@ class AlarmClockState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> stopAlarm() async {
+    final p = ReceivePort();
+    await Isolate.spawn(stopPlaySound, p.sendPort);
+    windowManager.setSkipTaskbar(true);
+    _scheduleAlarms();
+    notifyListeners();
+  }
+
   void _showWindowsToast(Alarm alarm) {
     WinToast.instance().showToast(
         type: ToastType.text02,
         title: DateFormat.yMMMMEEEEd().format(alarm.date),
         subtitle: alarm.message ?? '');
   }
+}
 
-  void stopAlarm() {
-    player.pause();
-    windowManager.setSkipTaskbar(true);
-    _scheduleAlarms();
-    notifyListeners();
-  }
+Future<void> startPlaySound(SendPort p) async {
+  final soundPath = TEXT('C:/Windows/Media/Alarm01.wav');
+  PlaySound(soundPath, NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+  free(soundPath);
+}
+
+Future<void> stopPlaySound(SendPort p) async {
+  final empty = TEXT('0');
+  PlaySound(empty, NULL, NULL);
+  free(empty);
 }

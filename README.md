@@ -21,7 +21,6 @@ To have a fully functional and distributable widget, we use several top quality 
 | [bitsdojo_window](https://pub.dev/packages/bitsdojo_window) | To customize the widget window |
 | [flutter_acrylic](https://pub.dev/packages/flutter_acrylic) | To set the widget background-color |
 | [window_manager](https://pub.dev/packages/window_manager) | To manage the state and visibility of the widget window |
-| [libmpv](https://pub.dev/packages/libmpv) | For playing the alarm audio |
 | [schedulers](https://pub.dev/packages/schedulers) | To schedule alarms |
 | [new_im_animations](https://pub.dev/packages/new_im_animations) | For displaying alarm effect |
 | [win_toast](https://pub.dev/packages/win_toast) | To display Windows alarm notification |

@@ -1,7 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:libmpv/libmpv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:win_toast/win_toast.dart';
@@ -19,7 +18,6 @@ Future<void> main() async {
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentInstance.load();
   await Window.initialize();
-  await MPV.initialize();
   await Window.setEffect(effect: WindowEffect.transparent);
   await WinToast.instance().initialize(
       appName: 'Smart Watch Widget',

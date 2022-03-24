@@ -18,7 +18,7 @@ add_dependencies(${BINARY_NAME} flutter_assemble)
 
 add_custom_command(
   TARGET ${BINARY_NAME} PRE_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/../bin/mpv-2.dll" "$<TARGET_FILE_DIR:${BINARY_NAME}>/mpv-2.dll"
+  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/../bin/msvcp140.dll" "$<TARGET_FILE_DIR:${BINARY_NAME}>/msvcp140.dll"
   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/../bin/vcruntime140.dll" "$<TARGET_FILE_DIR:${BINARY_NAME}>/vcruntime140.dll"
   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/../bin/vcruntime140_1.dll" "$<TARGET_FILE_DIR:${BINARY_NAME}>/vcruntime140_1.dll"
 )

@@ -48,8 +48,8 @@ class MenuPage extends StatelessWidget {
           MenuItem(
             title: 'Alarm Clock',
             icon: FluentIcons.alarm_clock,
-            onPressed: () => Navigator.push(context,
-                FluentPageRoute(builder: (context) => AlarmClockPage())),
+            onPressed: () => Navigator.push(
+                context, FluentPageRoute(builder: (_) => AlarmClockPage())),
             infoBadgeSource: numberOfActiveAlarms > 0
                 ? Text(numberOfActiveAlarms.toString())
                 : null,
@@ -58,7 +58,7 @@ class MenuPage extends StatelessWidget {
             title: 'Settings',
             icon: FluentIcons.settings,
             onPressed: () => Navigator.push(
-                context, FluentPageRoute(builder: (context) => SettingsPage())),
+                context, FluentPageRoute(builder: (_) => SettingsPage())),
           ),
         ],
       ),
