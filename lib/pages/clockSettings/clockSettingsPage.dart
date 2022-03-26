@@ -5,6 +5,7 @@ import 'package:smart_watch_widget/pages/clockSettings/clockSettingsColors.dart'
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsForm.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
+import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
 class ClockSettings extends StatefulWidget {
@@ -20,12 +21,27 @@ class _ClockSettingsState extends State<ClockSettings> {
   @override
   void initState() {
     super.initState();
-    final windowPosition = context.read<AppState>().windowPosition;
 
     WidgetsBinding.instance!.addPostFrameCallback(
         (_) => Future.delayed(Duration(milliseconds: 200), () async {
+              final windowPosition = context.read<AppState>().windowPosition ??
+                  await windowManager.getPosition();
+              final watchSize = context.read<AppState>().watchSize;
+              final height = watchSize >= 250 ? watchSize : 250.0;
+              final width =
+                  watchSize >= 450 ? watchSize : 450.0; //watchSize + 200.0;
+              final screenWidth = GetSystemMetrics(SM_CXSCREEN);
+              final screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
               await windowManager.setBounds(Rect.fromLTWH(
-                  windowPosition!.dx - 200, windowPosition.dy, 450, 250));
+                  windowPosition.dx + width > screenWidth
+                      ? screenWidth - width
+                      : windowPosition.dx,
+                  windowPosition.dy + height > screenHeight
+                      ? screenHeight - height
+                      : windowPosition.dy,
+                  width,
+                  height));
               setState(() => show = true);
             }));
   }
@@ -56,9 +72,14 @@ class _ClockSettingsState extends State<ClockSettings> {
                         ? Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Stack(
+                              alignment: Alignment.center,
                               children: [
                                 ClockPage(),
-                                ClockSettingsColors(),
+                                Container(
+                                  height: 245,
+                                  width: 220,
+                                  child: ClockSettingsColors(),
+                                ),
                               ],
                             ),
                           )
@@ -75,12 +96,14 @@ class _ClockSettingsState extends State<ClockSettings> {
                                   () async {
                                 final windowPosition =
                                     context.read<AppState>().windowPosition;
+                                final watchSize =
+                                    context.read<AppState>().watchSize;
 
                                 await windowManager.setBounds(Rect.fromLTWH(
                                     windowPosition!.dx,
                                     windowPosition.dy,
-                                    250,
-                                    250));
+                                    watchSize,
+                                    watchSize));
                                 Navigator.pop(context);
                               });
                             },

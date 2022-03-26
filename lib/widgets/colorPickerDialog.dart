@@ -38,7 +38,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
           actionsSpacing: 0,
         ),
         content: Container(
-          height: MediaQuery.of(context).size.height - 10,
+          height: 240,
           width: 210,
           child: material.Material(
             color: Colors.transparent,

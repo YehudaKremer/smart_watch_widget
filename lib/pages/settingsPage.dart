@@ -1,6 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/backgroundPage.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsPage.dart';
+import 'package:smart_watch_widget/pages/generalSettingsPage.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 import 'home/layout.dart';
 import 'menu/menuItem.dart';
 
@@ -11,7 +14,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Layout(
       child: ListView(
-        padding: const EdgeInsets.all(30),
+        padding: EdgeInsets.all(context.read<AppState>().watchSize / 10),
         children: [
           MenuItem(
             title: 'Back',
@@ -34,6 +37,7 @@ class SettingsPage extends StatelessWidget {
                   'Clock Settings',
                   style: FluentTheme.of(context).typography.bodyLarge,
                 ),
+                Container(width: 20),
               ],
             ),
             onPressed: () {
@@ -55,12 +59,33 @@ class SettingsPage extends StatelessWidget {
                   'Background',
                   style: FluentTheme.of(context).typography.bodyLarge,
                 ),
-                Container(width: 15),
+                Container(width: 35),
               ],
             ),
             onPressed: () {
               Navigator.push(context,
                   FluentPageRoute(builder: (context) => BackgroundPage()));
+            },
+          ),
+          Container(height: 10),
+          Button(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FluentIcons.settings,
+                  size: FluentTheme.of(context).typography.bodyLarge!.fontSize,
+                ),
+                Container(width: 5),
+                Text(
+                  'General Settings',
+                  style: FluentTheme.of(context).typography.bodyLarge,
+                ),
+              ],
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  FluentPageRoute(builder: (context) => GeneralSettingsPage()));
             },
           ),
         ],

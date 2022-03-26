@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 
 class AlarmMessageDialog extends StatefulWidget {
@@ -72,7 +73,8 @@ class _AlarmMessageDialogState extends State<AlarmMessageDialog> {
                 )
               ],
             ),
-            constraints: const BoxConstraints(maxWidth: 200),
+            constraints: BoxConstraints(
+                maxWidth: context.read<AppState>().watchSize - 50),
             style: ContentDialogThemeData(
               padding: EdgeInsets.zero,
               actionsPadding: EdgeInsets.zero,

@@ -22,10 +22,13 @@ class ClockSettingsColors extends StatelessWidget {
     return Consumer<ClockSettingsState>(
       builder: (context, clockSettingsState, child) {
         final state = clockSettingsState.clockSettings;
+        //final watchSize =context.read<AppState>().watchSize;
         return Stack(
           children: [
             state.showNumbers
                 ? ColorButton(
+                    // top: watchSize * 0.22,
+                    // left: watchSize * 0.41,
                     top: 33,
                     left: 127,
                     size: 14,

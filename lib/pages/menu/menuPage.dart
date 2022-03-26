@@ -5,6 +5,7 @@ import 'package:smart_watch_widget/pages/alarmClock/alarmClockPage.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/settingsPage.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 import 'package:window_manager/window_manager.dart';
 import 'menuItem.dart';
 
@@ -22,7 +23,7 @@ class MenuPage extends StatelessWidget {
     return Layout(
       child: GridView.count(
         primary: false,
-        padding: const EdgeInsets.all(30),
+        padding: EdgeInsets.all(context.read<AppState>().watchSize / 10),
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 3,

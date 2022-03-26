@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:smart_watch_widget/widgets/basicButton.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
@@ -70,9 +71,10 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
 
   @override
   Widget build(BuildContext context) {
+    var watchSize = context.read<AppState>().watchSize;
     return Layout(
       child: ListView(
-        padding: const EdgeInsets.all(30),
+        padding: EdgeInsets.all(context.read<AppState>().watchSize / 10),
         children: [
           MenuItem(
             title: 'Go Back',
@@ -85,7 +87,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
               padding: ButtonState.all(EdgeInsets.all(0)),
             ),
             child: TimePicker(
-              popupHeight: 240,
+              popupHeight: watchSize <= 400 ? watchSize - 10 : 390,
               selected: alarm.date,
               hourFormat: context
                       .read<ClockSettingsState>()

@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockFrom.dart';
@@ -20,7 +21,7 @@ class AlarmClockPage extends StatelessWidget {
           final itemCountWithBackAndAddButtons = state.alarms.length + 2;
           return AnimatedList(
             key: state.alarmsAnimatedListKey,
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.all(context.read<AppState>().watchSize / 10),
             itemBuilder: (context, index, animation) {
               if (index == 0) {
                 return ListItemPadding(

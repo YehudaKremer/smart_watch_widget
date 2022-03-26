@@ -148,7 +148,7 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                           child: ContentDialog(
                             title: Text('Reset Settings'),
                             content: Text(
-                                'Do you want to reset all clock settings?'),
+                                'Do you want to reset all the clock settings?'),
                             actions: [
                               Button(
                                 child: Text('Ok'),

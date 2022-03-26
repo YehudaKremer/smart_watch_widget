@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage>
   @override
   Future<void> onWindowMove() async {
     if (_debounceWindowMoves?.isActive ?? false) _debounceWindowMoves?.cancel();
-    _debounceWindowMoves = Timer(const Duration(milliseconds: 500), () async {
+    _debounceWindowMoves = Timer(const Duration(milliseconds: 250), () async {
       context
           .read<AppState>()
           .setWindowPosition(await windowManager.getPosition());
