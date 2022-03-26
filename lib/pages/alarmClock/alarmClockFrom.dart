@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:smart_watch_widget/widgets/basicButton.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
@@ -86,6 +87,12 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
             child: TimePicker(
               popupHeight: 240,
               selected: alarm.date,
+              hourFormat: context
+                      .read<ClockSettingsState>()
+                      .clockSettings
+                      .useMilitaryTime
+                  ? HourFormat.HH
+                  : HourFormat.h,
               onChanged: (date) => setAlarmState(() => alarm.date =
                   DateTime.parse(
                       DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),

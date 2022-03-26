@@ -93,7 +93,7 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                         state, () => settings.useMilitaryTime = v)
                     : null,
                 content: Text(
-                  'Use Military Time',
+                  'Use 24 Format',
                   style: TextStyle(
                     color: settings.showDigitalClock
                         ? FluentTheme.of(context).typography.body!.color
