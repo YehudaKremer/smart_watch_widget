@@ -9,6 +9,7 @@ import 'package:smart_watch_widget/pages/background/onlineImages.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/waves.dart';
 
 class BackgroundPage extends StatelessWidget {
@@ -27,7 +28,7 @@ class BackgroundPage extends StatelessWidget {
           MenuItem(
             title: 'Go Back',
             icon: FluentIcons.back,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => navigatorPop(context),
           ),
           BackgroundItem(
             name: 'Empty',

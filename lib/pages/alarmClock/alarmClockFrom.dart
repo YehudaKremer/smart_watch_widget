@@ -6,6 +6,7 @@ import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/basicButton.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
@@ -58,7 +59,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
     if (!isExistedAlarm) {
       context.read<AlarmClockState>().addAlarm(alarm);
     }
-    Navigator.pop(context);
+    navigatorPop(context);
   }
 
   void setAlarmState(Function cb) {
@@ -79,7 +80,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
           MenuItem(
             title: 'Go Back',
             icon: FluentIcons.back,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => navigatorPop(context),
           ),
           Container(height: 10),
           Button(
@@ -155,7 +156,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                       color: Colors.red,
                       onPressed: () {
                         context.read<AlarmClockState>().removeAlarm(alarm);
-                        Navigator.pop(context);
+                        navigatorPop(context);
                       },
                     )
                   : BasicButton(

@@ -4,6 +4,7 @@ import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 
 class AlarmMessageDialog extends StatefulWidget {
   final Alarm alarm;
@@ -95,7 +96,7 @@ class _AlarmMessageDialogState extends State<AlarmMessageDialog> {
                                 .read<AlarmClockState>()
                                 .updateAlarm(widget.alarm);
                           }
-                          Navigator.pop(context);
+                          navigatorPop(context);
                         }),
                   ),
                   Container(width: 10),

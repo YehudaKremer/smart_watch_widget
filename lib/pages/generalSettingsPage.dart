@@ -6,6 +6,7 @@ import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
 
 class GeneralSettingsPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _GeneralSettingsPageState extends State<GeneralSettingsPage> {
                 MenuItem(
                   title: 'Go Back',
                   icon: FluentIcons.back,
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => navigatorPop(context),
                 ),
                 Container(height: 10),
                 Row(
@@ -92,13 +93,13 @@ class _GeneralSettingsPageState extends State<GeneralSettingsPage> {
                                   child: Text('Ok'),
                                   onPressed: () async {
                                     await state.resetAll();
-                                    Navigator.pop(context);
+                                    navigatorPop(context);
                                   },
                                 ),
                                 Button(
                                   child: Text('Cancel'),
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    navigatorPop(context);
                                   },
                                 ),
                               ],

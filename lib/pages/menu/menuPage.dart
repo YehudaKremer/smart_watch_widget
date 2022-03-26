@@ -6,6 +6,7 @@ import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/settingsPage.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
 import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
 import 'menuItem.dart';
 
@@ -31,7 +32,7 @@ class MenuPage extends StatelessWidget {
           MenuItem(
             title: 'Go Back',
             icon: FluentIcons.back,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => navigatorPop(context),
           ),
           GestureDetector(
             onPanDown: (_) => windowManager.startDragging(),

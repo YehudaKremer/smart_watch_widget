@@ -13,6 +13,7 @@ import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
 import 'package:smart_watch_widget/utils/generalScope.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/listItemPadding.dart';
 import 'package:win32/win32.dart';
 import 'package:win_toast/win_toast.dart';
@@ -96,7 +97,7 @@ class AlarmClockState extends ChangeNotifier {
     _prefs.setString(alarmsPrefsKey, jsonEncode(_alarms));
   }
 
-  void _scheduleAlarms() {
+  Future<void> _scheduleAlarms() async {
     scheduler?.dispose();
     scheduler = TimeScheduler();
     String today = DateFormat.E().format(DateTime.now());
@@ -116,13 +117,14 @@ class AlarmClockState extends ChangeNotifier {
           DateTime.fromMillisecondsSinceEpoch(nextAlarmTimeStampForToday);
       Alarm nextAlarmForToday = activeAlarmForToday
           .firstWhere((alarm) => alarm.date == nextAlarmDateForToday);
-      scheduler!
+      await scheduler!
           .run(() => startAlarm(nextAlarmForToday), nextAlarmForToday.date);
     }
 
     DateTime startOfTheNextDay = DateTime.parse(
         DateFormat('yyyy-MM-dd').format(DateTime.now().add(Duration(days: 1))));
-    scheduler!.run(() => _scheduleAlarms(), startOfTheNextDay);
+    await scheduler!
+        .run(() async => await _scheduleAlarms(), startOfTheNextDay);
   }
 
   Future<void> startAlarm(Alarm alarm) async {
@@ -135,7 +137,7 @@ class AlarmClockState extends ChangeNotifier {
       if (data is SendPort) {
         data.send(alarm.message);
       } else if (data == 'done') {
-        Navigator.pop(navigatorKey.currentContext!);
+        navigatorPop(navigatorKey.currentContext!);
         Future.delayed(Duration(seconds: 1), stopAlarm);
       }
     });

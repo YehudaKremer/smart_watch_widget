@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 
 HotKey _goBackHotKey = HotKey(
   KeyCode.arrowLeft,
@@ -15,7 +16,7 @@ Future<void> registerGeneralHotKeys(BuildContext context) async {
     _goBackHotKey,
     keyDownHandler: (_) {
       if (Navigator.canPop(context)) {
-        Navigator.pop(context);
+        navigatorPop(context);
       }
     },
   );

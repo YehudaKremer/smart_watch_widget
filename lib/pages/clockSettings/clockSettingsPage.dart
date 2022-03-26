@@ -5,6 +5,7 @@ import 'package:smart_watch_widget/pages/clockSettings/clockSettingsColors.dart'
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsForm.dart';
 import 'package:smart_watch_widget/state/appState.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -104,7 +105,7 @@ class _ClockSettingsState extends State<ClockSettings> {
                                     windowPosition.dy,
                                     watchSize,
                                     watchSize));
-                                Navigator.pop(context);
+                                navigatorPop(context);
                               });
                             },
                           )

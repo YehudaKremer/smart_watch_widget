@@ -4,6 +4,7 @@ import 'package:smart_watch_widget/pages/background/backgroundPage.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsPage.dart';
 import 'package:smart_watch_widget/pages/generalSettingsPage.dart';
 import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'home/layout.dart';
 import 'menu/menuItem.dart';
 
@@ -20,7 +21,7 @@ class SettingsPage extends StatelessWidget {
             title: 'Back',
             icon: FluentIcons.back,
             onPressed: () {
-              Navigator.pop(context);
+              navigatorPop(context);
             },
           ),
           Container(height: 10),

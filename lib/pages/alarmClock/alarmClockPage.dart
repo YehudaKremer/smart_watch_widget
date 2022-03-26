@@ -7,6 +7,7 @@ import 'package:smart_watch_widget/pages/alarmClock/alarmClockFrom.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/listItemPadding.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 
@@ -29,7 +30,7 @@ class AlarmClockPage extends StatelessWidget {
                   title: 'Back',
                   icon: FluentIcons.back,
                   onPressed: () {
-                    Navigator.pop(context);
+                    navigatorPop(context);
                   },
                 ));
               } else if (index == itemCountWithBackAndAddButtons - 1) {

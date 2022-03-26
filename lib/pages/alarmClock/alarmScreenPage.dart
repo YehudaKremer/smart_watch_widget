@@ -3,6 +3,7 @@ import 'package:new_im_animations/im_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 
 class AlarmScreenPage extends StatelessWidget {
   const AlarmScreenPage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class AlarmScreenPage extends StatelessWidget {
     return Layout(
       child: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          navigatorPop(context);
           context.read<AlarmClockState>().stopAlarm();
         },
         child: Tooltip(

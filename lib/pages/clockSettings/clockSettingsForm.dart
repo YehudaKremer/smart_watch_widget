@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/state/clockSettingsState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 
 class ClockSettingsForm extends StatefulWidget {
   final void Function() onDismiss;
@@ -154,13 +155,13 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                                 child: Text('Ok'),
                                 onPressed: () async {
                                   await state.resetAll();
-                                  Navigator.pop(context);
+                                  navigatorPop(context);
                                 },
                               ),
                               Button(
                                 child: Text('Cancel'),
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  navigatorPop(context);
                                 },
                               ),
                             ],
