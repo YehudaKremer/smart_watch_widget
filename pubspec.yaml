@@ -13,8 +13,6 @@ dependencies:
     git: 
       url: https://github.com/YehudaKremer/analog_clock.git
       ref: fix-digital-clock-live
-  flutter_acrylic: ^1.0.0+1
-  bitsdojo_window: ^0.1.1+1
   provider: ^6.0.2
   fluent_ui: ^3.9.1
   fluentui_system_icons: ^1.1.161

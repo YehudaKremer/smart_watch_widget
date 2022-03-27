@@ -31,41 +31,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
-  bitsdojo_window:
-    dependency: "direct main"
-    description:
-      name: bitsdojo_window
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1+1"
-  bitsdojo_window_linux:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_linux
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
-  bitsdojo_window_macos:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
-  bitsdojo_window_platform_interface:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
-  bitsdojo_window_windows:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_windows
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -197,13 +162,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_acrylic:
-    dependency: "direct main"
-    description:
-      name: flutter_acrylic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0+1"
   flutter_blurhash:
     dependency: transitive
     description:
