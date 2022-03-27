@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/BackgroundImageItem.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
+import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategories.dart';
 import 'package:smart_watch_widget/pages/background/pixabay/pixabayImages.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
@@ -46,15 +47,6 @@ class BackgroundPage extends StatelessWidget {
               context.read<AppState>().setBackground(Background.empty);
             },
           ),
-          BackgroundItem(
-            name: 'Waves',
-            background: Waves(),
-            isSelected:
-                context.watch<AppState>().backgroundType == Background.waves,
-            onPressed: () {
-              context.read<AppState>().setBackground(Background.waves);
-            },
-          ),
           BackgroundImageItem(
             name: 'Local\nImage',
             backgroundType: Background.localImage,
@@ -72,28 +64,37 @@ class BackgroundPage extends StatelessWidget {
               }
             },
           ),
-          BackgroundImageItem(
-            name: 'Online\nImage',
-            backgroundType: Background.onlineImage,
-            onPressed: () async {
-              Navigator.push(
-                  context,
-                  FluentPageRoute(
-                      builder: (_) => PixabayImages(
-                            onDismiss: () async {
-                              final windowPosition =
-                                  context.read<AppState>().windowPosition;
-                              final watchSize =
-                                  context.read<AppState>().watchSize;
+          // BackgroundImageItem(
+          //   name: 'Online\nImage',
+          //   backgroundType: Background.onlineImage,
+          //   onPressed: () async {
+          //     Navigator.push(
+          //         context,
+          //         FluentPageRoute(
+          //             builder: (_) => PixabayCategories(
+          //                   onDismiss: () async {
+          //                     final windowPosition =
+          //                         context.read<AppState>().windowPosition;
+          //                     final watchSize =
+          //                         context.read<AppState>().watchSize;
 
-                              await windowManager.setBounds(Rect.fromLTWH(
-                                  windowPosition!.dx,
-                                  windowPosition.dy,
-                                  watchSize,
-                                  watchSize));
-                              navigatorPop(context);
-                            },
-                          )));
+          //                     await windowManager.setBounds(Rect.fromLTWH(
+          //                         windowPosition!.dx,
+          //                         windowPosition.dy,
+          //                         watchSize,
+          //                         watchSize));
+          //                     navigatorPop(context);
+          //                   },
+          //                 )));
+          //   },
+          // ),
+          BackgroundItem(
+            name: 'Waves',
+            background: Waves(),
+            isSelected:
+                context.watch<AppState>().backgroundType == Background.waves,
+            onPressed: () {
+              context.read<AppState>().setBackground(Background.waves);
             },
           ),
         ],

@@ -8,9 +8,23 @@ class PixabayCacheInterceptor extends Interceptor {
 
   PixabayCacheInterceptor(this.prefs);
 
+  Future<String?> getApiCache(String cacheKey) async {
+    var cache = prefs.getStringList(cacheKey);
+    if (cache != null && cache.isNotEmpty && cache.length > 1) {
+      if (DateTime.parse(cache[0])
+          .add(Duration(days: 1))
+          .isAfter(DateTime.now())) {
+        return cache[1];
+      }
+    }
+    await prefs.remove(cacheKey);
+    return null;
+  }
+
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    var responseFromCache = prefs.getString(options.uri.toString());
+  Future<void> onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    var responseFromCache = await getApiCache(options.uri.toString());
     if (options.extra['refresh'] == true) {
       print('${options.uri}: force refresh, ignore cache! \n');
       return handler.next(options);
@@ -24,8 +38,8 @@ class PixabayCacheInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    prefs.setString(
-        response.requestOptions.uri.toString(), response.toString());
+    prefs.setStringList(response.requestOptions.uri.toString(),
+        [DateTime.now().toString(), response.toString()]);
     super.onResponse(response, handler);
   }
 

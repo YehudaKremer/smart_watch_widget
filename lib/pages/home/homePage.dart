@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategories.dart';
 import 'package:smart_watch_widget/pages/background/pixabay/pixabayImages.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 import 'package:smart_watch_widget/utils/generalScope.dart';
+import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:smart_watch_widget/appState.dart';
 import 'package:system_theme/system_theme.dart';
@@ -60,7 +62,18 @@ class _HomePageState extends State<HomePage>
       ),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
-      home: Layout(
+      home:
+          // PixabayCategories(
+          //   onDismiss: () async {
+          //     final windowPosition = context.read<AppState>().windowPosition;
+          //     final watchSize = context.read<AppState>().watchSize;
+
+          //     await windowManager.setBounds(Rect.fromLTWH(
+          //         windowPosition!.dx, windowPosition.dy, watchSize, watchSize));
+          //     navigatorPop(context);
+          //   },
+          // )
+          Layout(
         child: ClockPage(navigateOnTap: MenuPage()),
       ),
     );
