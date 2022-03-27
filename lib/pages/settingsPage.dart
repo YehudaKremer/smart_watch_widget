@@ -4,7 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/backgroundPage.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsPage.dart';
-import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/appState.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
 import 'home/layout.dart';

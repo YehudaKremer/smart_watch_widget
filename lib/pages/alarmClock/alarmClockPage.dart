@@ -1,11 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/appState.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/models/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockFrom.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
-import 'package:smart_watch_widget/state/alarmClockState.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarmClockState.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/listItemPadding.dart';

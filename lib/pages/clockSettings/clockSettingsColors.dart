@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/state/clockSettingsState.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clockSettingsState.dart';
 import 'package:smart_watch_widget/widgets/colorButton.dart';
 import 'package:smart_watch_widget/widgets/colorPickerDialog.dart';
 

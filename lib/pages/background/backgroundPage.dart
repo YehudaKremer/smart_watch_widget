@@ -1,16 +1,15 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/BackgroundImageItem.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
-import 'package:smart_watch_widget/pages/background/onlineImages.dart';
+import 'package:smart_watch_widget/pages/background/pixabay/pixabayImages.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
-import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/appState.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/waves.dart';
+import 'package:window_manager/window_manager.dart';
 
 class BackgroundPage extends StatelessWidget {
   const BackgroundPage({Key? key}) : super(key: key);
@@ -73,14 +72,30 @@ class BackgroundPage extends StatelessWidget {
               }
             },
           ),
-          // BackgroundImageItem(
-          //   name: 'Online\nImage',
-          //   backgroundType: Background.onlineImage,
-          //   onPressed: () async {
-          //     Navigator.push(
-          //         context, FluentPageRoute(builder: (_) => OnlineImages()));
-          //   },
-          // ),
+          BackgroundImageItem(
+            name: 'Online\nImage',
+            backgroundType: Background.onlineImage,
+            onPressed: () async {
+              Navigator.push(
+                  context,
+                  FluentPageRoute(
+                      builder: (_) => PixabayImages(
+                            onDismiss: () async {
+                              final windowPosition =
+                                  context.read<AppState>().windowPosition;
+                              final watchSize =
+                                  context.read<AppState>().watchSize;
+
+                              await windowManager.setBounds(Rect.fromLTWH(
+                                  windowPosition!.dx,
+                                  windowPosition.dy,
+                                  watchSize,
+                                  watchSize));
+                              navigatorPop(context);
+                            },
+                          )));
+            },
+          ),
         ],
       ),
     );

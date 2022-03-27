@@ -37,18 +37,18 @@ class AppState extends ChangeNotifier {
   }
 
   _getWindowPosition() {
-    final size = prefs.getDouble(watchSizeKey);
-
-    if (size != null && size != _watchSize) {
-      _watchSize = size;
-      setWatchSize(size);
-    }
-  }
-
-  _getWindowSize() {
     final dx = prefs.getDouble(windowPositionDxKey);
     final dy = prefs.getDouble(windowPositionDyKey);
     if (dx != null || dy != null) _windowPosition = Offset(dx ?? 0, dy ?? 0);
+  }
+
+  _getWindowSize() async {
+    final size = prefs.getDouble(watchSizeKey);
+
+    if (size != null && size != await windowManager.getPosition()) {
+      _watchSize = size;
+      windowManager.setSize(Size(size, size));
+    }
   }
 
   _getThemeMode() {

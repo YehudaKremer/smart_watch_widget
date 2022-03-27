@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
-import 'package:smart_watch_widget/state/clockSettingsState.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clockSettingsState.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 

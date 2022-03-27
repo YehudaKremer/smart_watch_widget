@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsColors.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsForm.dart';
-import 'package:smart_watch_widget/state/appState.dart';
+import 'package:smart_watch_widget/appState.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:win32/win32.dart';
@@ -22,7 +22,10 @@ class _ClockSettingsState extends State<ClockSettings> {
   @override
   void initState() {
     super.initState();
+    resizeWindowToMinimalSize();
+  }
 
+  void resizeWindowToMinimalSize() {
     WidgetsBinding.instance!.addPostFrameCallback(
         (_) => Future.delayed(Duration(milliseconds: 200), () async {
               final windowPosition = context.read<AppState>().windowPosition ??
