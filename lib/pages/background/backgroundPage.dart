@@ -3,7 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/BackgroundImageItem.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategories.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayCategories.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/appState.dart';
@@ -63,6 +63,11 @@ class BackgroundPage extends StatelessWidget {
                   context,
                   FluentPageRoute(
                       builder: (_) => PixabayCategories(
+                            onSelectImage: (imageUrl) {
+                              context.read<AppState>().setBackground(
+                                  Background.onlineImage,
+                                  onlineImage: imageUrl);
+                            },
                             onDismiss: () async {
                               final windowPosition =
                                   context.read<AppState>().windowPosition;

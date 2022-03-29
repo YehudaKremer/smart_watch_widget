@@ -2,14 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/appState.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageBy.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageResult.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageBy.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageResult.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
 
 class PixabayImageViewer extends StatefulWidget {
   final PixabayImage image;
-  const PixabayImageViewer({Key? key, required this.image}) : super(key: key);
+  final void Function(String imageUrl) onSelectImage;
+
+  const PixabayImageViewer({
+    Key? key,
+    required this.image,
+    required this.onSelectImage,
+  }) : super(key: key);
 
   @override
   State<PixabayImageViewer> createState() => _PixabayImageViewerState();
@@ -80,7 +86,7 @@ class _PixabayImageViewerState extends State<PixabayImageViewer> {
                         children: [
                           Icon(FluentIcons.save),
                           Container(width: 5),
-                          Text('Save as watch background'),
+                          Text('Select Image'),
                         ],
                       ),
                       onPressed: () async {
@@ -88,9 +94,8 @@ class _PixabayImageViewerState extends State<PixabayImageViewer> {
                         navigatorPop(context);
                         navigatorPop(context);
 
-                        context.read<AppState>().setBackground(
-                            Background.onlineImage,
-                            onlineImage: widget.image.largeImageURL);
+                        widget.onSelectImage(widget.image.largeImageURL!);
+
                         final windowPosition =
                             context.read<AppState>().windowPosition;
                         final watchSize = context.read<AppState>().watchSize;

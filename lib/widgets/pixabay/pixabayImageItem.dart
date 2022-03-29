@@ -1,11 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageResult.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageViewer.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageResult.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageViewer.dart';
 
 class PixabayImageItem extends StatefulWidget {
   final PixabayImage image;
-  const PixabayImageItem({Key? key, required this.image}) : super(key: key);
+  final void Function(String imageUrl) onSelectImage;
+
+  const PixabayImageItem({
+    Key? key,
+    required this.image,
+    required this.onSelectImage,
+  }) : super(key: key);
 
   @override
   State<PixabayImageItem> createState() => PixabayImageItemState();
@@ -36,7 +42,10 @@ class PixabayImageItemState extends State<PixabayImageItem>
         Navigator.push(
             context,
             FluentPageRoute(
-                builder: (context) => PixabayImageViewer(image: widget.image)));
+                builder: (context) => PixabayImageViewer(
+                      image: widget.image,
+                      onSelectImage: widget.onSelectImage,
+                    )));
       },
       child: MouseRegion(
         onEnter: (_) => controller.forward(),

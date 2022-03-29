@@ -2,20 +2,22 @@ import 'package:dio/dio.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/appState.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/byPixabay.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayApiState.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageItem.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageResult.dart';
+import 'package:smart_watch_widget/widgets/pixabay/byPixabay.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayApiState.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageItem.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageResult.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 
 class PixabayImages extends StatefulWidget {
   final String category;
+  final void Function(String imageUrl) onSelectImage;
 
   PixabayImages({
     Key? key,
     required this.category,
+    required this.onSelectImage,
   }) : super(key: key);
 
   @override
@@ -39,17 +41,21 @@ class _PixabayImagesState extends State<PixabayImages> {
           .api
           .get('/', queryParameters: {'category': widget.category});
       var imageResult = PixabayImageResult.fromJson(result.data);
-      setState(() {
-        images = imageResult.hits;
-        if (noInternet) {
-          noInternet = false;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          images = imageResult.hits;
+          if (noInternet) {
+            noInternet = false;
+          }
+        });
+      }
     } on DioError catch (e) {
       if (e.message.contains('Failed host lookup')) {
-        setState(() {
-          noInternet = true;
-        });
+        if (mounted) {
+          setState(() {
+            noInternet = true;
+          });
+        }
       }
     }
   }
@@ -94,8 +100,10 @@ class _PixabayImagesState extends State<PixabayImages> {
                           ].cast<Widget>() +
                           (haveImages
                               ? images!
-                                  .map(
-                                      (image) => PixabayImageItem(image: image))
+                                  .map((image) => PixabayImageItem(
+                                        image: image,
+                                        onSelectImage: widget.onSelectImage,
+                                      ))
                                   .toList()
                               : []),
                     ),

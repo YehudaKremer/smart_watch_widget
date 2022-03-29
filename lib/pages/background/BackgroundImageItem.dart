@@ -4,7 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
 import 'package:smart_watch_widget/appState.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategories.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayCategories.dart';
 
 class BackgroundImageItem extends StatefulWidget {
   final String name;

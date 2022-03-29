@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockPage.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
+import 'package:smart_watch_widget/pages/menu/wallpaperMenuItem.dart';
 import 'package:smart_watch_widget/pages/settingsPage.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockState.dart';
 import 'package:smart_watch_widget/appState.dart';
@@ -48,6 +49,12 @@ class MenuPage extends StatelessWidget {
             onPressed: () => exit(0),
           ),
           MenuItem(
+            title: 'Settings',
+            icon: FluentIcons.settings,
+            onPressed: () => Navigator.push(
+                context, FluentPageRoute(builder: (_) => SettingsPage())),
+          ),
+          MenuItem(
             title: 'Alarm Clock',
             icon: FluentIcons.alarm_clock,
             onPressed: () => Navigator.push(
@@ -56,12 +63,7 @@ class MenuPage extends StatelessWidget {
                 ? Text(numberOfActiveAlarms.toString())
                 : null,
           ),
-          MenuItem(
-            title: 'Settings',
-            icon: FluentIcons.settings,
-            onPressed: () => Navigator.push(
-                context, FluentPageRoute(builder: (_) => SettingsPage())),
-          ),
+          WallpaperMenuItem(),
         ],
       ),
     );

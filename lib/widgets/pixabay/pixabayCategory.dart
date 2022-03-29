@@ -1,10 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImages.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImages.dart';
 
 class pixabayCategory extends StatefulWidget {
   final String category;
+  final void Function(String imageUrl) onSelectImage;
 
-  pixabayCategory({Key? key, required this.category}) : super(key: key);
+  pixabayCategory({
+    Key? key,
+    required this.category,
+    required this.onSelectImage,
+  }) : super(key: key);
 
   @override
   State<pixabayCategory> createState() => _pixabayCategoryState();
@@ -35,8 +40,10 @@ class _pixabayCategoryState extends State<pixabayCategory>
         Navigator.push(
             context,
             FluentPageRoute(
-                builder: (context) =>
-                    PixabayImages(category: widget.category)));
+                builder: (context) => PixabayImages(
+                      category: widget.category,
+                      onSelectImage: widget.onSelectImage,
+                    )));
       },
       child: MouseRegion(
         onEnter: (_) => controller.forward(),

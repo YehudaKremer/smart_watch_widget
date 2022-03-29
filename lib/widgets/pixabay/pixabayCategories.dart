@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/appState.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/byPixabay.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategory.dart';
+import 'package:smart_watch_widget/widgets/pixabay/byPixabay.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayCategory.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
@@ -28,10 +28,12 @@ const photosCategories = [
 
 class PixabayCategories extends StatefulWidget {
   final void Function() onDismiss;
+  final void Function(String imageUrl) onSelectImage;
 
   PixabayCategories({
     Key? key,
     required this.onDismiss,
+    required this.onSelectImage,
   }) : super(key: key);
 
   @override
@@ -117,8 +119,10 @@ class _PixabayCategoriesState extends State<PixabayCategories> {
                                     )
                                   ].cast<Widget>() +
                                   (photosCategories
-                                      .map((category) =>
-                                          pixabayCategory(category: category))
+                                      .map((category) => pixabayCategory(
+                                            category: category,
+                                            onSelectImage: widget.onSelectImage,
+                                          ))
                                       .toList()),
                             ),
                           ),

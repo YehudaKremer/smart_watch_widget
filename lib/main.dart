@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsState.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayApiState.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayApiState.dart';
 import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:provider/provider.dart';

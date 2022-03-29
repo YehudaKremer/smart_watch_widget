@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageResult.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageResult.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PixabayImageBy extends StatelessWidget {
