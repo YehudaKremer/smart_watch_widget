@@ -50,8 +50,7 @@ class _PixabayCategoriesState extends State<PixabayCategories> {
   void resizeWindowToMinimalSize() {
     WidgetsBinding.instance!.addPostFrameCallback(
         (_) => Future.delayed(Duration(milliseconds: 200), () async {
-              final windowPosition = context.read<AppState>().windowPosition ??
-                  await windowManager.getPosition();
+              final windowPosition = context.read<AppState>().windowPosition;
               final watchSize = context.read<AppState>().watchSize;
               final height = watchSize >= 450 ? watchSize : 450.0;
               final width = watchSize >= 450 ? watchSize : 450.0;

@@ -28,8 +28,7 @@ class _ClockSettingsState extends State<ClockSettings> {
   void resizeWindowToMinimalSize() {
     WidgetsBinding.instance!.addPostFrameCallback(
         (_) => Future.delayed(Duration(milliseconds: 200), () async {
-              final windowPosition = context.read<AppState>().windowPosition ??
-                  await windowManager.getPosition();
+              final windowPosition = context.read<AppState>().windowPosition;
               final watchSize = context.read<AppState>().watchSize;
               final height = watchSize >= 250 ? watchSize : 250.0;
               final width =
@@ -104,7 +103,7 @@ class _ClockSettingsState extends State<ClockSettings> {
                                     context.read<AppState>().watchSize;
 
                                 await windowManager.setBounds(Rect.fromLTWH(
-                                    windowPosition!.dx,
+                                    windowPosition.dx,
                                     windowPosition.dy,
                                     watchSize,
                                     watchSize));

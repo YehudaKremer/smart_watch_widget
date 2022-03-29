@@ -104,8 +104,8 @@ class AppState extends ChangeNotifier {
       _windowPosition = position;
     }
 
-    prefs.setDouble(windowPositionDxKey, _windowPosition!.dx);
-    prefs.setDouble(windowPositionDyKey, _windowPosition!.dy);
+    prefs.setDouble(windowPositionDxKey, _windowPosition.dx);
+    prefs.setDouble(windowPositionDyKey, _windowPosition.dy);
   }
 
   Future<void> _getBackground() async {

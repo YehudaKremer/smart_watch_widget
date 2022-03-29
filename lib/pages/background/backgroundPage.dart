@@ -70,7 +70,7 @@ class BackgroundPage extends StatelessWidget {
                                   context.read<AppState>().watchSize;
 
                               await windowManager.setBounds(Rect.fromLTWH(
-                                  windowPosition!.dx,
+                                  windowPosition.dx,
                                   windowPosition.dy,
                                   watchSize,
                                   watchSize));
