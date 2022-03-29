@@ -19,6 +19,7 @@ class PixabayApiState extends ChangeNotifier {
         'key': '26185412-c8e36afcd8117b764f7e76eec',
         'min_width': 250,
         'min_height': 250,
+        'per_page': 200,
         'safesearch': true,
       },
     );

@@ -10,7 +10,7 @@ import 'package:schedulers/schedulers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmScreenPage.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
-import 'package:smart_watch_widget/models/alarm.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockItem.dart';
 import 'package:smart_watch_widget/utils/generalScope.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';

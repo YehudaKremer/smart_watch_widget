@@ -24,11 +24,7 @@ Future<void> main() async {
   var prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
 
-  if (appState.windowPosition != null) {
-    windowManager.setPosition(appState.windowPosition!);
-  } else {
-    windowManager.setAlignment(Alignment.topRight);
-  }
+  windowManager.setPosition(appState.windowPosition);
   windowManager.setBackgroundColor(Colors.transparent);
   windowManager.show();
 

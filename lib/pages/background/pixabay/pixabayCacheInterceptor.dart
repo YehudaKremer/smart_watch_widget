@@ -9,6 +9,7 @@ class PixabayCacheInterceptor extends Interceptor {
   PixabayCacheInterceptor(this.prefs);
 
   Future<String?> getApiCache(String cacheKey) async {
+    //await prefs.remove(cacheKey);
     var cache = prefs.getStringList(cacheKey);
     if (cache != null && cache.isNotEmpty && cache.length > 1) {
       if (DateTime.parse(cache[0])

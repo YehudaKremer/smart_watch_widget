@@ -1,10 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/appState.dart';
+import 'package:smart_watch_widget/pages/background/pixabay/byPixabay.dart';
 import 'package:smart_watch_widget/pages/background/pixabay/pixabayApiState.dart';
+import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageItem.dart';
 import 'package:smart_watch_widget/pages/background/pixabay/pixabayImageResult.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
+import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 
 class PixabayImages extends StatefulWidget {
@@ -21,6 +24,7 @@ class PixabayImages extends StatefulWidget {
 
 class _PixabayImagesState extends State<PixabayImages> {
   List<PixabayImage>? images;
+  bool noInternet = false;
 
   @override
   void initState() {
@@ -29,18 +33,30 @@ class _PixabayImagesState extends State<PixabayImages> {
   }
 
   Future<void> getImages() async {
-    var result = await context
-        .read<PixabayApiState>()
-        .api
-        .get('/', queryParameters: {'category': widget.category});
-    var imageResult = PixabayImageResult.fromJson(result.data);
-    setState(() {
-      images = imageResult.hits;
-    });
+    try {
+      var result = await context
+          .read<PixabayApiState>()
+          .api
+          .get('/', queryParameters: {'category': widget.category});
+      var imageResult = PixabayImageResult.fromJson(result.data);
+      setState(() {
+        images = imageResult.hits;
+        if (noInternet) {
+          noInternet = false;
+        }
+      });
+    } on DioError catch (e) {
+      if (e.message.contains('Failed host lookup')) {
+        setState(() {
+          noInternet = true;
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    bool haveImages = images != null && images!.length > 0;
     return Padding(
       padding: const EdgeInsets.all(2),
       child: ClipRRect(
@@ -59,32 +75,37 @@ class _PixabayImagesState extends State<PixabayImages> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(9)),
-              child: GridView.count(
-                padding: const EdgeInsets.only(left: 0, right: 0, top: 0),
-                primary: false,
-                crossAxisSpacing: 0,
-                mainAxisSpacing: 0,
-                crossAxisCount: 3,
-                children: [
-                      MenuItem(
-                        title: 'Go Back',
-                        icon: FluentIcons.back,
-                        onPressed: () => navigatorPop(context),
-                      )
-                    ].cast<Widget>() +
-                    (images != null && images!.length > 0
-                        ? images!
-                            .map((image) => CachedNetworkImage(
-                                  imageUrl: image.webformatURL ??
-                                      'https://pixabay.com/static/img/logo_square.png',
-                                  placeholder: (context, url) =>
-                                      Center(child: ProgressRing()),
-                                  fit: BoxFit.cover,
-                                  errorWidget: (context, url, error) =>
-                                      Icon(FluentIcons.error),
-                                ))
-                            .toList()
-                        : []),
+              child: ScrollConfiguration(
+                behavior: CustomScrollBehavior(),
+                child: Stack(
+                  children: [
+                    GridView.count(
+                      padding: const EdgeInsets.only(left: 0, right: 0, top: 0),
+                      primary: false,
+                      crossAxisSpacing: 0,
+                      mainAxisSpacing: 0,
+                      crossAxisCount: 3,
+                      children: [
+                            MenuItem(
+                              title: 'Go Back',
+                              icon: FluentIcons.back,
+                              onPressed: () => navigatorPop(context),
+                            )
+                          ].cast<Widget>() +
+                          (haveImages
+                              ? images!
+                                  .map(
+                                      (image) => PixabayImageItem(image: image))
+                                  .toList()
+                              : []),
+                    ),
+                    if (haveImages) ByPixabay(),
+                    if (noInternet)
+                      Center(child: Text('No Internet Connection.')),
+                    if (images == null || images!.length <= 0)
+                      Center(child: ProgressRing())
+                  ],
+                ),
               ),
             ),
           ),

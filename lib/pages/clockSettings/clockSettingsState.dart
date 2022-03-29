@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_watch_widget/models/clockSettings.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clockSettings.dart';
 
 const clockSettingsPrefsKey = 'clockSettings';
 

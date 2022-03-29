@@ -12,21 +12,24 @@ const windowPositionDxKey = 'windowPositionDx';
 const windowPositionDyKey = 'windowPositionDy';
 const backgroundKey = 'background';
 const localImageBackgroundKey = 'localImageBackground';
+const onlineImageBackgroundKey = 'onlineImageBackground';
 enum Background { empty, waves, localImage, onlineImage }
 
 class AppState extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _isWindowFocused = true;
   String? _localImageBackground;
+  String? _onlineImageBackground;
   Brightness _brightness = Brightness.dark;
   Background _backgroundType = Background.empty;
   double _watchSize = defaultWatchSize;
-  Offset? _windowPosition;
-  Offset? get windowPosition => _windowPosition;
+  late Offset _windowPosition;
+  Offset get windowPosition => _windowPosition;
   double get watchSize => _watchSize;
   bool get isWindowFocused => _isWindowFocused;
   Brightness get brightness => _brightness;
   Background get backgroundType => _backgroundType;
+  String? get onlineImageBackground => _onlineImageBackground;
   String? get localImageBackground => _localImageBackground;
 
   AppState(this.prefs) {
@@ -39,7 +42,12 @@ class AppState extends ChangeNotifier {
   _getWindowPosition() {
     final dx = prefs.getDouble(windowPositionDxKey);
     final dy = prefs.getDouble(windowPositionDyKey);
-    if (dx != null || dy != null) _windowPosition = Offset(dx ?? 0, dy ?? 0);
+    if (dx == null && dy == null) {
+      _windowPosition =
+          Offset(GetSystemMetrics(SM_CXSCREEN).toDouble() - _watchSize, 0);
+    } else {
+      _windowPosition = Offset(dx ?? 0, dy ?? 0);
+    }
   }
 
   _getWindowSize() async {
@@ -110,19 +118,30 @@ class AppState extends ChangeNotifier {
         if (path != null && await File(path).exists()) {
           _localImageBackground = path;
         }
+      } else if (_backgroundType == Background.onlineImage) {
+        var path = prefs.getString(onlineImageBackgroundKey);
+        if (path != null) {
+          _onlineImageBackground = path;
+        }
       }
       notifyListeners();
     }
   }
 
   Future<void> setBackground(Background background,
-      {String? localImage}) async {
+      {String? localImage, String? onlineImage}) async {
     _backgroundType = background;
-    if (localImage != null &&
+    if (background == Background.localImage &&
+        localImage != null &&
         localImage.isNotEmpty &&
         await File(localImage).exists()) {
       _localImageBackground = localImage;
       prefs.setString(localImageBackgroundKey, localImage);
+    } else if (background == Background.onlineImage &&
+        onlineImage != null &&
+        onlineImage.isNotEmpty) {
+      _onlineImageBackground = onlineImage;
+      prefs.setString(onlineImageBackgroundKey, onlineImage);
     }
     notifyListeners();
     prefs.setString(backgroundKey, background.toString());

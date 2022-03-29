@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   hotkey_manager
   system_theme
+  url_launcher_windows
   win_toast
   window_manager
 )

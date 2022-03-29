@@ -28,7 +28,26 @@ class BackgroundItem extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(3)),
             child: background,
           ),
-          Center(child: Text(name)),
+          Center(
+            child: SizedBox(
+              width: 60,
+              height: 44,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  name,
+                  style: FluentTheme.of(context)
+                      .typography
+                      .body!
+                      .copyWith(color: Colors.white.withOpacity(0.9)),
+                ),
+              ),
+            ),
+          ),
           Positioned(
             top: 5,
             right: 5,

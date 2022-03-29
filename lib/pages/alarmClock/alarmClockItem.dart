@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/models/alarm.dart';
+import 'package:smart_watch_widget/pages/alarmClock/alarm.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarmClockState.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsState.dart';
 import 'alarmClockFrom.dart';

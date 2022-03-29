@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
 import 'package:smart_watch_widget/appState.dart';
+import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategories.dart';
 
 class BackgroundImageItem extends StatefulWidget {
   final String name;
@@ -26,11 +28,37 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
   late AnimationController controller;
   final fit = BoxFit.fill;
   final colorBlendMode = BlendMode.modulate;
+  int randomOnlineImage = Random().nextInt(photosCategories.length);
+  bool repeatedlyChangeOnlineImage = false;
 
   @override
   void initState() {
     super.initState();
     setAnimation();
+
+    if (widget.backgroundType == Background.onlineImage) {
+      repeatedlyChangeOnlineImage = true;
+      changeOnlineImage();
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.backgroundType == Background.onlineImage) {
+      repeatedlyChangeOnlineImage = false;
+    }
+    super.dispose();
+  }
+
+  Future<void> changeOnlineImage() async {
+    while (repeatedlyChangeOnlineImage) {
+      await Future.delayed(Duration(seconds: 3), () {
+        if (repeatedlyChangeOnlineImage) {
+          setState(() =>
+              randomOnlineImage = Random().nextInt(photosCategories.length));
+        }
+      });
+    }
   }
 
   void setAnimation() {
@@ -40,11 +68,18 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
     animation = Tween<double>(begin: 0.8, end: 0.9).animate(curve);
   }
 
-  Image getImage(Background currentBackgroundType) {
+  Image getImage() {
     var localImage = context.watch<AppState>().localImageBackground;
     var animatedColor = Colors.white.withOpacity(animation.value);
 
-    if (currentBackgroundType == Background.localImage && localImage != null) {
+    if (widget.backgroundType == Background.onlineImage) {
+      return Image.asset(
+          'assets/images/${photosCategories[randomOnlineImage]}.jpg',
+          fit: fit,
+          color: animatedColor,
+          colorBlendMode: colorBlendMode);
+    } else if (widget.backgroundType == Background.localImage &&
+        localImage != null) {
       return Image.file(File(localImage),
           fit: fit, color: animatedColor, colorBlendMode: colorBlendMode);
     } else {
@@ -60,14 +95,20 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
     return MouseRegion(
       onEnter: (_) => controller.forward(),
       onExit: (_) => controller.reverse(),
-      child: BackgroundItem(
-        name: widget.name,
-        background: AnimatedBuilder(
-          animation: animation,
-          builder: (_, __) => getImage(currentBackgroundType),
+      child: AnimatedSwitcher(
+        duration: FluentTheme.of(context).slowAnimationDuration,
+        transitionBuilder: (Widget child, Animation<double> animation) =>
+            FadeTransition(opacity: animation, child: child),
+        child: BackgroundItem(
+          key: Key(randomOnlineImage.toString()),
+          name: widget.name,
+          background: AnimatedBuilder(
+            animation: animation,
+            builder: (_, __) => getImage(),
+          ),
+          isSelected: currentBackgroundType == widget.backgroundType,
+          onPressed: widget.onPressed,
         ),
-        isSelected: currentBackgroundType == widget.backgroundType,
-        onPressed: widget.onPressed,
       ),
     );
   }

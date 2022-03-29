@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/BackgroundImageItem.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
 import 'package:smart_watch_widget/pages/background/pixabay/pixabayCategories.dart';
-import 'package:smart_watch_widget/pages/background/pixabay/pixabayImages.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/appState.dart';
@@ -19,7 +18,7 @@ class BackgroundPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Layout(
       child: GridView.count(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+        padding: EdgeInsets.all(context.read<AppState>().watchSize / 8),
         primary: false,
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
@@ -31,20 +30,12 @@ class BackgroundPage extends StatelessWidget {
             onPressed: () => navigatorPop(context),
           ),
           BackgroundItem(
-            name: 'Empty',
-            background: Icon(
-              FluentIcons.blocked,
-              size: 50,
-              color: FluentTheme.of(context)
-                  .typography
-                  .body!
-                  .color!
-                  .withOpacity(0.2),
-            ),
+            name: 'Waves',
+            background: Waves(),
             isSelected:
-                context.watch<AppState>().backgroundType == Background.empty,
+                context.watch<AppState>().backgroundType == Background.waves,
             onPressed: () {
-              context.read<AppState>().setBackground(Background.empty);
+              context.read<AppState>().setBackground(Background.waves);
             },
           ),
           BackgroundImageItem(
@@ -64,37 +55,45 @@ class BackgroundPage extends StatelessWidget {
               }
             },
           ),
-          // BackgroundImageItem(
-          //   name: 'Online\nImage',
-          //   backgroundType: Background.onlineImage,
-          //   onPressed: () async {
-          //     Navigator.push(
-          //         context,
-          //         FluentPageRoute(
-          //             builder: (_) => PixabayCategories(
-          //                   onDismiss: () async {
-          //                     final windowPosition =
-          //                         context.read<AppState>().windowPosition;
-          //                     final watchSize =
-          //                         context.read<AppState>().watchSize;
+          BackgroundImageItem(
+            name: 'Online\nImage',
+            backgroundType: Background.onlineImage,
+            onPressed: () async {
+              Navigator.push(
+                  context,
+                  FluentPageRoute(
+                      builder: (_) => PixabayCategories(
+                            onDismiss: () async {
+                              final windowPosition =
+                                  context.read<AppState>().windowPosition;
+                              final watchSize =
+                                  context.read<AppState>().watchSize;
 
-          //                     await windowManager.setBounds(Rect.fromLTWH(
-          //                         windowPosition!.dx,
-          //                         windowPosition.dy,
-          //                         watchSize,
-          //                         watchSize));
-          //                     navigatorPop(context);
-          //                   },
-          //                 )));
-          //   },
-          // ),
+                              await windowManager.setBounds(Rect.fromLTWH(
+                                  windowPosition!.dx,
+                                  windowPosition.dy,
+                                  watchSize,
+                                  watchSize));
+                              navigatorPop(context);
+                            },
+                          )));
+            },
+          ),
           BackgroundItem(
-            name: 'Waves',
-            background: Waves(),
+            name: 'Empty',
+            background: Icon(
+              FluentIcons.blocked,
+              size: 50,
+              color: FluentTheme.of(context)
+                  .typography
+                  .body!
+                  .color!
+                  .withOpacity(0.2),
+            ),
             isSelected:
-                context.watch<AppState>().backgroundType == Background.waves,
+                context.watch<AppState>().backgroundType == Background.empty,
             onPressed: () {
-              context.read<AppState>().setBackground(Background.waves);
+              context.read<AppState>().setBackground(Background.empty);
             },
           ),
         ],

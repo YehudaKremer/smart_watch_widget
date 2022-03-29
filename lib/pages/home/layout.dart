@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
@@ -11,11 +12,54 @@ class Layout extends StatelessWidget {
   final Widget child;
   Layout({Key? key, required this.child}) : super(key: key);
 
+  BackgroundImage(BuildContext context) {
+    var background = context.watch<AppState>().backgroundType;
+    var localImageBackground = context.watch<AppState>().localImageBackground;
+    var onlineImageBackground = context.watch<AppState>().onlineImageBackground;
+
+    return AnimatedSwitcher(
+      duration: FluentTheme.of(context).slowAnimationDuration,
+      transitionBuilder: (innerChild, animation) => SlideFadeTransition(
+        animation: animation,
+        child: innerChild,
+      ),
+      child: Container(
+        key: Key(
+            'background-$background-$localImageBackground-$onlineImageBackground'),
+        child: background == Background.waves
+            ? Waves()
+            : background == Background.localImage &&
+                    localImageBackground != null
+                ? Container(
+                    constraints: BoxConstraints.expand(),
+                    child: Image.file(File(localImageBackground),
+                        fit: BoxFit.fitHeight,
+                        color: Colors.white.withOpacity(0.9),
+                        colorBlendMode: BlendMode.modulate),
+                  )
+                : background == Background.onlineImage &&
+                        onlineImageBackground != null
+                    ? Container(
+                        constraints: BoxConstraints.expand(),
+                        child: CachedNetworkImage(
+                          imageUrl: onlineImageBackground,
+                          placeholder: (context, url) =>
+                              Center(child: ProgressRing()),
+                          fit: BoxFit.fitHeight,
+                          color: Colors.white.withOpacity(0.9),
+                          colorBlendMode: BlendMode.modulate,
+                          errorWidget: (context, url, error) =>
+                              Icon(FluentIcons.error),
+                        ),
+                      )
+                    : Container(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     registerGeneralHotKeys(context);
-    var background = context.watch<AppState>().backgroundType;
-    var localImageBackground = context.watch<AppState>().localImageBackground;
 
     return Padding(
       padding: const EdgeInsets.all(2),
@@ -37,20 +81,7 @@ class Layout extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  AnimatedSlideFade(
-                    child: background == Background.waves
-                        ? Waves()
-                        : background == Background.localImage &&
-                                localImageBackground != null
-                            ? Container(
-                                constraints: BoxConstraints.expand(),
-                                child: Image.file(File(localImageBackground),
-                                    fit: BoxFit.fitHeight,
-                                    color: Colors.white.withOpacity(0.9),
-                                    colorBlendMode: BlendMode.modulate),
-                              )
-                            : Container(),
-                  ),
+                  BackgroundImage(context),
                   child,
                 ],
               ),
