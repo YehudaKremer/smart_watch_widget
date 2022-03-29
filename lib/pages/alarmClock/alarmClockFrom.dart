@@ -33,6 +33,10 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
   void initState() {
     super.initState();
     registerGeneralHotKeys();
+
+    /// reset the seconds and milliseconds in the DateTime
+    alarm.date =
+        DateTime.parse(DateFormat('yyyy-MM-dd HH:mm').format(alarm.date));
   }
 
   @override

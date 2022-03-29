@@ -41,8 +41,11 @@ class AlarmClockPage extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     FluentPageRoute(
-                      builder: (context) =>
-                          AlarmClockFrom(Alarm(date: DateTime.now())),
+                      builder: (context) {
+                        var alarm = Alarm(
+                            date: DateTime.now().add(Duration(minutes: 1)));
+                        return AlarmClockFrom(alarm);
+                      },
                     ),
                   ),
                 ));

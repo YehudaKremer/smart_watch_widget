@@ -113,10 +113,8 @@ class AlarmClockState extends ChangeNotifier {
       int nextAlarmTimeStampForToday = activeAlarmForToday
           .map((alarm) => alarm.date.millisecondsSinceEpoch)
           .reduce(min);
-      DateTime nextAlarmDateForToday =
-          DateTime.fromMillisecondsSinceEpoch(nextAlarmTimeStampForToday);
-      Alarm nextAlarmForToday = activeAlarmForToday
-          .firstWhere((alarm) => alarm.date == nextAlarmDateForToday);
+      Alarm nextAlarmForToday = activeAlarmForToday.firstWhere((alarm) =>
+          alarm.date.millisecondsSinceEpoch == nextAlarmTimeStampForToday);
       await scheduler!
           .run(() => startAlarm(nextAlarmForToday), nextAlarmForToday.date);
     }

@@ -42,7 +42,7 @@ class AlarmClockItem extends StatelessWidget {
                               .read<ClockSettingsState>()
                               .clockSettings
                               .useMilitaryTime
-                          ? DateFormat.Hms().format(alarm.date)
+                          ? DateFormat.Hm().format(alarm.date)
                           : DateFormat.jm().format(alarm.date),
                       style: TextStyle(
                         color: alarm.isActive
