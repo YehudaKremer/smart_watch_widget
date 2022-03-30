@@ -138,34 +138,31 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                     barrierDismissible: true,
                     context: context,
                     barrierColor: Colors.transparent,
-                    builder: (BuildContext context) => Padding(
-                      padding: const EdgeInsets.all(3),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        child: Container(
-                          color: FluentTheme.of(context)
-                              .scaffoldBackgroundColor
-                              .withOpacity(0.6),
-                          child: ContentDialog(
-                            title: Text('Reset Settings'),
-                            content: Text(
-                                'Do you want to reset all the clock settings?'),
-                            actions: [
-                              Button(
-                                child: Text('Ok'),
-                                onPressed: () async {
-                                  await state.resetAll();
-                                  navigatorPop(context);
-                                },
-                              ),
-                              Button(
-                                child: Text('Cancel'),
-                                onPressed: () {
-                                  navigatorPop(context);
-                                },
-                              ),
-                            ],
-                          ),
+                    builder: (BuildContext context) => ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: Container(
+                        color: FluentTheme.of(context)
+                            .scaffoldBackgroundColor
+                            .withOpacity(0.6),
+                        child: ContentDialog(
+                          title: Text('Reset Settings'),
+                          content: Text(
+                              'Do you want to reset all the clock settings?'),
+                          actions: [
+                            Button(
+                              child: Text('Ok'),
+                              onPressed: () async {
+                                await state.resetAll();
+                                navigatorPop(context);
+                              },
+                            ),
+                            Button(
+                              child: Text('Cancel'),
+                              onPressed: () {
+                                navigatorPop(context);
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ),

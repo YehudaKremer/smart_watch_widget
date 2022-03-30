@@ -59,18 +59,7 @@ class _HomePageState extends State<HomePage>
       ),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
-      home:
-          // PixabayCategories(
-          //   onDismiss: () async {
-          //     final windowPosition = context.read<AppState>().windowPosition;
-          //     final watchSize = context.read<AppState>().watchSize;
-
-          //     await windowManager.setBounds(Rect.fromLTWH(
-          //         windowPosition!.dx, windowPosition.dy, watchSize, watchSize));
-          //     navigatorPop(context);
-          //   },
-          // )
-          Layout(
+      home: Layout(
         child: ClockPage(navigateOnTap: MenuPage()),
       ),
     );
