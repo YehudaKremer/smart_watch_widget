@@ -1,12 +1,8 @@
-import 'dart:io';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/watchBackground.dart';
-import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/utils/hotKeys.dart';
 import 'package:smart_watch_widget/appState.dart';
-import 'package:smart_watch_widget/widgets/waves.dart';
 
 class Layout extends StatelessWidget {
   final Widget child;
