@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_watch_widget/pages/background/watchBackground.dart';
 import 'package:smart_watch_widget/pages/clockPage.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsColors.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clockSettingsForm.dart';
@@ -77,6 +78,25 @@ class _ClockSettingsState extends State<ClockSettings> {
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
+                                Container(
+                                  height: 212,
+                                  width: 212,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: FluentTheme.of(context)
+                                          .shadowColor
+                                          .withOpacity(0.4),
+                                      width: 1.4,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            MediaQuery.of(context).size.height /
+                                                2)),
+                                  ),
+                                  child: ClipOval(
+                                    child: WatchBackground(),
+                                  ),
+                                ),
                                 ClockPage(),
                                 Container(
                                   height: 245,
