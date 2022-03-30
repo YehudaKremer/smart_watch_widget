@@ -1,9 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageResult.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabayImages.dart';
 
 class pixabayCategory extends StatefulWidget {
   final String category;
-  final void Function(String imageUrl) onSelectImage;
+  final void Function(PixabayImage image) onSelectImage;
 
   pixabayCategory({
     Key? key,

@@ -9,7 +9,7 @@ import 'package:window_manager/window_manager.dart';
 
 class PixabayImageViewer extends StatefulWidget {
   final PixabayImage image;
-  final void Function(String imageUrl) onSelectImage;
+  final void Function(PixabayImage image) onSelectImage;
 
   const PixabayImageViewer({
     Key? key,
@@ -94,7 +94,7 @@ class _PixabayImageViewerState extends State<PixabayImageViewer> {
                         navigatorPop(context);
                         navigatorPop(context);
 
-                        widget.onSelectImage(widget.image.largeImageURL!);
+                        widget.onSelectImage(widget.image);
 
                         final windowPosition =
                             context.read<AppState>().windowPosition;

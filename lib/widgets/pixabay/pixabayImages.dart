@@ -12,7 +12,7 @@ import 'package:smart_watch_widget/utils/navigator.dart';
 
 class PixabayImages extends StatefulWidget {
   final String category;
-  final void Function(String imageUrl) onSelectImage;
+  final void Function(PixabayImage image) onSelectImage;
 
   PixabayImages({
     Key? key,

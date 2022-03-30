@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/BackgroundImageItem.dart';
 import 'package:smart_watch_widget/pages/background/backgroundItem.dart';
@@ -63,10 +65,17 @@ class BackgroundPage extends StatelessWidget {
                   context,
                   FluentPageRoute(
                       builder: (_) => PixabayCategories(
-                            onSelectImage: (imageUrl) {
-                              context.read<AppState>().setBackground(
-                                  Background.onlineImage,
-                                  onlineImage: imageUrl);
+                            onSelectImage: (image) async {
+                              var imageUrl = image.webformatURL ?? '';
+                              if (imageUrl.isNotEmpty) {
+                                var localPath =
+                                    '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
+                                await Dio().download(imageUrl, localPath);
+
+                                context.read<AppState>().setBackground(
+                                    Background.onlineImage,
+                                    onlineImage: localPath);
+                              }
                             },
                             onDismiss: () async {
                               final windowPosition =

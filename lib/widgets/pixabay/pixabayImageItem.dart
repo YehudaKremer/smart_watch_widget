@@ -5,7 +5,7 @@ import 'package:smart_watch_widget/widgets/pixabay/pixabayImageViewer.dart';
 
 class PixabayImageItem extends StatefulWidget {
   final PixabayImage image;
-  final void Function(String imageUrl) onSelectImage;
+  final void Function(PixabayImage image) onSelectImage;
 
   const PixabayImageItem({
     Key? key,

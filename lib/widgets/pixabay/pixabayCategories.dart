@@ -6,6 +6,7 @@ import 'package:smart_watch_widget/widgets/pixabay/pixabayCategory.dart';
 import 'package:smart_watch_widget/pages/menu/menuItem.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/utils/customScrollBehavior.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabayImageResult.dart';
 import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -28,7 +29,7 @@ const photosCategories = [
 
 class PixabayCategories extends StatefulWidget {
   final void Function() onDismiss;
-  final void Function(String imageUrl) onSelectImage;
+  final void Function(PixabayImage image) onSelectImage;
 
   PixabayCategories({
     Key? key,

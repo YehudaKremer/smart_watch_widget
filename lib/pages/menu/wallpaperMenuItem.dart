@@ -30,16 +30,20 @@ class _WallpaperMenuItemState extends State<WallpaperMenuItem> {
               context,
               FluentPageRoute(
                   builder: (_) => PixabayCategories(
-                        onSelectImage: (imageUrl) async {
-                          setState(() => isLoading = true);
-                          var localPath =
-                              '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
-                          await Dio().download(imageUrl, localPath);
-                          LPWSTR path = TEXT(localPath);
-                          SystemParametersInfo(
-                              SPI_SETDESKWALLPAPER, 0, path, 0);
-                          free(path);
-                          setState(() => isLoading = false);
+                        onSelectImage: (image) async {
+                          var imageUrl =
+                              image.fullHDURL ?? image.largeImageURL ?? '';
+                          if (imageUrl.isNotEmpty) {
+                            setState(() => isLoading = true);
+                            var localPath =
+                                '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
+                            await Dio().download(imageUrl, localPath);
+                            LPWSTR path = TEXT(localPath);
+                            SystemParametersInfo(
+                                SPI_SETDESKWALLPAPER, 0, path, 0);
+                            free(path);
+                            setState(() => isLoading = false);
+                          }
                         },
                         onDismiss: () async {
                           final windowPosition =

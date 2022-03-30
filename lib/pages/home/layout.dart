@@ -33,7 +33,7 @@ class Layout extends StatelessWidget {
                 ? Container(
                     constraints: BoxConstraints.expand(),
                     child: Image.file(File(localImageBackground),
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.cover,
                         color: Colors.white.withOpacity(0.9),
                         colorBlendMode: BlendMode.modulate),
                   )
@@ -41,16 +41,10 @@ class Layout extends StatelessWidget {
                         onlineImageBackground != null
                     ? Container(
                         constraints: BoxConstraints.expand(),
-                        child: CachedNetworkImage(
-                          imageUrl: onlineImageBackground,
-                          placeholder: (context, url) =>
-                              Center(child: ProgressRing()),
-                          fit: BoxFit.fitHeight,
-                          color: Colors.white.withOpacity(0.9),
-                          colorBlendMode: BlendMode.modulate,
-                          errorWidget: (context, url, error) =>
-                              Icon(FluentIcons.error),
-                        ),
+                        child: Image.file(File(onlineImageBackground),
+                            fit: BoxFit.cover,
+                            color: Colors.white.withOpacity(0.9),
+                            colorBlendMode: BlendMode.modulate),
                       )
                     : Container(),
       ),
