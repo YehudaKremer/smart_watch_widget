@@ -1,12 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/background/watchBackground.dart';
-import 'package:smart_watch_widget/utils/hotKeys.dart';
-import 'package:smart_watch_widget/appState.dart';
+import 'package:smart_watch_widget/pages/background/watch_background.dart';
+import 'package:smart_watch_widget/utils/hot_keys.dart';
+import 'package:smart_watch_widget/app_state.dart';
 
 class Layout extends StatelessWidget {
   final Widget child;
-  Layout({Key? key, required this.child}) : super(key: key);
+  const Layout({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class Layout extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  WatchBackground(),
+                  const WatchBackground(),
                   child,
                 ],
               ),

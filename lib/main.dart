@@ -1,15 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_watch_widget/pages/clockSettings/clockSettingsState.dart';
-import 'package:smart_watch_widget/widgets/pixabay/pixabayApiState.dart';
+import 'package:smart_watch_widget/pages/clockSettings/clock_settings_state.dart';
+import 'package:smart_watch_widget/widgets/pixabay/pixabay_api_state.dart';
 import 'package:win_toast/win_toast.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/home/homePage.dart';
+import 'package:smart_watch_widget/pages/home/home_page.dart';
 import 'package:system_theme/system_theme.dart';
-import 'appState.dart';
-import 'pages/alarmClock/alarmClockState.dart';
+import 'app_state.dart';
+import 'pages/alarmClock/alarm_clock_state.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => ClockSettingsState(prefs)),
         ChangeNotifierProvider(create: (_) => PixabayApiState(prefs))
       ],
-      child: HomePage(),
+      child: const HomePage(),
     ),
   );
 }

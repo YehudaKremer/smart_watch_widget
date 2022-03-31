@@ -29,12 +29,12 @@ class Waves extends StatelessWidget {
         ],
         durations: [35000, 19440, 10800, 6000],
         heightPercentages: [0.35, 0.37, 0.40, 0.45],
-        blur: MaskFilter.blur(BlurStyle.solid, 10),
+        blur: const MaskFilter.blur(BlurStyle.solid, 10),
         gradientBegin: Alignment.bottomLeft,
         gradientEnd: Alignment.topRight,
       ),
       waveAmplitude: 0,
-      size: Size(
+      size: const Size(
         double.infinity,
         double.infinity,
       ),
