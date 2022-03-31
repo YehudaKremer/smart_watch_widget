@@ -50,7 +50,7 @@ class _pixabayCategoryState extends State<pixabayCategory>
         onEnter: (_) => controller.forward(),
         onExit: (_) => controller.reverse(),
         child: Stack(
-          alignment: Alignment.center,
+          fit: StackFit.expand,
           children: [
             AnimatedBuilder(
               animation: animation,
@@ -59,24 +59,25 @@ class _pixabayCategoryState extends State<pixabayCategory>
                 fit: BoxFit.cover,
                 color: Colors.white.withOpacity(animation.value),
                 colorBlendMode: BlendMode.modulate,
-                height: 150,
               ),
             ),
-            SizedBox(
-              width: 120,
-              height: 40,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.25),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '${widget.category.toUpperCase().substring(0, 1)}${widget.category.substring(1)}',
-                  style: FluentTheme.of(context)
-                      .typography
-                      .bodyLarge!
-                      .copyWith(color: Colors.white.withOpacity(0.9)),
+            Center(
+              child: SizedBox(
+                width: 120,
+                height: 40,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.25),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    '${widget.category.toUpperCase().substring(0, 1)}${widget.category.substring(1)}',
+                    style: FluentTheme.of(context)
+                        .typography
+                        .bodyLarge!
+                        .copyWith(color: Colors.white.withOpacity(0.9)),
+                  ),
                 ),
               ),
             ),
