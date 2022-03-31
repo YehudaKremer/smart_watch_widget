@@ -26,5 +26,3 @@ background-color |
 | [flutter_colorpicker](https://pub.dev/packages/flutter_colorpicker) | To enable customizes the clock colors |
 | [wave](https://pub.dev/packages/wave) | To display cool waves background |
 | [msix](https://pub.dev/packages/msix) | To build Msix file for Microsoft Store distribution |
-
-Alarm sound by [Alexander](https://orangefreesounds.com/) posted at [orangefreesounds.com](https://orangefreesounds.com/twin-bell-alarm-clock/) under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license.
