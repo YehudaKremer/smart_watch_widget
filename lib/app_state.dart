@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:system_theme/system_theme.dart';
-import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
 const watchSizeKey = 'watchSize';
@@ -42,12 +40,7 @@ class AppState extends ChangeNotifier {
   _getWindowPosition() {
     final dx = prefs.getDouble(windowPositionDxKey);
     final dy = prefs.getDouble(windowPositionDyKey);
-    if (dx == null && dy == null) {
-      _windowPosition =
-          Offset(GetSystemMetrics(SM_CXSCREEN).toDouble() - _watchSize, 0);
-    } else {
-      _windowPosition = Offset(dx ?? 0, dy ?? 0);
-    }
+    _windowPosition = Offset(dx ?? 0, dy ?? 0);
   }
 
   _getWindowSize() async {
@@ -85,22 +78,24 @@ class AppState extends ChangeNotifier {
   }
 
   void setWindowPosition(Offset position) {
-    final screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    final screenHeight = GetSystemMetrics(SM_CYSCREEN);
+    // final screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    // final screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    if (position.dx + watchSize > screenWidth ||
-        position.dy + watchSize > screenHeight) {
-      double dx = position.dx + watchSize > screenWidth
-          ? screenWidth - watchSize
-          : position.dx;
-      double dy = position.dy + watchSize > screenHeight
-          ? screenHeight - watchSize
-          : position.dy;
+    // if (position.dx + watchSize > screenWidth ||
+    //     position.dy + watchSize > screenHeight) {
+    //   double dx = position.dx + watchSize > screenWidth
+    //       ? screenWidth - watchSize
+    //       : position.dx;
+    //   double dy = position.dy + watchSize > screenHeight
+    //       ? screenHeight - watchSize
+    //       : position.dy;
 
-      windowManager.setPosition(_windowPosition = Offset(dx, dy));
-    } else {
-      _windowPosition = position;
-    }
+    //   windowManager.setPosition(_windowPosition = Offset(dx, dy));
+    // } else {
+    //   _windowPosition = position;
+    // }
+
+    _windowPosition = position;
 
     prefs.setDouble(windowPositionDxKey, _windowPosition.dx);
     prefs.setDouble(windowPositionDyKey, _windowPosition.dy);

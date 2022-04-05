@@ -73,6 +73,31 @@ class _ClockSettingsState extends State<ClockSettings> {
                 Expanded(
                   child: AnimatedSlideFade(
                     child: show
+                        ? ClockSettingsForm(
+                            onDismiss: () {
+                              setState(() => show = false);
+                              Future.delayed(const Duration(milliseconds: 200),
+                                  () async {
+                                final windowPosition =
+                                    context.read<AppState>().windowPosition;
+                                final watchSize =
+                                    context.read<AppState>().watchSize;
+
+                                await windowManager.setBounds(Rect.fromLTWH(
+                                    windowPosition.dx,
+                                    windowPosition.dy,
+                                    watchSize,
+                                    watchSize));
+                                navigatorPop(context);
+                              });
+                            },
+                          )
+                        : Container(),
+                  ),
+                ),
+                Expanded(
+                  child: AnimatedSlideFade(
+                    child: show
                         ? Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Stack(
@@ -105,31 +130,6 @@ class _ClockSettingsState extends State<ClockSettings> {
                                 ),
                               ],
                             ),
-                          )
-                        : Container(),
-                  ),
-                ),
-                Expanded(
-                  child: AnimatedSlideFade(
-                    child: show
-                        ? ClockSettingsForm(
-                            onDismiss: () {
-                              setState(() => show = false);
-                              Future.delayed(const Duration(milliseconds: 200),
-                                  () async {
-                                final windowPosition =
-                                    context.read<AppState>().windowPosition;
-                                final watchSize =
-                                    context.read<AppState>().watchSize;
-
-                                await windowManager.setBounds(Rect.fromLTWH(
-                                    windowPosition.dx,
-                                    windowPosition.dy,
-                                    watchSize,
-                                    watchSize));
-                                navigatorPop(context);
-                              });
-                            },
                           )
                         : Container(),
                   ),
