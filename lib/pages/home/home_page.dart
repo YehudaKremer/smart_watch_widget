@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage>
       navigatorKey: navigatorKey,
       theme: ThemeData(
         brightness: context.watch<AppState>().brightness,
-        accentColor: SystemTheme.accentInstance.accent.toAccentColor(),
+        accentColor: SystemTheme.accentColor.accent.toAccentColor(),
       ),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage>
   void onWindowFocus() {
     windowManager.setSkipTaskbar(false);
     context.read<AppState>().setWindowFocused(true);
-    SystemTheme.accentInstance.load();
+    SystemTheme.accentColor.load();
   }
 
   @override

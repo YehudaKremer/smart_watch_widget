@@ -16,7 +16,7 @@ dependencies:
   provider: ^6.0.2
   fluent_ui: ^3.9.1
   fluentui_system_icons: ^1.1.161
-  system_theme: ^1.0.1
+  system_theme: ^2.0.0
   window_manager: ^0.1.9
   shared_preferences: ^2.0.13
   intl: ^0.17.0

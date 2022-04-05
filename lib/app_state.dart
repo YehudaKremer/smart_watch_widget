@@ -60,14 +60,12 @@ class AppState extends ChangeNotifier {
   }
 
   _getThemeMode() {
-    SystemTheme.darkMode.then((isDarkMode) {
-      setBrightness(isDarkMode ? Brightness.dark : Brightness.light);
-    });
+    setBrightness(SystemTheme.isDarkMode ? Brightness.dark : Brightness.light);
   }
 
   setBrightness(Brightness brightness) {
     _brightness = brightness;
-    SystemTheme.accentInstance.load().then((_) => notifyListeners());
+    SystemTheme.accentColor.load().then((_) => notifyListeners());
   }
 
   setWatchSize(double size) {

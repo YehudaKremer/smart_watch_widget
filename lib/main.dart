@@ -15,7 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   await hotKeyManager.unregisterAll();
-  await SystemTheme.accentInstance.load();
+  await SystemTheme.accentColor.load();
   await WinToast.instance().initialize(
       appName: 'Smart Watch Widget',
       productName: '48434KremerSoftware.SmartWatchWidget',
