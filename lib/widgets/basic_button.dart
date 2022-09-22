@@ -23,7 +23,7 @@ class BasicButton extends StatelessWidget {
         child: Button(
           style: ButtonStyle(
             iconSize: ButtonState.all(
-                FluentTheme.of(context).typography.title!.fontSize),
+                FluentTheme.of(context).typography.subtitle!.fontSize),
             foregroundColor: ButtonState.all(color),
           ),
           onPressed: onPressed,

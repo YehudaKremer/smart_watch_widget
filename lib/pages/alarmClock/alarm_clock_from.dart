@@ -190,7 +190,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                                     .color,
                             size: FluentTheme.of(context)
                                 .typography
-                                .title!
+                                .subtitle!
                                 .fontSize,
                           ),
                           alarm.readMessage
@@ -202,7 +202,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
                                         .scaffoldBackgroundColor,
                                     size: FluentTheme.of(context)
                                             .typography
-                                            .title!
+                                            .subtitle!
                                             .fontSize! /
                                         2,
                                   ),

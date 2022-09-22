@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   analog_clock: ^0.1.1
   provider: ^6.0.3
-  fluent_ui: 3.9.1
+  fluent_ui: 3.10.0
   fluentui_system_icons: ^1.1.181
   system_theme: ^2.0.0
   window_manager: ^0.2.7

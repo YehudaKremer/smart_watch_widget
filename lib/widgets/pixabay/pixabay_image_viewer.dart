@@ -67,7 +67,7 @@ class _PixabayImageViewerState extends State<PixabayImageViewer> {
                         style: ButtonStyle(
                           iconSize: ButtonState.all(FluentTheme.of(context)
                               .typography
-                              .title!
+                              .subtitle!
                               .fontSize),
                         ),
                         icon: Icon(

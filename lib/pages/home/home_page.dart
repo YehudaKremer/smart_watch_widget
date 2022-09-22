@@ -54,9 +54,12 @@ class HomePageState extends State<HomePage>
       themeMode: ThemeMode.system,
       navigatorKey: navigatorKey,
       theme: ThemeData(
-        brightness: context.watch<AppState>().brightness,
-        accentColor: SystemTheme.accentColor.accent.toAccentColor(),
-      ),
+          brightness: context.watch<AppState>().brightness,
+          accentColor: SystemTheme.accentColor.accent.toAccentColor(),
+          scaffoldBackgroundColor:
+              context.watch<AppState>().brightness == Brightness.dark
+                  ? const Color.fromRGBO(25, 25, 25, 1)
+                  : const Color.fromRGBO(255, 255, 255, 1)),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
       home: const Layout(
