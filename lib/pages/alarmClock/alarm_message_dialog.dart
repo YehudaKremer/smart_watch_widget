@@ -35,41 +35,44 @@ class _AlarmMessageDialogState extends State<AlarmMessageDialog> {
       child: Container(
         color: FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
         child: ContentDialog(
-          content: Column(
-            children: [
-              ScrollConfiguration(
-                behavior: CustomScrollBehavior(),
-                child: TextBox(
-                  autofocus: true,
-                  controller: messageController,
-                  placeholder: 'Type alarm message',
-                  maxLines: 3,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                      bottomLeft: Radius.zero,
-                      bottomRight: Radius.zero,
+          content: SizedBox(
+            height: 100,
+            child: Column(
+              children: [
+                ScrollConfiguration(
+                  behavior: CustomScrollBehavior(),
+                  child: TextBox(
+                    autofocus: true,
+                    controller: messageController,
+                    placeholder: 'Type alarm message',
+                    maxLines: 3,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                        bottomLeft: Radius.zero,
+                        bottomRight: Radius.zero,
+                      ),
                     ),
+                    placeholderStyle:
+                        TextStyle(color: FluentTheme.of(context).disabledColor),
                   ),
-                  placeholderStyle:
-                      TextStyle(color: FluentTheme.of(context).disabledColor),
                 ),
-              ),
-              Tooltip(
-                message:
-                    "Read the message (Text To Speech) when the alarm is on.\nFor now: Works only for english.",
-                child: ToggleSwitch(
-                  checked: widget.alarm.readMessage,
-                  onChanged: (v) {
-                    setState(() {
-                      widget.alarm.readMessage = v;
-                    });
-                  },
-                  content: const Text('Read Message'),
+                Tooltip(
+                  message:
+                      "Read the message (Text To Speech) when the alarm is on.\nFor now: Works only for english.",
+                  child: ToggleSwitch(
+                    checked: widget.alarm.readMessage,
+                    onChanged: (v) {
+                      setState(() {
+                        widget.alarm.readMessage = v;
+                      });
+                    },
+                    content: const Text('Read Message'),
+                  ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
           constraints:
               BoxConstraints(maxWidth: context.read<AppState>().watchSize - 50),

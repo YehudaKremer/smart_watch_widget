@@ -9,7 +9,7 @@ import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/list_item_padding.dart';
-import 'package:smart_watch_widget/pages/menu/menu_item.dart';
+import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
 
 class AlarmClockPage extends StatelessWidget {
   const AlarmClockPage({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class AlarmClockPage extends StatelessWidget {
             itemBuilder: (context, index, animation) {
               if (index == 0) {
                 return ListItemPadding(
-                    child: MenuItem(
+                    child: WatchMenuItem(
                   title: 'Back',
                   icon: FluentIcons.back,
                   onPressed: () {
@@ -35,7 +35,7 @@ class AlarmClockPage extends StatelessWidget {
                 ));
               } else if (index == itemCountWithBackAndAddButtons - 1) {
                 return ListItemPadding(
-                    child: MenuItem(
+                    child: WatchMenuItem(
                   title: 'New Alarm',
                   icon: FluentIcons.add,
                   onPressed: () => Navigator.push(

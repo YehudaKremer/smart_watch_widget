@@ -7,15 +7,20 @@ import 'package:smart_watch_widget/pages/background/background_image_item.dart';
 import 'package:smart_watch_widget/pages/background/background_item.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_categories.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
-import 'package:smart_watch_widget/pages/menu/menu_item.dart';
+import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/waves.dart';
 import 'package:window_manager/window_manager.dart';
 
-class BackgroundPage extends StatelessWidget {
+class BackgroundPage extends StatefulWidget {
   const BackgroundPage({Key? key}) : super(key: key);
 
+  @override
+  State<BackgroundPage> createState() => _BackgroundPageState();
+}
+
+class _BackgroundPageState extends State<BackgroundPage> {
   @override
   Widget build(BuildContext context) {
     return Layout(
@@ -26,7 +31,7 @@ class BackgroundPage extends StatelessWidget {
         mainAxisSpacing: 20,
         crossAxisCount: 2,
         children: [
-          MenuItem(
+          WatchMenuItem(
             title: 'Go Back',
             icon: FluentIcons.back,
             onPressed: () => navigatorPop(context),
@@ -50,6 +55,7 @@ class BackgroundPage extends StatelessWidget {
               if (result != null) {
                 var path = result.files.single.path;
                 if (path != null && path.isNotEmpty) {
+                  if (!mounted) return;
                   context
                       .read<AppState>()
                       .setBackground(Background.localImage, localImage: path);
@@ -72,6 +78,7 @@ class BackgroundPage extends StatelessWidget {
                                     '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
                                 await Dio().download(imageUrl, localPath);
 
+                                if (!mounted) return;
                                 context.read<AppState>().setBackground(
                                     Background.onlineImage,
                                     onlineImage: localPath);
@@ -88,6 +95,8 @@ class BackgroundPage extends StatelessWidget {
                                   windowPosition.dy,
                                   watchSize,
                                   watchSize));
+
+                              if (!mounted) return;
                               navigatorPop(context);
                             },
                           )));

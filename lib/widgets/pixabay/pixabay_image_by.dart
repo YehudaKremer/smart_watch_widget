@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_image_result.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PixabayImageBy extends StatelessWidget {
   final PixabayImage image;
@@ -34,7 +34,7 @@ class PixabayImageBy extends StatelessWidget {
                   style: ButtonStyle(
                       padding: ButtonState.all(const EdgeInsets.all(0))),
                   child: Text(image.user ?? ''),
-                  onPressed: () => launch(
+                  onPressed: () => launchUrlString(
                       'https://pixabay.com/users/${image.user}-${image.user_id}')),
             ),
             Text(
@@ -49,7 +49,7 @@ class PixabayImageBy extends StatelessWidget {
                   style: ButtonStyle(
                       padding: ButtonState.all(const EdgeInsets.all(0))),
                   child: const Text('Pixabay'),
-                  onPressed: () => launch('https://pixabay.com/')),
+                  onPressed: () => launchUrlString('https://pixabay.com/')),
             ),
           ],
         ),

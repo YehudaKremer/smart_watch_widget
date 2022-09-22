@@ -11,6 +11,7 @@ const windowPositionDyKey = 'windowPositionDy';
 const backgroundKey = 'background';
 const localImageBackgroundKey = 'localImageBackground';
 const onlineImageBackgroundKey = 'onlineImageBackground';
+
 enum Background { empty, waves, localImage, onlineImage }
 
 class AppState extends ChangeNotifier {

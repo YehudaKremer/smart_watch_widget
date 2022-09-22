@@ -1,13 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-class MenuItem extends StatelessWidget {
+class WatchMenuItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color? color;
   final Widget? infoBadgeSource;
   final Function()? onPressed;
 
-  const MenuItem(
+  const WatchMenuItem(
       {Key? key,
       required this.title,
       required this.icon,
@@ -24,7 +24,7 @@ class MenuItem extends StatelessWidget {
       child: IconButton(
         style: ButtonStyle(
           iconSize: ButtonState.all(
-              FluentTheme.of(context).typography.title!.fontSize),
+              FluentTheme.of(context).typography.subtitle!.fontSize),
           foregroundColor: ButtonState.all(color),
         ),
         icon: Stack(

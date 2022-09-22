@@ -21,6 +21,7 @@ class BackgroundItem extends StatelessWidget {
       style: ButtonStyle(
         padding: ButtonState.all(EdgeInsets.zero),
       ),
+      onPressed: onPressed,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -61,7 +62,6 @@ class BackgroundItem extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: onPressed,
     );
   }
 }

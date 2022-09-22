@@ -16,17 +16,17 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
+class HomePageState extends State<HomePage>
     with WindowListener, WidgetsBindingObserver {
   Timer? _debounceWindowMoves;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     windowManager.addListener(this);
   }
 
@@ -34,18 +34,16 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     hotKeyManager.unregisterAll();
     windowManager.removeListener(this);
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _debounceWindowMoves?.cancel();
     super.dispose();
   }
 
   @override
   void didChangePlatformBrightness() {
-    if (WidgetsBinding.instance != null) {
-      context
-          .read<AppState>()
-          .setBrightness(WidgetsBinding.instance!.window.platformBrightness);
-    }
+    context
+        .read<AppState>()
+        .setBrightness(WidgetsBinding.instance.window.platformBrightness);
 
     super.didChangePlatformBrightness();
   }
@@ -56,9 +54,12 @@ class _HomePageState extends State<HomePage>
       themeMode: ThemeMode.system,
       navigatorKey: navigatorKey,
       theme: ThemeData(
-        brightness: context.watch<AppState>().brightness,
-        accentColor: SystemTheme.accentColor.accent.toAccentColor(),
-      ),
+          brightness: context.watch<AppState>().brightness,
+          accentColor: SystemTheme.accentColor.accent.toAccentColor(),
+          scaffoldBackgroundColor:
+              context.watch<AppState>().brightness == Brightness.dark
+                  ? const Color.fromRGBO(25, 25, 25, 1)
+                  : const Color.fromRGBO(255, 255, 255, 1)),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
       home: const Layout(

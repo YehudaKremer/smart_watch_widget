@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/watch_background.dart';
 import 'package:smart_watch_widget/pages/clock_page.dart';
@@ -10,14 +11,14 @@ import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
-class ClockSettings extends StatefulWidget {
-  const ClockSettings({Key? key}) : super(key: key);
+class ClockSettingsPage extends StatefulWidget {
+  const ClockSettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<ClockSettings> createState() => _ClockSettingsState();
+  State<ClockSettingsPage> createState() => _ClockSettingsPageState();
 }
 
-class _ClockSettingsState extends State<ClockSettings> {
+class _ClockSettingsPageState extends State<ClockSettingsPage> {
   bool show = false;
 
   @override
@@ -27,7 +28,7 @@ class _ClockSettingsState extends State<ClockSettings> {
   }
 
   void resizeWindowToMinimalSize() {
-    WidgetsBinding.instance!.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
         (_) => Future.delayed(const Duration(milliseconds: 200), () async {
               final windowPosition = context.read<AppState>().windowPosition;
               final watchSize = context.read<AppState>().watchSize;
@@ -37,7 +38,7 @@ class _ClockSettingsState extends State<ClockSettings> {
               final screenWidth = GetSystemMetrics(SM_CXSCREEN);
               final screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-              await windowManager.setBounds(Rect.fromLTWH(
+              await windowManager.setBounds(ui.Rect.fromLTWH(
                   windowPosition.dx + width > screenWidth
                       ? screenWidth - width
                       : windowPosition.dx,
@@ -83,11 +84,13 @@ class _ClockSettingsState extends State<ClockSettings> {
                                 final watchSize =
                                     context.read<AppState>().watchSize;
 
-                                await windowManager.setBounds(Rect.fromLTWH(
+                                await windowManager.setBounds(ui.Rect.fromLTWH(
                                     windowPosition.dx,
                                     windowPosition.dy,
                                     watchSize,
                                     watchSize));
+
+                                if (!mounted) return;
                                 navigatorPop(context);
                               });
                             },

@@ -24,9 +24,11 @@ Future<void> main() async {
   var prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
 
-  windowManager.setPosition(appState.windowPosition);
-  windowManager.setBackgroundColor(Colors.transparent);
-  windowManager.show();
+  windowManager.waitUntilReadyToShow(null, () async {
+    await windowManager.show();
+    await windowManager.setPosition(appState.windowPosition);
+    await windowManager.setBackgroundColor(Colors.transparent);
+  });
 
   runApp(
     MultiProvider(
