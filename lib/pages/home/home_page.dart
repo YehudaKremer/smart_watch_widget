@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     windowManager.addListener(this);
   }
 
@@ -34,18 +34,16 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     hotKeyManager.unregisterAll();
     windowManager.removeListener(this);
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _debounceWindowMoves?.cancel();
     super.dispose();
   }
 
   @override
   void didChangePlatformBrightness() {
-    if (WidgetsBinding.instance != null) {
-      context
-          .read<AppState>()
-          .setBrightness(WidgetsBinding.instance!.window.platformBrightness);
-    }
+    context
+        .read<AppState>()
+        .setBrightness(WidgetsBinding.instance.window.platformBrightness);
 
     super.didChangePlatformBrightness();
   }
