@@ -11,14 +11,14 @@ import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
-class ClockSettings extends StatefulWidget {
-  const ClockSettings({Key? key}) : super(key: key);
+class ClockSettingsPage extends StatefulWidget {
+  const ClockSettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<ClockSettings> createState() => _ClockSettingsState();
+  State<ClockSettingsPage> createState() => _ClockSettingsPageState();
 }
 
-class _ClockSettingsState extends State<ClockSettings> {
+class _ClockSettingsPageState extends State<ClockSettingsPage> {
   bool show = false;
 
   @override

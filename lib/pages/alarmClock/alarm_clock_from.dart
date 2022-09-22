@@ -90,68 +90,24 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
             onPressed: () => navigatorPop(context),
           ),
           Container(height: 10),
-          GestureDetector(
-            onTapDown: (_) async {
-              // TODO move TimePicker to statefull widget like "ClockSettings"
-              // and show the TimePicker only after the clock widget is wide enough
-              print('onTapDown');
-              final windowPosition = context.read<AppState>().windowPosition;
-              final watchSize = context.read<AppState>().watchSize;
-              final height = watchSize >= 250 ? watchSize : 250.0;
-              final width =
-                  watchSize >= 450 ? watchSize : 450.0; //watchSize + 200.0;
-              final screenWidth = GetSystemMetrics(SM_CXSCREEN);
-              final screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-              await windowManager.setBounds(ui.Rect.fromLTWH(
-                  windowPosition.dx + width > screenWidth
-                      ? screenWidth - width
-                      : windowPosition.dx,
-                  windowPosition.dy + height > screenHeight
-                      ? screenHeight - height
-                      : windowPosition.dy,
-                  width,
-                  height));
-            },
-            child: Button(
-              style: ButtonStyle(
-                padding: ButtonState.all(const EdgeInsets.all(0)),
-              ),
-              child: TimePicker(
-                popupHeight: watchSize <= 400 ? watchSize - 10 : 390,
-                selected: alarm.date,
-                hourFormat: context
-                        .read<ClockSettingsState>()
-                        .clockSettings
-                        .useMilitaryTime
-                    ? HourFormat.HH
-                    : HourFormat.h,
-                onChanged: (date) => setAlarmState(() => alarm.date =
-                    DateTime.parse(
-                        DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),
-              ),
-              onPressed: () async {
-                // final windowPosition = context.read<AppState>().windowPosition;
-                // final watchSize = context.read<AppState>().watchSize;
-                // final height = watchSize >= 250 ? watchSize : 250.0;
-                // final width =
-                //     watchSize >= 450 ? watchSize : 450.0; //watchSize + 200.0;
-                // final screenWidth = GetSystemMetrics(SM_CXSCREEN);
-                // final screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-                // await windowManager.setBounds(ui.Rect.fromLTWH(
-                //     windowPosition.dx + width > screenWidth
-                //         ? screenWidth - width
-                //         : windowPosition.dx,
-                //     windowPosition.dy + height > screenHeight
-                //         ? screenHeight - height
-                //         : windowPosition.dy,
-                //     width,
-                //     height));
-
-                //await windowManager.setSize(const ui.Size(500, 500));
-              },
+          Button(
+            style: ButtonStyle(
+              padding: ButtonState.all(const EdgeInsets.all(0)),
             ),
+            child: TimePicker(
+              popupHeight: watchSize <= 400 ? watchSize - 10 : 390,
+              selected: alarm.date,
+              hourFormat: context
+                      .read<ClockSettingsState>()
+                      .clockSettings
+                      .useMilitaryTime
+                  ? HourFormat.HH
+                  : HourFormat.h,
+              onChanged: (date) => setAlarmState(() => alarm.date =
+                  DateTime.parse(
+                      DateFormat('yyyy-MM-dd HH:mm:00.000').format(date))),
+            ),
+            onPressed: () {},
           ),
           Container(height: 10),
           Wrap(

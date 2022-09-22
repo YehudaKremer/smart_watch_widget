@@ -90,8 +90,10 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
             onPressed: () {
-              Navigator.push(context,
-                  FluentPageRoute(builder: (context) => const ClockSettings()));
+              Navigator.push(
+                  context,
+                  FluentPageRoute(
+                      builder: (context) => const ClockSettingsPage()));
             },
           ),
           Container(height: 10),
