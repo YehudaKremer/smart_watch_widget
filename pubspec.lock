@@ -154,7 +154,7 @@ packages:
       name: fluent_ui
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0-pre.4"
+    version: "4.0.0-pre.3"
   fluentui_system_icons:
     dependency: "direct main"
     description:

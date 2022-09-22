@@ -3,12 +3,12 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_page.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
-import 'package:smart_watch_widget/pages/menu/wallpaper_menu_item.dart';
 import 'package:smart_watch_widget/pages/settings_page.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
+import '../background/background_page.dart';
 import 'watch_menu_item.dart';
 
 class MenuPage extends StatelessWidget {
@@ -63,7 +63,12 @@ class MenuPage extends StatelessWidget {
                 ? Text(numberOfActiveAlarms.toString())
                 : null,
           ),
-          const WallpaperMenuItem(),
+          WatchMenuItem(
+            title: 'Background',
+            icon: FluentIcons.picture_fill,
+            onPressed: () => Navigator.push(context,
+                FluentPageRoute(builder: (context) => const BackgroundPage())),
+          ),
         ],
       ),
     );

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/background/background_page.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clock_settings_page.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
@@ -95,31 +94,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   FluentPageRoute(
                       builder: (context) => const ClockSettingsPage()));
             },
-          ),
-          Container(height: 10),
-          Button(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  FluentIcons.picture_fill,
-                  size: FluentTheme.of(context).typography.bodyLarge!.fontSize,
-                ),
-                Container(width: 5),
-                Text(
-                  'Background',
-                  style: FluentTheme.of(context).typography.bodyLarge,
-                ),
-                Container(width: 35),
-              ],
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  FluentPageRoute(
-                      builder: (context) => const BackgroundPage()));
-            },
-          ),
+          )
         ],
       ),
     );
