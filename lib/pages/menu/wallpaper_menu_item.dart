@@ -7,7 +7,7 @@ import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_categories.dart';
 import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
-import 'menu_item.dart';
+import 'watch_menu_item.dart';
 
 class WallpaperMenuItem extends StatefulWidget {
   const WallpaperMenuItem({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _WallpaperMenuItemState extends State<WallpaperMenuItem> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        MenuItem(
+        WatchMenuItem(
           title: 'Desktop Wallpaper',
           icon: FluentIcons.picture_fill,
           onPressed: () => Navigator.push(

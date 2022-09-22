@@ -6,7 +6,7 @@ import 'package:smart_watch_widget/widgets/pixabay/by_pixabay.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_api_state.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_image_item.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_image_result.dart';
-import 'package:smart_watch_widget/pages/menu/menu_item.dart';
+import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
 import 'package:smart_watch_widget/utils/custom_scroll_behavior.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 
@@ -92,7 +92,7 @@ class _PixabayImagesState extends State<PixabayImages> {
                       mainAxisSpacing: 0,
                       crossAxisCount: 3,
                       children: [
-                            MenuItem(
+                            WatchMenuItem(
                               title: 'Go Back',
                               icon: FluentIcons.back,
                               onPressed: () => navigatorPop(context),

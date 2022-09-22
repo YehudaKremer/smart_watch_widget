@@ -9,7 +9,7 @@ import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
-import 'menu_item.dart';
+import 'watch_menu_item.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -30,31 +30,31 @@ class MenuPage extends StatelessWidget {
         mainAxisSpacing: 10,
         crossAxisCount: 3,
         children: [
-          MenuItem(
+          WatchMenuItem(
             title: 'Go Back',
             icon: FluentIcons.back,
             onPressed: () => navigatorPop(context),
           ),
           GestureDetector(
             onPanDown: (_) => windowManager.startDragging(),
-            child: const MenuItem(
+            child: const WatchMenuItem(
               title: 'Move Watch',
               icon: FluentIcons.move,
             ),
           ),
-          MenuItem(
+          WatchMenuItem(
             title: 'Close Watch',
             icon: FluentIcons.cancel,
             color: Colors.red,
             onPressed: () => exit(0),
           ),
-          MenuItem(
+          WatchMenuItem(
             title: 'Settings',
             icon: FluentIcons.settings,
             onPressed: () => Navigator.push(
                 context, FluentPageRoute(builder: (_) => const SettingsPage())),
           ),
-          MenuItem(
+          WatchMenuItem(
             title: 'Alarm Clock',
             icon: FluentIcons.alarm_clock,
             onPressed: () => Navigator.push(context,

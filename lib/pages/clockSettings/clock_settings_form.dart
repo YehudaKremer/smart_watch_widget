@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/menu/menu_item.dart';
+import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clock_settings_state.dart';
 import 'package:smart_watch_widget/utils/custom_scroll_behavior.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
@@ -37,7 +37,7 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              MenuItem(
+              WatchMenuItem(
                 title: 'Go Back',
                 icon: FluentIcons.back,
                 onPressed: widget.onDismiss,

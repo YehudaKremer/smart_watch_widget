@@ -9,7 +9,7 @@ import 'package:smart_watch_widget/pages/clockSettings/clock_settings_state.dart
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/basic_button.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
-import 'package:smart_watch_widget/pages/menu/menu_item.dart';
+import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
 import 'alarm_message_dialog.dart';
 import 'day_toggle_button.dart';
 
@@ -81,7 +81,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
       child: ListView(
         padding: EdgeInsets.all(context.read<AppState>().watchSize / 10),
         children: [
-          MenuItem(
+          WatchMenuItem(
             title: 'Go Back',
             icon: FluentIcons.back,
             onPressed: () => navigatorPop(context),
