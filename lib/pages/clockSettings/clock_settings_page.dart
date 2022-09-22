@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/background/watch_background.dart';
 import 'package:smart_watch_widget/pages/clock_page.dart';
@@ -37,7 +38,7 @@ class _ClockSettingsState extends State<ClockSettings> {
               final screenWidth = GetSystemMetrics(SM_CXSCREEN);
               final screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-              await windowManager.setBounds(Rect.fromLTWH(
+              await windowManager.setBounds(ui.Rect.fromLTWH(
                   windowPosition.dx + width > screenWidth
                       ? screenWidth - width
                       : windowPosition.dx,
@@ -83,11 +84,13 @@ class _ClockSettingsState extends State<ClockSettings> {
                                 final watchSize =
                                     context.read<AppState>().watchSize;
 
-                                await windowManager.setBounds(Rect.fromLTWH(
+                                await windowManager.setBounds(ui.Rect.fromLTWH(
                                     windowPosition.dx,
                                     windowPosition.dy,
                                     watchSize,
                                     watchSize));
+
+                                if (!mounted) return;
                                 navigatorPop(context);
                               });
                             },

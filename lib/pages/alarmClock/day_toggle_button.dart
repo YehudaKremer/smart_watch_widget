@@ -19,9 +19,9 @@ class DayToggleButton extends StatelessWidget {
       child: SizedBox(
         width: 32,
         child: ToggleButton(
-          child: Text(day.substring(0, 1)),
           checked: selected,
           onChanged: (value) => onToggle(value),
+          child: Text(day.substring(0, 1)),
         ),
       ),
     );

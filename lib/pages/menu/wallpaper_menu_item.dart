@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'dart:ui' as ui;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -50,12 +51,13 @@ class _WallpaperMenuItemState extends State<WallpaperMenuItem> {
                               context.read<AppState>().windowPosition;
                           final watchSize = context.read<AppState>().watchSize;
 
-                          await windowManager.setBounds(Rect.fromLTWH(
+                          await windowManager.setBounds(ui.Rect.fromLTWH(
                               windowPosition.dx,
                               windowPosition.dy,
                               watchSize,
                               watchSize));
 
+                          if (!mounted) return;
                           navigatorPop(context);
                         },
                       ))),

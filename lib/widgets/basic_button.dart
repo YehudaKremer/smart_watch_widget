@@ -21,13 +21,13 @@ class BasicButton extends StatelessWidget {
         message: title,
         triggerMode: TooltipTriggerMode.longPress,
         child: Button(
-          child: Icon(icon),
           style: ButtonStyle(
             iconSize: ButtonState.all(
                 FluentTheme.of(context).typography.title!.fontSize),
             foregroundColor: ButtonState.all(color),
           ),
           onPressed: onPressed,
+          child: Icon(icon),
         ),
       ),
     );

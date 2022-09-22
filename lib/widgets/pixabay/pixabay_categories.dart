@@ -1,5 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
+import 'package:win32/win32.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/widgets/pixabay/by_pixabay.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_category.dart';
@@ -7,8 +10,6 @@ import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
 import 'package:smart_watch_widget/utils/animations.dart';
 import 'package:smart_watch_widget/utils/custom_scroll_behavior.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_image_result.dart';
-import 'package:win32/win32.dart';
-import 'package:window_manager/window_manager.dart';
 
 const photosCategories = [
   'backgrounds',
@@ -60,7 +61,7 @@ class _PixabayCategoriesState extends State<PixabayCategories> {
               final screenWidth = GetSystemMetrics(SM_CXSCREEN);
               final screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-              await windowManager.setBounds(Rect.fromLTWH(
+              await windowManager.setBounds(ui.Rect.fromLTWH(
                   windowPosition.dx + width > screenWidth
                       ? screenWidth - width
                       : windowPosition.dx,

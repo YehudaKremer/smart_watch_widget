@@ -153,6 +153,8 @@ class _ClockSettingsFormState extends State<ClockSettingsForm> {
                               child: const Text('Ok'),
                               onPressed: () async {
                                 await state.resetAll();
+
+                                if (!mounted) return;
                                 navigatorPop(context);
                               },
                             ),

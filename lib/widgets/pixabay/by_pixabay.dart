@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ByPixabay extends StatelessWidget {
   const ByPixabay({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class ByPixabay extends StatelessWidget {
                   style: ButtonStyle(
                       padding: ButtonState.all(const EdgeInsets.all(0))),
                   child: const Text('Pixabay'),
-                  onPressed: () => launch('https://pixabay.com/')),
+                  onPressed: () => launchUrlString('https://pixabay.com/')),
             ),
           ],
         ),
