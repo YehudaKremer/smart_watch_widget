@@ -23,8 +23,7 @@ class WatchMenuItem extends StatelessWidget {
       triggerMode: TooltipTriggerMode.longPress,
       child: IconButton(
         style: ButtonStyle(
-          iconSize: ButtonState.all(
-              FluentTheme.of(context).typography.subtitle!.fontSize),
+          iconSize: ButtonState.all(MediaQuery.of(context).size.height * 0.08),
           foregroundColor: ButtonState.all(color),
         ),
         icon: Stack(
