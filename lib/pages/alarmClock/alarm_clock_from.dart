@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'dart:ui' as ui;
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +10,6 @@ import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:smart_watch_widget/widgets/basic_button.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/menu/watch_menu_item.dart';
-import 'package:win32/win32.dart';
-import 'package:window_manager/window_manager.dart';
 import 'alarm_message_dialog.dart';
 import 'day_toggle_button.dart';
 
