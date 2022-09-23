@@ -62,9 +62,7 @@ class HomePageState extends State<HomePage>
                   : const Color.fromRGBO(255, 255, 255, 1)),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
-      home: const Layout(
-        child: ClockPage(navigateOnTap: MenuPage()),
-      ),
+      home: Container(),
     );
   }
 
