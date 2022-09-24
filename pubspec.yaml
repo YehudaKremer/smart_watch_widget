@@ -50,3 +50,4 @@ msix_config:
   publisher: CN=BF257F3F-5644-46DF-8668-014044C1B138
   logo_path: images\logo-light.png
   enable_at_startup: true
+  store: true
