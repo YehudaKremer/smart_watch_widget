@@ -38,22 +38,24 @@ class _WallpaperMenuState extends State<WallpaperMenu> {
             onPressed: () => navigatorPop(context),
           ),
           BackgroundImageItem(
-            name: 'Watch',
+            name: 'Watch Wallpaper',
             backgroundType: Background.localImage,
             backgroundImagePath:
                 context.watch<AppState>().brightness == Brightness.dark
                     ? 'assets/images/watch_dark.png'
                     : 'assets/images/watch_light.png',
+            nameTextStyle: FluentTheme.of(context).typography.caption,
             onPressed: () => Navigator.push(context,
                 FluentPageRoute(builder: (context) => const BackgroundPage())),
           ),
           BackgroundImageItem(
-            name: 'Desktop',
+            name: 'Desktop Wallpaper',
             backgroundType: Background.localImage,
             backgroundImagePath:
                 context.watch<AppState>().brightness == Brightness.dark
                     ? 'assets/images/desktop_dark.png'
                     : 'assets/images/desktop_light.png',
+            nameTextStyle: FluentTheme.of(context).typography.caption,
             onPressed: () => Navigator.push(
                 context,
                 FluentPageRoute(

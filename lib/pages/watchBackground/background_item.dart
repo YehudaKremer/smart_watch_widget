@@ -6,6 +6,7 @@ class BackgroundItem extends StatelessWidget {
   final Widget background;
   final bool isSelected;
   final void Function() onPressed;
+  final TextStyle? nameTextStyle;
 
   const BackgroundItem({
     Key? key,
@@ -13,6 +14,7 @@ class BackgroundItem extends StatelessWidget {
     required this.background,
     required this.isSelected,
     required this.onPressed,
+    this.nameTextStyle,
   }) : super(key: key);
 
   @override
@@ -41,9 +43,8 @@ class BackgroundItem extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   name,
-                  style: FluentTheme.of(context)
-                      .typography
-                      .body!
+                  style: (nameTextStyle ??
+                          FluentTheme.of(context).typography.body!)
                       .copyWith(color: Colors.white.withOpacity(0.9)),
                 ),
               ),

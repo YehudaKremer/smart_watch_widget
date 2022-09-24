@@ -8,9 +8,10 @@ import 'package:smart_watch_widget/widgets/pixabay/pixabay_categories.dart';
 
 class BackgroundImageItem extends StatefulWidget {
   final String name;
-  final Background backgroundType;
   final void Function() onPressed;
   final String? backgroundImagePath;
+  final TextStyle? nameTextStyle;
+  final Background backgroundType;
 
   const BackgroundImageItem({
     Key? key,
@@ -18,6 +19,7 @@ class BackgroundImageItem extends StatefulWidget {
     required this.backgroundType,
     required this.onPressed,
     this.backgroundImagePath,
+    this.nameTextStyle,
   }) : super(key: key);
 
   @override
@@ -115,6 +117,7 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
           isSelected: widget.backgroundImagePath == null &&
               currentBackgroundType == widget.backgroundType,
           onPressed: widget.onPressed,
+          nameTextStyle: widget.nameTextStyle,
         ),
       ),
     );
