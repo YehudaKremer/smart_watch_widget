@@ -10,6 +10,11 @@ import 'package:smart_watch_widget/pages/home/home_page.dart';
 import 'package:system_theme/system_theme.dart';
 import 'app_state.dart';
 import 'pages/alarmClock/alarm_clock_state.dart';
+import 'pages/alarmClock/alarm_screen_page.dart';
+import 'pages/clock_page.dart';
+import 'pages/home/layout.dart';
+import 'pages/menu/menu_page.dart';
+import 'utils/general_scope.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +33,14 @@ Future<void> main() async {
     await windowManager.show();
     await windowManager.setPosition(appState.windowPosition);
     await windowManager.setBackgroundColor(Colors.transparent);
+    Navigator.push(
+      navigatorKey.currentContext!,
+      FluentPageRoute(
+        builder: (context) => const Layout(
+          child: ClockPage(navigateOnTap: MenuPage()),
+        ),
+      ),
+    );
   });
 
   runApp(

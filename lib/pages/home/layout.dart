@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/background/watch_background.dart';
+import 'package:smart_watch_widget/pages/watchBackground/watch_background.dart';
 import 'package:smart_watch_widget/utils/hot_keys.dart';
 import 'package:smart_watch_widget/app_state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:new_im_animations/im_animations.dart';
+import 'package:im_animations/im_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';

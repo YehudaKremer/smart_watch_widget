@@ -2,15 +2,11 @@ import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/clock_page.dart';
-import 'package:smart_watch_widget/pages/home/layout.dart';
 import 'package:smart_watch_widget/utils/custom_scroll_behavior.dart';
 import 'package:smart_watch_widget/utils/general_scope.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:system_theme/system_theme.dart';
-
-import '../menu/menu_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,9 +58,7 @@ class HomePageState extends State<HomePage>
                   : const Color.fromRGBO(255, 255, 255, 1)),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
-      home: const Layout(
-        child: ClockPage(navigateOnTap: MenuPage()),
-      ),
+      home: Container(),
     );
   }
 

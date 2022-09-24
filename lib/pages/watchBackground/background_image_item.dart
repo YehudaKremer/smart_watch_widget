@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_watch_widget/pages/background/background_item.dart';
+import 'package:smart_watch_widget/pages/watchBackground/background_item.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_categories.dart';
 
@@ -10,12 +10,14 @@ class BackgroundImageItem extends StatefulWidget {
   final String name;
   final Background backgroundType;
   final void Function() onPressed;
+  final String? backgroundImagePath;
 
   const BackgroundImageItem({
     Key? key,
     required this.name,
     required this.backgroundType,
     required this.onPressed,
+    this.backgroundImagePath,
   }) : super(key: key);
 
   @override
@@ -79,12 +81,16 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
           color: animatedColor,
           colorBlendMode: colorBlendMode);
     } else if (widget.backgroundType == Background.localImage &&
-        localImage != null) {
+        localImage != null &&
+        widget.backgroundImagePath == null) {
       return Image.file(File(localImage),
           fit: fit, color: animatedColor, colorBlendMode: colorBlendMode);
     } else {
-      return Image.asset('assets/images/tulips-100_150.png',
-          fit: fit, color: animatedColor, colorBlendMode: colorBlendMode);
+      return Image.asset(
+          widget.backgroundImagePath ?? 'assets/images/tulips-100_150.png',
+          fit: widget.backgroundImagePath != null ? BoxFit.cover : fit,
+          color: animatedColor,
+          colorBlendMode: colorBlendMode);
     }
   }
 
@@ -106,7 +112,8 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
             animation: animation,
             builder: (_, __) => getImage(),
           ),
-          isSelected: currentBackgroundType == widget.backgroundType,
+          isSelected: widget.backgroundImagePath == null &&
+              currentBackgroundType == widget.backgroundType,
           onPressed: widget.onPressed,
         ),
       ),
