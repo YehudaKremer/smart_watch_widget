@@ -8,7 +8,8 @@ import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
-import '../background/background_page.dart';
+import '../watchBackground/watch_background_menu.dart';
+import 'wallpaper_menu.dart';
 import 'watch_menu_item.dart';
 
 class MenuPage extends StatelessWidget {
@@ -64,10 +65,10 @@ class MenuPage extends StatelessWidget {
                 : null,
           ),
           WatchMenuItem(
-            title: 'Background',
+            title: 'Wallpaper',
             icon: FluentIcons.picture_fill,
             onPressed: () => Navigator.push(context,
-                FluentPageRoute(builder: (context) => const BackgroundPage())),
+                FluentPageRoute(builder: (context) => const WallpaperMenu())),
           ),
         ],
       ),
