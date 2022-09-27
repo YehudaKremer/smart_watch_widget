@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/home/home_page.dart';
 import 'package:system_theme/system_theme.dart';
 import 'app_state.dart';
+import 'pages/Timer.dart';
 import 'pages/alarmClock/alarm_clock_state.dart';
-import 'pages/alarmClock/alarm_screen_page.dart';
 import 'pages/clock_page.dart';
 import 'pages/home/layout.dart';
 import 'pages/menu/menu_page.dart';
@@ -36,9 +36,9 @@ Future<void> main() async {
     Navigator.push(
       navigatorKey.currentContext!,
       FluentPageRoute(
-        builder: (context) => const Layout(
-          child: ClockPage(navigateOnTap: MenuPage()),
-        ),
+        builder: (context) =>
+            const Layout(child: Timer() //ClockPage(navigateOnTap: MenuPage()),
+                ),
       ),
     );
   });
