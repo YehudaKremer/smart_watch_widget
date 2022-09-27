@@ -7,6 +7,7 @@ class BackgroundItem extends StatelessWidget {
   final bool isSelected;
   final void Function() onPressed;
   final TextStyle? nameTextStyle;
+  final Widget? infoBadgeSource;
 
   const BackgroundItem({
     Key? key,
@@ -15,6 +16,7 @@ class BackgroundItem extends StatelessWidget {
     required this.isSelected,
     required this.onPressed,
     this.nameTextStyle,
+    this.infoBadgeSource,
   }) : super(key: key);
 
   @override
@@ -61,6 +63,15 @@ class BackgroundItem extends StatelessWidget {
                   : Container(),
             ),
           ),
+          infoBadgeSource != null
+              ? Positioned(
+                  right: 5,
+                  top: 5,
+                  child: InfoBadge(
+                    source: infoBadgeSource,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

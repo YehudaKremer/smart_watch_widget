@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_page.dart';
 import 'package:smart_watch_widget/pages/home/layout.dart';
+import 'package:smart_watch_widget/pages/menu/timers_menu.dart';
 import 'package:smart_watch_widget/pages/settings_page.dart';
 import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';
 import 'package:smart_watch_widget/app_state.dart';
@@ -49,6 +50,15 @@ class MenuPage extends StatelessWidget {
             icon: FluentIcons.cancel,
             color: Colors.red,
             onPressed: () => exit(0),
+          ),
+          WatchMenuItem(
+            title: 'Timers',
+            icon: FluentIcons.alarm_clock,
+            onPressed: () => Navigator.push(context,
+                FluentPageRoute(builder: (context) => const TimersMenu())),
+            infoBadgeSource: numberOfActiveAlarms > 0
+                ? Text(numberOfActiveAlarms.toString())
+                : null,
           ),
           WatchMenuItem(
             title: 'Alarm Clock',

@@ -12,6 +12,7 @@ class BackgroundImageItem extends StatefulWidget {
   final String? backgroundImagePath;
   final TextStyle? nameTextStyle;
   final Background backgroundType;
+  final Widget? infoBadgeSource;
 
   const BackgroundImageItem({
     Key? key,
@@ -20,6 +21,7 @@ class BackgroundImageItem extends StatefulWidget {
     required this.onPressed,
     this.backgroundImagePath,
     this.nameTextStyle,
+    this.infoBadgeSource,
   }) : super(key: key);
 
   @override
@@ -116,6 +118,7 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
           ),
           isSelected: widget.backgroundImagePath == null &&
               currentBackgroundType == widget.backgroundType,
+          infoBadgeSource: widget.infoBadgeSource,
           onPressed: widget.onPressed,
           nameTextStyle: widget.nameTextStyle,
         ),

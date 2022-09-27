@@ -36,9 +36,11 @@ Future<void> main() async {
     Navigator.push(
       navigatorKey.currentContext!,
       FluentPageRoute(
-        builder: (context) =>
-            const Layout(child: Timer() //ClockPage(navigateOnTap: MenuPage()),
-                ),
+        builder: (context) => const Layout(
+            child: ClockPage(
+                navigateOnTap:
+                    MenuPage()) //ClockPage(navigateOnTap: MenuPage()),
+            ),
       ),
     );
   });

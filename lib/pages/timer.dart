@@ -22,7 +22,7 @@ class _TimerState extends State<Timer> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1), () {
-      //   _controller.start();
+      _controller.start();
     });
   }
 
@@ -33,41 +33,41 @@ class _TimerState extends State<Timer> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        // CircularCountDownTimer(
-        //   duration: _duration,
-        //   controller: _controller,
-        //   width: MediaQuery.of(context).size.width - 1.5,
-        //   height: MediaQuery.of(context).size.height - 1.5,
-        //   ringColor:
-        //       SystemTheme.accentColor.accent.toAccentColor().withOpacity(0.0),
-        //   fillColor: SystemTheme.accentColor.accent.toAccentColor().lightest,
-        //   strokeWidth: 3.0,
-        //   strokeCap: StrokeCap.round,
-        //   textStyle: TextStyle(
-        //     fontSize: FluentTheme.of(context).typography.title!.fontSize,
-        //   ),
-        //   textFormat: _duration <= 60
-        //       ? CountdownTextFormat.SS
-        //       : _duration <= 60 * 60
-        //           ? CountdownTextFormat.MM_SS
-        //           : CountdownTextFormat.HH_MM_SS,
-        //   isReverse: true,
-        //   isReverseAnimation: true,
-        //   isTimerTextShown: false,
-        //   autoStart: false,
-        //   onStart: () {
-        //     // Here, do whatever you want
-        //     debugPrint('Countdown Started');
-        //   },
-        //   onComplete: () {
-        //     // Here, do whatever you want
-        //     debugPrint('Countdown Ended');
-        //   },
-        //   onChange: (String timeStamp) {
-        //     // Here, do whatever you want
-        //     debugPrint('Countdown Changed $timeStamp');
-        //   },
-        // ),
+        CircularCountDownTimer(
+          duration: _duration,
+          controller: _controller,
+          width: MediaQuery.of(context).size.width - 1.5,
+          height: MediaQuery.of(context).size.height - 1.5,
+          ringColor:
+              SystemTheme.accentColor.accent.toAccentColor().withOpacity(0.0),
+          fillColor: SystemTheme.accentColor.accent.toAccentColor().lightest,
+          strokeWidth: 3.0,
+          strokeCap: StrokeCap.round,
+          textStyle: TextStyle(
+            fontSize: FluentTheme.of(context).typography.title!.fontSize,
+          ),
+          textFormat: _duration <= 60
+              ? CountdownTextFormat.SS
+              : _duration <= 60 * 60
+                  ? CountdownTextFormat.MM_SS
+                  : CountdownTextFormat.HH_MM_SS,
+          isReverse: true,
+          isReverseAnimation: true,
+          isTimerTextShown: false,
+          autoStart: false,
+          onStart: () {
+            // Here, do whatever you want
+            debugPrint('Countdown Started');
+          },
+          onComplete: () {
+            // Here, do whatever you want
+            debugPrint('Countdown Ended');
+          },
+          onChange: (String timeStamp) {
+            // Here, do whatever you want
+            debugPrint('Countdown Changed $timeStamp');
+          },
+        ),
         SizedBox(
           width: 200,
           child: TimePicker(
