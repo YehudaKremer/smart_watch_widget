@@ -195,7 +195,7 @@ Future<void> playTextToSpeech(SendPort sPort) async {
       CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
       final speechEngine = SpVoice.createInstance();
       final pText = (message as String).toNativeUtf16();
-      speechEngine.Speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
+      speechEngine.speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
       free(pText);
       CoUninitialize();
 
