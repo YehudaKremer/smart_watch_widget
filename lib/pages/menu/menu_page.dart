@@ -8,7 +8,6 @@ import 'package:smart_watch_widget/pages/alarmClock/alarm_clock_state.dart';
 import 'package:smart_watch_widget/app_state.dart';
 import 'package:smart_watch_widget/utils/navigator.dart';
 import 'package:window_manager/window_manager.dart';
-import '../watchBackground/watch_background_menu.dart';
 import 'wallpaper_menu.dart';
 import 'watch_menu_item.dart';
 

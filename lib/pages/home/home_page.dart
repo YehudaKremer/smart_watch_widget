@@ -37,9 +37,8 @@ class HomePageState extends State<HomePage>
 
   @override
   void didChangePlatformBrightness() {
-    context
-        .read<AppState>()
-        .setBrightness(WidgetsBinding.instance.window.platformBrightness);
+    context.read<AppState>().setBrightness(
+        WidgetsBinding.instance.platformDispatcher.platformBrightness);
 
     super.didChangePlatformBrightness();
   }
@@ -49,7 +48,7 @@ class HomePageState extends State<HomePage>
     return FluentApp(
       themeMode: ThemeMode.system,
       navigatorKey: navigatorKey,
-      theme: ThemeData(
+      theme: FluentThemeData(
           brightness: context.watch<AppState>().brightness,
           accentColor: SystemTheme.accentColor.accent.toAccentColor(),
           scaffoldBackgroundColor:

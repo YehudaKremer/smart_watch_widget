@@ -50,7 +50,7 @@ class _PixabayImagesState extends State<PixabayImages> {
         });
       }
     } on DioError catch (e) {
-      if (e.message.contains('Failed host lookup')) {
+      if (e.message != null && e.message!.contains('Failed host lookup')) {
         if (mounted) {
           setState(() {
             noInternet = true;

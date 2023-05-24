@@ -163,10 +163,18 @@ class AlarmClockState extends ChangeNotifier {
   }
 
   void _showWindowsToast(Alarm alarm) {
-    WinToast.instance().showToast(
-        type: ToastType.text02,
-        title: DateFormat.yMMMMEEEEd().format(alarm.date),
-        subtitle: alarm.message ?? '');
+    var xml = """
+<?xml version="1.0" encoding="UTF-8"?>
+<toast launch="action=viewConversation&amp;conversationId=9813">
+   <visual>
+      <binding template="ToastGeneric">
+         <text>${DateFormat.yMMMMEEEEd().format(alarm.date)}</text>
+         <text>${alarm.message ?? ''}</text>
+      </binding>
+   </visual>
+</toast>
+  """;
+    WinToast.instance().showCustomToast(xml: xml);
   }
 }
 
@@ -195,7 +203,7 @@ Future<void> playTextToSpeech(SendPort sPort) async {
       CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
       final speechEngine = SpVoice.createInstance();
       final pText = (message as String).toNativeUtf16();
-      speechEngine.Speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
+      speechEngine.speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
       free(pText);
       CoUninitialize();
 

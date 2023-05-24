@@ -92,7 +92,7 @@ class _AlarmClockFromState extends State<AlarmClockFrom> {
               padding: ButtonState.all(const EdgeInsets.all(0)),
             ),
             child: TimePicker(
-              popupHeight: watchSize <= 400 ? watchSize - 10 : 390,
+              popupHeight: watchSize <= 400 ? watchSize - 1 : 390,
               selected: alarm.date,
               hourFormat: context
                       .read<ClockSettingsState>()

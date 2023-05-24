@@ -30,7 +30,7 @@ class PixabayImageBy extends StatelessWidget {
             ),
             MouseRegion(
               cursor: SystemMouseCursors.click,
-              child: TextButton(
+              child: HyperlinkButton(
                   style: ButtonStyle(
                       padding: ButtonState.all(const EdgeInsets.all(0))),
                   child: Text(image.user ?? ''),
@@ -45,7 +45,7 @@ class PixabayImageBy extends StatelessWidget {
             ),
             MouseRegion(
               cursor: SystemMouseCursors.click,
-              child: TextButton(
+              child: HyperlinkButton(
                   style: ButtonStyle(
                       padding: ButtonState.all(const EdgeInsets.all(0))),
                   child: const Text('Pixabay'),

@@ -10,7 +10,6 @@ import 'package:smart_watch_widget/pages/home/home_page.dart';
 import 'package:system_theme/system_theme.dart';
 import 'app_state.dart';
 import 'pages/alarmClock/alarm_clock_state.dart';
-import 'pages/alarmClock/alarm_screen_page.dart';
 import 'pages/clock_page.dart';
 import 'pages/home/layout.dart';
 import 'pages/menu/menu_page.dart';
@@ -22,9 +21,10 @@ Future<void> main() async {
   await hotKeyManager.unregisterAll();
   await SystemTheme.accentColor.load();
   await WinToast.instance().initialize(
-      appName: 'Smart Watch Widget',
-      productName: '48434KremerSoftware.SmartWatchWidget',
-      companyName: 'Kremer Software');
+      aumId: '48434KremerSoftware.SmartWatchWidget',
+      displayName: 'Smart Watch Widget',
+      iconPath: '',
+      clsid: 'fce91c93-8cbd-443d-b1c0-66d4ba8788c7');
 
   var prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
