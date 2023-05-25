@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smart_watch_widget/utils/custom_scroll_behavior.dart';
 import 'package:smart_watch_widget/utils/general_scope.dart';
 import 'package:window_manager/window_manager.dart';
@@ -57,6 +58,9 @@ class HomePageState extends State<HomePage>
                   : const Color.fromRGBO(255, 255, 255, 1)),
       scrollBehavior: CustomScrollBehaviorWithoutScrollBar(),
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [
+        SentryNavigatorObserver(),
+      ],
       home: Container(),
     );
   }

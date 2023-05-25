@@ -91,8 +91,12 @@ class AlarmClockItem extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () => Navigator.push(context,
-          FluentPageRoute(builder: (context) => AlarmClockFrom(alarm))),
+      onPressed: () => Navigator.push(
+          context,
+          FluentPageRoute(
+            builder: (context) => AlarmClockFrom(alarm),
+            settings: const RouteSettings(name: 'AlarmClockFrom'),
+          )),
     );
   }
 }

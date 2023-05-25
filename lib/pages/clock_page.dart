@@ -14,7 +14,11 @@ class ClockPage extends StatelessWidget {
       onTap: () {
         if (navigateOnTap != null) {
           Navigator.push(
-              context, FluentPageRoute(builder: (context) => navigateOnTap!));
+              context,
+              FluentPageRoute(
+                builder: (context) => navigateOnTap!,
+                settings: const RouteSettings(name: 'ClockPageNavigateOnTap'),
+              ));
         }
       },
       child: Consumer<ClockSettingsState>(

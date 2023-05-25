@@ -70,36 +70,37 @@ class _BackgroundPageState extends State<BackgroundPage> {
               Navigator.push(
                   context,
                   FluentPageRoute(
-                      builder: (_) => PixabayCategories(
-                            onSelectImage: (image) async {
-                              var imageUrl = image.webformatURL ?? '';
-                              if (imageUrl.isNotEmpty) {
-                                var localPath =
-                                    '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
-                                await Dio().download(imageUrl, localPath);
+                    builder: (_) => PixabayCategories(
+                      onSelectImage: (image) async {
+                        var imageUrl = image.webformatURL ?? '';
+                        if (imageUrl.isNotEmpty) {
+                          var localPath =
+                              '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
+                          await Dio().download(imageUrl, localPath);
 
-                                if (!mounted) return;
-                                context.read<AppState>().setBackground(
-                                    Background.onlineImage,
-                                    onlineImage: localPath);
-                              }
-                            },
-                            onDismiss: () async {
-                              final windowPosition =
-                                  context.read<AppState>().windowPosition;
-                              final watchSize =
-                                  context.read<AppState>().watchSize;
+                          if (!mounted) return;
+                          context.read<AppState>().setBackground(
+                              Background.onlineImage,
+                              onlineImage: localPath);
+                        }
+                      },
+                      onDismiss: () async {
+                        final windowPosition =
+                            context.read<AppState>().windowPosition;
+                        final watchSize = context.read<AppState>().watchSize;
 
-                              await windowManager.setBounds(Rect.fromLTWH(
-                                  windowPosition.dx,
-                                  windowPosition.dy,
-                                  watchSize,
-                                  watchSize));
+                        await windowManager.setBounds(Rect.fromLTWH(
+                            windowPosition.dx,
+                            windowPosition.dy,
+                            watchSize,
+                            watchSize));
 
-                              if (!mounted) return;
-                              navigatorPop(context);
-                            },
-                          )));
+                        if (!mounted) return;
+                        navigatorPop(context);
+                      },
+                    ),
+                    settings: const RouteSettings(name: 'PixabayCategories'),
+                  ));
             },
           ),
           BackgroundItem(

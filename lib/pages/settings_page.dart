@@ -92,7 +92,9 @@ class _SettingsPageState extends State<SettingsPage> {
               Navigator.push(
                   context,
                   FluentPageRoute(
-                      builder: (context) => const ClockSettingsPage()));
+                    builder: (context) => const ClockSettingsPage(),
+                    settings: const RouteSettings(name: 'ClockSettingsPage'),
+                  ));
             },
           )
         ],

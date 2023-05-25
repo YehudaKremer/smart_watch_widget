@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_watch_widget/pages/clockSettings/clock_settings_state.dart';
 import 'package:smart_watch_widget/widgets/pixabay/pixabay_api_state.dart';
@@ -39,22 +40,29 @@ Future<void> main() async {
         builder: (context) => const Layout(
           child: ClockPage(navigateOnTap: MenuPage()),
         ),
+        settings: const RouteSettings(name: 'MenuPage'),
       ),
     );
   });
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => appState),
-        ChangeNotifierProvider(
-          create: (_) => AlarmClockState(prefs),
-          lazy: false,
-        ),
-        ChangeNotifierProvider(create: (_) => ClockSettingsState(prefs)),
-        ChangeNotifierProvider(create: (_) => PixabayApiState(prefs))
-      ],
-      child: const HomePage(),
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://4c791229b1d943c4a21dc50374950de8@o554512.ingest.sentry.io/4505243108573184';
+    },
+    appRunner: () => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => appState),
+          ChangeNotifierProvider(
+            create: (_) => AlarmClockState(prefs),
+            lazy: false,
+          ),
+          ChangeNotifierProvider(create: (_) => ClockSettingsState(prefs)),
+          ChangeNotifierProvider(create: (_) => PixabayApiState(prefs))
+        ],
+        child: const HomePage(),
+      ),
     ),
   );
 }

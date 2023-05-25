@@ -52,13 +52,21 @@ class MenuPage extends StatelessWidget {
             title: 'Settings',
             icon: FluentIcons.settings,
             onPressed: () => Navigator.push(
-                context, FluentPageRoute(builder: (_) => const SettingsPage())),
+                context,
+                FluentPageRoute(
+                  builder: (_) => const SettingsPage(),
+                  settings: const RouteSettings(name: 'SettingsPage'),
+                )),
           ),
           WatchMenuItem(
             title: 'Alarm Clock',
             icon: FluentIcons.alarm_clock,
-            onPressed: () => Navigator.push(context,
-                FluentPageRoute(builder: (_) => const AlarmClockPage())),
+            onPressed: () => Navigator.push(
+                context,
+                FluentPageRoute(
+                  builder: (_) => const AlarmClockPage(),
+                  settings: const RouteSettings(name: 'AlarmClockPage'),
+                )),
             infoBadgeSource: numberOfActiveAlarms > 0
                 ? Text(numberOfActiveAlarms.toString())
                 : null,
@@ -66,8 +74,12 @@ class MenuPage extends StatelessWidget {
           WatchMenuItem(
             title: 'Wallpaper',
             icon: FluentIcons.picture_fill,
-            onPressed: () => Navigator.push(context,
-                FluentPageRoute(builder: (context) => const WallpaperMenu())),
+            onPressed: () => Navigator.push(
+                context,
+                FluentPageRoute(
+                  builder: (context) => const WallpaperMenu(),
+                  settings: const RouteSettings(name: 'WallpaperMenu'),
+                )),
           ),
         ],
       ),

@@ -45,8 +45,12 @@ class _WallpaperMenuState extends State<WallpaperMenu> {
                     ? 'assets/images/watch_dark.png'
                     : 'assets/images/watch_light.png',
             nameTextStyle: FluentTheme.of(context).typography.caption,
-            onPressed: () => Navigator.push(context,
-                FluentPageRoute(builder: (context) => const BackgroundPage())),
+            onPressed: () => Navigator.push(
+                context,
+                FluentPageRoute(
+                  builder: (context) => const BackgroundPage(),
+                  settings: const RouteSettings(name: 'BackgroundPage'),
+                )),
           ),
           BackgroundImageItem(
             name: 'Desktop Wallpaper',
@@ -59,36 +63,36 @@ class _WallpaperMenuState extends State<WallpaperMenu> {
             onPressed: () => Navigator.push(
                 context,
                 FluentPageRoute(
-                    builder: (_) => PixabayCategories(
-                          onSelectImage: (image) async {
-                            var imageUrl =
-                                image.fullHDURL ?? image.largeImageURL ?? '';
-                            if (imageUrl.isNotEmpty) {
-                              var localPath =
-                                  '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
-                              await Dio().download(imageUrl, localPath);
-                              LPWSTR path = TEXT(localPath);
-                              SystemParametersInfo(
-                                  SPI_SETDESKWALLPAPER, 0, path, 0);
-                              free(path);
-                            }
-                          },
-                          onDismiss: () async {
-                            final windowPosition =
-                                context.read<AppState>().windowPosition;
-                            final watchSize =
-                                context.read<AppState>().watchSize;
+                  builder: (_) => PixabayCategories(
+                    onSelectImage: (image) async {
+                      var imageUrl =
+                          image.fullHDURL ?? image.largeImageURL ?? '';
+                      if (imageUrl.isNotEmpty) {
+                        var localPath =
+                            '${(await getApplicationDocumentsDirectory()).path}/SmartWatchWidget/Wallpapers/${Uri.parse(imageUrl).pathSegments.last}';
+                        await Dio().download(imageUrl, localPath);
+                        LPWSTR path = TEXT(localPath);
+                        SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, path, 0);
+                        free(path);
+                      }
+                    },
+                    onDismiss: () async {
+                      final windowPosition =
+                          context.read<AppState>().windowPosition;
+                      final watchSize = context.read<AppState>().watchSize;
 
-                            await windowManager.setBounds(ui.Rect.fromLTWH(
-                                windowPosition.dx,
-                                windowPosition.dy,
-                                watchSize,
-                                watchSize));
+                      await windowManager.setBounds(ui.Rect.fromLTWH(
+                          windowPosition.dx,
+                          windowPosition.dy,
+                          watchSize,
+                          watchSize));
 
-                            if (!mounted) return;
-                            navigatorPop(context);
-                          },
-                        ))),
+                      if (!mounted) return;
+                      navigatorPop(context);
+                    },
+                  ),
+                  settings: const RouteSettings(name: 'PixabayCategories'),
+                )),
           ),
         ],
       ),

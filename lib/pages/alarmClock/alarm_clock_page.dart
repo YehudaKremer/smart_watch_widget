@@ -47,6 +47,7 @@ class AlarmClockPage extends StatelessWidget {
                                 DateTime.now().add(const Duration(minutes: 1)));
                         return AlarmClockFrom(alarm);
                       },
+                      settings: const RouteSettings(name: 'AlarmClockFrom'),
                     ),
                   ),
                 ));

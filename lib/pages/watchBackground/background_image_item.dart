@@ -51,6 +51,7 @@ class _BackgroundImageItemState extends State<BackgroundImageItem>
     if (widget.backgroundType == Background.onlineImage) {
       repeatedlyChangeOnlineImage = false;
     }
+    controller.dispose();
     super.dispose();
   }
 

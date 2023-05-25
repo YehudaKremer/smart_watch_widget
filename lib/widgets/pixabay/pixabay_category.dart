@@ -27,6 +27,12 @@ class _PixabayCategoryState extends State<PixabayCategory>
     setAnimation();
   }
 
+  @override
+  dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   void setAnimation() {
     controller = AnimationController(
         duration: const Duration(milliseconds: 75), vsync: this);
@@ -41,10 +47,12 @@ class _PixabayCategoryState extends State<PixabayCategory>
         Navigator.push(
             context,
             FluentPageRoute(
-                builder: (context) => PixabayImages(
-                      category: widget.category,
-                      onSelectImage: widget.onSelectImage,
-                    )));
+              builder: (context) => PixabayImages(
+                category: widget.category,
+                onSelectImage: widget.onSelectImage,
+              ),
+              settings: const RouteSettings(name: 'PixabayImages'),
+            ));
       },
       child: MouseRegion(
         onEnter: (_) => controller.forward(),

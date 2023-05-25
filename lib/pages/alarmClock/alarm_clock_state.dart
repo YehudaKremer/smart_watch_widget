@@ -145,8 +145,12 @@ class AlarmClockState extends ChangeNotifier {
             : startPlaySound,
         rPort.sendPort);
 
-    Navigator.push(navigatorKey.currentContext!,
-        FluentPageRoute(builder: (context) => const AlarmScreenPage()));
+    Navigator.push(
+        navigatorKey.currentContext!,
+        FluentPageRoute(
+          builder: (context) => const AlarmScreenPage(),
+          settings: const RouteSettings(name: 'AlarmScreenPage'),
+        ));
 
     scheduler!
         .run(() => stopAlarm(), alarm.date.add(const Duration(minutes: 1)));
