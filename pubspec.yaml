@@ -1,7 +1,7 @@
 name: smart_watch_widget
 description: A smart watch widget for windows.
 publish_to: "none"
-version: 1.7.1
+version: 1.7.2
 
 environment:
   sdk: ">=3.0.1 <4.0.0"
@@ -38,7 +38,7 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
-  msix: ^3.13.2
+  msix: ^3.14.2
 
 flutter:
   uses-material-design: true

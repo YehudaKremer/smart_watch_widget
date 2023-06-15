@@ -16,7 +16,6 @@ const photosCategories = [
   'nature',
   'science',
   'education',
-  'health',
   'places',
   'animals',
   'industry',
